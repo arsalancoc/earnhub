@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnNova - Admin Panel</title>
+    <style>
+        /* --- ADMIN DARK THEME --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #0b0b13; color: #ffffff; padding: 20px; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: #171721; padding: 20px; border-radius: 12px; border: 1px solid #2a2a3d; }
+        .header h1 { font-size: 24px; color: #ff007f; display: flex; align-items: center; gap: 10px; }
+        .stats { display: flex; gap: 20px; }
+        .stat-box { background: #0b0b13; padding: 10px 20px; border-radius: 8px; border: 1px solid #33334d; text-align: center; }
+        .stat-box span { display: block; font-size: 12px; color: #7a7a9d; text-transform: uppercase; margin-bottom: 5px; }
+        .stat-box strong { font-size: 20px; color: #00ffcc; }
+
+        /* Table Styles */
+        .table-container { background: #171721; border-radius: 12px; border: 1px solid #2a2a3d; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: #2a2a3d; padding: 15px; font-size: 13px; color: #a0a0b5; text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 15px; border-bottom: 1px solid #2a2a3d; font-size: 14px; vertical-align: middle; }
+        tr:hover { background: rgba(255, 255, 255, 0.02); }
+        
+        .user-info { font-weight: bold; color: #fff; }
+        .user-id { font-size: 11px; color: #7a7a9d; display: block; margin-top: 3px; }
+        .amt { color: #00ffcc; font-weight: bold; font-size: 16px; }
+        
+        .status { padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; }
+        .status.pending { background: rgba(255, 152, 0, 0.1); color: #ff9800; border: 1px solid rgba(255, 152, 0, 0.3); }
+        .status.approved { background: rgba(0, 255, 204, 0.1); color: #00ffcc; border: 1px solid rgba(0, 255, 204, 0.3); }
+        .status.rejected { background: rgba(255, 94, 98, 0.1); color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); }
+
+        /* Action Buttons */
+        .btn-group { display: flex; gap: 8px; }
+        .btn { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.2s; color: white; }
+        .btn-approve { background: #00b386; }
+        .btn-approve:hover { background: #00cc99; }
+        .btn-reject { background: #ff4d4d; }
+        .btn-reject:hover { background: #ff6666; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>⚙️ EarnNova Admin</h1>
+        <div class="stats">
+            <div class="stat-box"><span>Pending Requests</span><strong id="stat-pending">0</strong></div>
+            <div class="stat-box"><span>Total Processed</span><strong id="stat-processed">0</strong></div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>User Details</th>
+                    <th>Withdraw Method</th>
+                    <th>Amount (Gems)</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="requests-body">
+                <tr><td colspan="6" style="text-align: center; color: #7a7a9d;">Loading requests...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FIREBASE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";        
+        
+        // Exact same config as your app
+        const firebaseConfig = {
+            apiKey: "AIzaSyCltyZMbm3uSQgMCTwzxwYO0O4CxLULzF4",
+            authDomain: "earnnova-3adf9.firebaseapp.com",
+            projectId: "earnnova-3adf9",
+            storageBucket: "earnnova-3adf9.firebasestorage.app",
+            messagingSenderId: "877247915302",
+            appId: "1:877247915302:web:1106e099a65ea3f4234de7"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        const tbody = document.getElementById('requests-body');
+        
+        // Live listener for withdrawals
+        const q = query(collection(db, "withdrawals"), orderBy("timestamp", "desc"));
+        
+        onSnapshot(q, (snapshot) => {
+            let html = "";
+            let pendingCount = 0;
+            let processedCount = 0;
+
+            if (snapshot.empty) {
+                tbody.innerHTML = "<tr><td colspan='6' style='text-align: center; color: #7a7a9d;'>No withdrawal requests yet!</td></tr>";
+                return;
+            }
+
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const docId = docSnap.id;
+                
+                // Format Date
+                let dateStr = "N/A";
+                if (data.timestamp) {
+                    const d = data.timestamp.toDate();
+                    dateStr = d.toLocaleDateString('en-GB') + " <br><span style='color:#7a7a9d; font-size:11px;'>" + d.toLocaleTimeString() + "</span>";
+                }
+
+                // Count stats
+                if (data.status === "Pending") pendingCount++;
+                else processedCount++;
+
+                // Set status class for colors
+                let statusClass = "pending";
+                if (data.status === "Approved") statusClass = "approved";
+                if (data.status === "Rejected") statusClass = "rejected";
+
+                // Action buttons logic (Disable if already processed)
+                const isProcessed = data.status !== "Pending";
+                const buttons = isProcessed ? 
+                    `<span style="color: #7a7a9d; font-size: 12px;">Processed</span>` : 
+                    `<div class="btn-group">
+                        <button class="btn btn-approve" onclick="window.updateStatus('${docId}', 'Approved', null, 0)">Approve</button>
+                        <button class="btn btn-reject" onclick="window.updateStatus('${docId}', 'Rejected', '${data.userId}', ${data.amount})">Reject</button>
+                    </div>`;
+
+                html += `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td>
+                            <span class="user-info">${data.name}</span>
+                            <span class="user-id">UID: ${data.userId}</span>
+                        </td>
+                        <td>
+                            <strong style="color:#fff;">${data.method}</strong><br>
+                            <span style="color:#a0a0b5; font-size:12px;">${data.details}</span>
+                        </td>
+                        <td class="amt">💎 ${data.amount}</td>
+                        <td><span class="status ${statusClass}">${data.status}</span></td>
+                        <td>${buttons}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+            document.getElementById('stat-pending').innerText = pendingCount;
+            document.getElementById('stat-processed').innerText = processedCount;
+        });
+
+        // Global function to update status
+        window.updateStatus = async (docId, newStatus, userId, amount) => {
+            const confirmMsg = newStatus === 'Approved' ? 
+                "Are you sure you want to APPROVE this request? Have you sent the payment?" : 
+                "Are you sure you want to REJECT? This will refund the gems back to the user.";
+            
+            if(!confirm(confirmMsg)) return;
+
+            try {
+                // 1. Update the withdrawal status
+                await updateDoc(doc(db, "withdrawals", docId), {
+                    status: newStatus
+                });
+
+                // 2. If Rejected, refund the gems back to the user's wallet
+                if (newStatus === "Rejected" && userId && amount) {
+                    await updateDoc(doc(db, "users", userId), {
+                        balance: increment(amount)
+                    });
+                    alert("Rejected! Gems have been refunded to the user.");
+                } else {
+                    alert("Approved successfully!");
+                }
+            } catch (error) {
+                console.error("Error updating document: ", error);
+                alert("Error updating status. Check console.");
+            }
+        };
+    </script>
+</body>
+</html>

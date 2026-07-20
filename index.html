@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnNova - Pro Rewards</title>
+    <style>
+        /* --- PRO DARK THEME CSS --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #05050a; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; overflow-x: hidden; position: relative; }
+        .hidden { display: none !important; }
+       
+        /* --- GLOBAL BACKGROUND WATERMARK --- */
+        body::after { content: ''; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; height: 90vw; max-width: 500px; max-height: 500px; background-image: url('https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f'); background-size: contain; background-repeat: no-repeat; opacity: 0.03; z-index: -1; pointer-events: none; border-radius: 50%; filter: grayscale(100%); }
+
+        /* --- LOGIN SCREEN --- */
+        #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background: radial-gradient(circle at center, #1f103b 0%, #05050a 100%); overflow: hidden; position: relative; z-index: 10; }
+        .floating-element { position: absolute; pointer-events: none; animation: floatAnim 6s ease-in-out infinite; z-index: 0; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); font-size: 3rem; }
+        .fe-1 { top: 15%; left: 15%; animation-delay: 0s; font-size: 4.5rem; } .fe-2 { top: 20%; right: 15%; animation-delay: 1.5s; font-size: 3.5rem; transform: rotate(15deg); } .fe-3 { bottom: 25%; left: 20%; animation-delay: 2.5s; font-size: 4rem; transform: rotate(-10deg); } .fe-4 { bottom: 20%; right: 20%; animation-delay: 1s; font-size: 4.5rem; transform: rotate(20deg); } .fe-5 { top: 40%; left: 5%; animation-delay: 3.5s; font-size: 2.5rem; filter: blur(3px) opacity(0.7); } .fe-6 { top: 50%; right: 8%; animation-delay: 0.5s; font-size: 2.5rem; filter: blur(3px) opacity(0.7); }
+        @keyframes floatAnim { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(12deg); } }
+        .login-glass-card { background: rgba(20, 15, 35, 0.65); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 1px solid rgba(255, 255, 255, 0.25); border-left: 1px solid rgba(255, 255, 255, 0.25); padding: 50px 40px; border-radius: 30px; width: 90%; max-width: 440px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02); z-index: 2; position: relative; animation: cardPop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .login-glass-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,0,127,0.1) 0%, transparent 60%); z-index: -1; pointer-events: none; }
+        @keyframes cardPop { 0% { opacity: 0; transform: scale(0.8) translateY(40px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        .login-glass-card img.main-logo { height: 80px; width: 80px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(255, 0, 127, 0.4); border: 2px solid rgba(255,255,255,0.1); animation: logoFloat 4s ease-in-out infinite; }
+        @keyframes logoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .gradient-text { font-size: 34px; font-weight: 900; letter-spacing: 1px; margin-bottom: 10px; background: linear-gradient(90deg, #ff007f, #ff8c00, #ffd700); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 10px rgba(255,0,127,0.3)); }
+        .login-glass-card p { color: #b0b0c5; font-size: 15px; margin-bottom: 30px; font-weight: 500; line-height: 1.5; }
+        .terms-container { display: flex; align-items: flex-start; text-align: left; gap: 12px; margin-bottom: 25px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .terms-container.shake { animation: shakeError 0.5s ease-in-out; border-color: #ff4d4d; background: rgba(255,77,77,0.1); }
+        .terms-container input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: #ff007f; cursor: pointer; }
+        .terms-container label { font-size: 12px; color: #a0a0b5; cursor: pointer; line-height: 1.4; }
+        .terms-container a { color: #00ffcc; text-decoration: none; font-weight: bold; transition: 0.2s; } .terms-container a:hover { text-decoration: underline; color: #fff; }
+        @keyframes shakeError { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
+        .google-btn-new { display: flex; align-items: center; justify-content: center; gap: 12px; background: #ffffff; color: #000000; border: none; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .google-btn-new:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.3); } .google-btn-new:active { transform: translateY(0); box-shadow: 0 5px 10px rgba(0,0,0,0.3); }
+        .google-icon { width: 24px; height: 24px; }
+
+        /* --- GLOBAL CONTAINER --- */
+        .main-container { max-width: 480px; margin: 0 auto; min-height: 100vh; padding: 20px; padding-bottom: 90px; position: relative; z-index: 1; }
+       
+        /* --- SIDEBAR CSS --- */
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(3px); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s; }
+        .sidebar-overlay.show { display: block; opacity: 1; }
+        .sidebar { position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: #0b0b13; z-index: 1000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 5px 0 25px rgba(0,0,0,0.8); }
+        .sidebar.active { left: 0; }
+        .sidebar-header { padding: 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #171721; position: sticky; top: 0; background: #0b0b13; z-index: 2;}
+        .sidebar-close { font-size: 28px; color: #7a7a9d; cursor: pointer; background: none; border: none; transition: 0.3s; } .sidebar-close:hover { color: #ff007f; transform: scale(1.1); }
+        .sidebar-content { padding: 15px 0 30px 0; }
+        .sidebar-category { padding: 10px 20px; font-size: 10px; font-weight: 800; color: #555566; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 10px; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 12px 20px; color: #d0d0e0; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; border-left: 3px solid transparent;}
+        .sidebar-item:hover { background: rgba(23, 23, 33, 0.8); color: #fff; border-left: 3px solid #ff007f; }
+        .sidebar-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-right: 5px; box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }
+        .icon-profile { background: rgba(0, 123, 255, 0.15); color: #007bff; border: 1px solid rgba(0, 123, 255, 0.3); } .icon-time { background: rgba(255, 152, 0, 0.15); color: #ff9800; border: 1px solid rgba(255, 152, 0, 0.3); } .icon-tg { background: rgba(0, 136, 204, 0.15); color: #0088cc; border: 1px solid rgba(0, 136, 204, 0.3); } .icon-wa { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); } .icon-yt { background: rgba(255, 0, 0, 0.15); color: #ff0000; border: 1px solid rgba(255, 0, 0, 0.3); } .icon-support { background: rgba(138, 43, 226, 0.15); color: #8a2be2; border: 1px solid rgba(138, 43, 226, 0.3); } .icon-chat { background: rgba(0, 255, 204, 0.15); color: #00ffcc; border: 1px solid rgba(0, 255, 204, 0.3); } .icon-faq { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); } .icon-share { background: rgba(255, 0, 127, 0.15); color: #ff007f; border: 1px solid rgba(255, 0, 127, 0.3); } .icon-privacy { background: rgba(160, 160, 181, 0.15); color: #a0a0b5; border: 1px solid rgba(160, 160, 181, 0.3); } .icon-logout { background: rgba(255, 94, 98, 0.15); color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); }
+        .menu-btn { font-size: 24px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(23, 23, 33, 0.8); border-radius: 12px; border: 1px solid #2a2a3d; margin-right: 12px; transition: 0.3s;} .menu-btn:hover { background: #ff007f; border-color: #ff007f; }
+
+        /* --- DASHBOARD UI --- */
+        .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .brand-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; letter-spacing: 1px; color: #fff; }
+        .brand-logo img { height: 38px; width: 38px; border-radius: 10px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.5)); }
+        .brand-logo .brand-text { display: flex; flex-direction: column; line-height: 1; }
+        .brand-logo .brand-text span:last-child { color: #ff007f; font-size: 14px; text-shadow: 0 0 10px rgba(255,0,127,0.4); }
+        .header-actions { display: flex; gap: 15px; }
+        .action-icon-group { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+        .action-circle { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .ac-red { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; } .ac-orange { background: rgba(255, 152, 0, 0.15); color: #ff9800; }
+        .action-label { font-size: 10px; color: #a0a0b5; font-weight: 600; }
+        
+        .banner-container { width: 100%; overflow: hidden; border-radius: 15px; margin-bottom: 20px; position: relative; background: #171721; border: 1px solid #232335; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .banner-track { display: flex; width: 300%; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .banner-slide { width: 33.333%; padding: 20px; display: flex; justify-content: space-between; align-items: center; background-size: cover; background-position: center; position: relative;}
+        .slide-1 { background: linear-gradient(135deg, rgba(62, 28, 122, 0.9), rgba(30, 20, 50, 0.9)); } .slide-2 { background: linear-gradient(135deg, rgba(255, 0, 127, 0.8), rgba(60, 10, 40, 0.9)); } .slide-3 { background: linear-gradient(135deg, rgba(0, 150, 255, 0.8), rgba(10, 30, 60, 0.9)); }
+        .banner-text-content { z-index: 2; display: flex; flex-direction: column; gap: 5px;}
+        .banner-title { font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; background: rgba(255,255,255,0.1); display: inline-block; padding: 3px 8px; border-radius: 4px; width: fit-content;}
+        .banner-main { font-size: 18px; font-weight: 900; color: #fff; margin-top: 5px; } .banner-highlight { font-size: 22px; font-weight: 900; color: #ffd700; text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4); margin-top: -2px;}
+        .banner-img { height: 75px; width: 75px; z-index: 2; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));}
+        .banner-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5;}
+        .b-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: 0.3s; } .b-dot.active { background: #fff; width: 15px; border-radius: 4px; }
+
+        /* WALLET BOX */
+        .wallet-wrapper { position: relative; border-radius: 18px; padding: 2px; overflow: hidden; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+        .wallet-wrapper::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient( #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000 ); animation: rotateBorder 3.5s linear infinite; z-index: 0; }
+        @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
+        .wallet-inner { position: relative; background: #232333; border-radius: 16px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1; }
+        .wallet-left { display: flex; align-items: center; gap: 12px; }
+        .w-balance { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 0.5px;}
+        .w-btn-pro { background: linear-gradient(135deg, #6b48ff, #9d4edd); color: #fff; border: none; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4); transition: 0.2s; position: relative; z-index: 100; }
+        .w-btn-pro:active { transform: scale(0.95); }
+        
+        .adv-action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
+        .adv-card { background: rgba(23, 23, 33, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px 15px; display: flex; align-items: center; gap: 15px; position: relative; overflow: hidden; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); }
+        .adv-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .adv-card::after { content: ''; position: absolute; right: -15px; top: -15px; width: 60px; height: 60px; border-radius: 50%; filter: blur(25px); z-index: -1; opacity: 0.5; transition: 0.3s; }
+        .adv-card:hover::after { opacity: 0.8; transform: scale(1.2); }
+        .adv-card.t-tasks::after { background: #ffd700; } .adv-card.t-ranks::after { background: #007bff; } .adv-card.t-micro::after { background: #ff007f; } .adv-card.t-games::after { background: #8a2be2; }
+        .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #171721; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }
+        .adv-info h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #7a7a9d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+
+        /* --- GLOBAL BOTTOM NAV --- */
+        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px; background: rgba(23, 23, 33, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 100; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #7a7a9d; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-size: 11px; font-weight: 600; flex: 1; position: relative; gap: 5px; }
+        .nav-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: 0.3s; }
+        .nav-item:hover { color: #fff; } .nav-item.active { color: #ff007f; transform: translateY(-4px); } .nav-item.active svg { filter: drop-shadow(0 0 8px rgba(255,0,127,0.6)); stroke-width: 2.5; }
+        .nav-item::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #ff007f; opacity: 0; transition: 0.3s; box-shadow: 0 0 8px #ff007f; } .nav-item.active::after { opacity: 1; bottom: -6px; }
+
+        /* --- SCREENS HEADERS (No Back Buttons on Main Tabs) --- */
+        .main-page-header { text-align: center; margin-bottom: 25px; padding-top: 10px; }
+        .main-page-header h2 { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        
+        /* Sub-page Headers (With Back Button) */
+        .sub-header { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; padding-top: 5px; }
+        .back-btn { background: #171721; border: 1px solid #33334d; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .sub-header h2 { flex-grow: 1; text-align: center; padding-right: 70px; font-size: 20px; font-weight: 800;}
+
+        /* --- LEADERBOARD --- */
+        .lb-pro-container { background: #12101f; border: 1px solid #2b224d; border-radius: 20px; padding: 25px 15px 15px 15px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative;}
+        .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
+        #lb-timer { text-align: center; color: #00ffcc; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: none; background: rgba(0, 255, 204, 0.1); padding: 6px; border-radius: 8px; border: 1px dashed rgba(0,255,204,0.5); width: fit-content; margin-left: auto; margin-right: auto;}
+        
+        .lb-dropdown { position: absolute; top: 0; right: 0; z-index: 10;} .lb-drop-btn { background: #1f1b36; border: 1px solid #3d3269; color: #fff; padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);} .lb-drop-btn:hover { background: #2b224d; } .lb-drop-menu { position: absolute; top: 100%; right: 0; margin-top: 5px; background: #1f1b36; border: 1px solid #3d3269; border-radius: 12px; width: 120px; overflow: hidden; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.7); flex-direction: column;} .lb-drop-menu.show { display: flex; } .lb-drop-item { padding: 12px 15px; font-size: 13px; color: #d0d0e0; font-weight: 600; cursor: pointer; transition: 0.2s;} .lb-drop-item:hover { background: #2b224d; color: #fff; } .lb-drop-item.active { background: #3d3269; color: #ffd700; }
+        .podium-pro-box { display: flex; justify-content: center; align-items: flex-end; gap: 5px; margin-top: 30px; margin-bottom: 10px; height: 180px; } .podium-pillar { display: flex; flex-direction: column; align-items: center; position: relative; width: 30%; } .hex-outer { display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; background: #c0c0c0; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); padding: 3px; } .hex-inner { width: 100%; height: 100%; background: #171721; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; } .hex-inner img { width: 100%; height: 100%; object-fit: cover; } .crown { position: absolute; top: -20px; font-size: 28px; z-index: 3; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); transform: rotate(15deg); right: -5px;}
+        .rank-2-pro { transform: translateY(20px); } .rank-2-pro .hex-outer { width: 65px; height: 65px; background: #c0c0c0; } .rank-2-pro .pillar-base { height: 80px; background: linear-gradient(180deg, #44327a, #1f1b36); clip-path: polygon(50% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%); width: 100%; margin-top: -15px; z-index: 1; border-top: 2px solid #c0c0c0;}
+        .rank-1-pro { z-index: 5; } .rank-1-pro .hex-outer { width: 85px; height: 85px; background: #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.5); padding: 4px;} .rank-1-pro .pillar-base { height: 110px; background: linear-gradient(180deg, #59359a, #1f1b36); clip-path: polygon(50% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 15%); width: 100%; margin-top: -20px; z-index: 1; border-top: 2px solid #ffd700;} .rank-1-pro .crown { top: -28px; right: 0; font-size: 38px; left: 50%; transform: translateX(-50%); }
+        .rank-3-pro { transform: translateY(35px); } .rank-3-pro .hex-outer { width: 60px; height: 60px; background: #cd7f32; } .rank-3-pro .pillar-base { height: 65px; background: linear-gradient(180deg, #3c2a6b, #1f1b36); clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%); width: 100%; margin-top: -10px; z-index: 1; border-top: 2px solid #cd7f32;}
+        .pillar-text { position: absolute; bottom: 10px; text-align: center; width: 100%; z-index: 2; } .p-name { font-size: 11px; font-weight: bold; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 0 5px; } .p-score { font-size: 12px; font-weight: 900; color: #ffd700; margin-top: 3px; }
+        .lb-bottom-tabs { display: flex; background: #0b0b13; border-radius: 12px; padding: 6px; margin-top: 15px; border: 1px solid #232335;} .lb-b-tab { flex: 1; padding: 10px 0; text-align: center; background: transparent; border: none; color: #7a7a9d; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s;} .lb-b-tab.active { background: #2b224d; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .list-header { display: grid; grid-template-columns: 50px 1fr 80px; padding: 0 15px 10px 15px; border-bottom: 1px solid #2a2a3d; color: #7a7a9d; font-size: 11px; font-weight: bold; letter-spacing: 1px; } .list-container { padding-top: 10px; padding-bottom: 20px;} .list-row { display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; background: rgba(23, 23, 33, 0.4); transition: 0.2s; } .list-row:hover { background: rgba(23, 23, 33, 0.8); } .row-rank { font-size: 14px; font-weight: bold; color: #7a7a9d; } .row-user { display: flex; align-items: center; gap: 12px; } .row-avatar { width: 35px; height: 35px; border-radius: 50%; background: #2a2a3d; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } .row-name { font-size: 14px; color: #e0e0e0; font-weight: 500; } .row-score { font-size: 14px; font-weight: bold; color: #00ffcc; text-align: right; }
+        
+        /* --- PRO PROFILE DASHBOARD --- */
+        .pro-profile-header { position: relative; background: linear-gradient(135deg, #4A235A 0%, #2F1B41 100%); border-radius: 24px; padding: 30px 20px 25px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .pro-profile-header::before { content: ''; position: absolute; top: -20px; left: -20px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255,0,127,0.2), transparent); z-index: 0; filter: blur(20px);}
+        .pro-avatar-wrapper { position: relative; width: 90px; height: 90px; margin: 0 auto 15px auto; z-index: 1; }
+        .pro-avatar-wrapper img { width: 100%; height: 100%; border-radius: 25px; border: 3px solid #ff007f; padding: 3px; background: #1a1a2e; object-fit: cover; }
+        .pro-avatar-edit { position: absolute; bottom: -8px; right: -8px; background: #ff007f; color: #fff; width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; border: 3px solid #2F1B41; box-shadow: 0 4px 10px rgba(255,0,127,0.5); }
+        .pro-name-row { display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 1; position: relative; }
+        .pro-name-row h3 { font-size: 22px; font-weight: 900; color: #fff; }
+        .pro-edit-btn { background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 8px; font-size: 11px; cursor: pointer; color: #e0e0e0; transition: 0.2s;} .pro-edit-btn:hover { background: rgba(255,255,255,0.2); }
+        .pro-email { color: #d0d0e0; font-size: 13px; margin-top: 5px; z-index: 1; position: relative; font-weight: 500;}
+        .pro-stats-row { display: flex; gap: 15px; margin-top: 25px; z-index: 1; position: relative; }
+        .pro-stat-box { flex: 1; background: rgba(0,0,0,0.2); border-radius: 16px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); text-align: left; }
+        .pro-stat-box span { font-size: 11px; color: #a0a0b5; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;}
+        .pro-stat-box h4 { font-size: 20px; color: #00ffcc; margin-top: 5px; font-weight: 900;}
+        
+        .profile-options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;}
+        .profile-option { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: linear-gradient(90deg, #1f1f33, #1a1a2e); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; cursor: pointer; transition: 0.3s; }
+        .profile-option:hover { transform: translateX(5px); border-color: rgba(255,255,255,0.15); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .po-left { display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: 700; color: #e0e0e0;}
+        .po-icon { font-size: 20px; width: 35px; height: 35px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .po-right { color: #7a7a9d; font-size: 12px; font-weight: bold;}
+        
+        .profile-logout-btn { width: 100%; padding: 16px; border-radius: 16px; background: rgba(255, 94, 98, 0.1); color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); font-size: 15px; font-weight: 900; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,94,98,0.15);}
+        .profile-logout-btn:hover { background: #ff5e62; color: #fff; box-shadow: 0 8px 25px rgba(255,94,98,0.4); }
+
+        /* History & Lists styling */
+        .modern-history-item { display: flex; justify-content: space-between; align-items: center; background: #171721; border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid #2a2a3d; transition: 0.3s; }
+        .modern-history-item:hover { border-color: #3a3a5c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        .mh-left { display: flex; align-items: center; gap: 15px; } .mh-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(138,43,226,0.1); color: #8a2be2; display: flex; justify-content: center; align-items: center; font-size: 20px; } .mh-info h5 { color: #fff; font-size: 14px; font-weight: bold; margin-bottom: 4px; } .mh-info p { color: #7a7a9d; font-size: 11px; }
+        .mh-right { text-align: right; } .mh-amount { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 6px; } .mh-status { font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; display: inline-block;}
+        .mh-status.pending { background: rgba(255,152,0,0.1); color: #ff9800; border: 1px solid rgba(255,152,0,0.3); } .mh-status.approved { background: rgba(0,255,204,0.1); color: #00ffcc; border: 1px solid rgba(0,255,204,0.3); } .mh-status.rejected { background: rgba(255,94,98,0.1); color: #ff5e62; border: 1px solid rgba(255,94,98,0.3); }
+
+        /* PRO INVITE */
+        .invite-hero { text-align: center; padding: 25px 15px; background: radial-gradient(circle at top, rgba(255,0,127,0.15), transparent 70%); border-radius: 20px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .invite-hero-img { width: 110px; height: 110px; margin-bottom: 10px; filter: drop-shadow(0 10px 15px rgba(255,0,127,0.4)); animation: floatLogo 4s infinite ease-in-out; }
+        .invite-title { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+        .invite-sub { font-size: 14px; color: #a0a0b5; line-height: 1.5; padding: 0 10px; } .invite-sub .highlight { color: #00ffcc; font-weight: bold; font-size: 15px;}
+        .invite-code-box { background: #171721; border-radius: 16px; padding: 20px; border: 1px solid #2a2a3d; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-bottom: 25px; }
+        .invite-code-box > span { display: block; font-size: 11px; color: #7a7a9d; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; }
+        .code-row { display: flex; align-items: center; justify-content: space-between; background: #0b0b13; padding: 8px 8px 8px 15px; border-radius: 12px; border: 1px solid rgba(255,0,127,0.3); }
+        .the-code { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 2px; }
+        .code-row button { background: linear-gradient(135deg, #ff007f, #8a2be2); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 900; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(255,0,127,0.4); } .code-row button:active { transform: scale(0.95); }
+        .share-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; } .share-title::before { content: ''; width: 4px; height: 16px; background: #00ffcc; border-radius: 4px; }
+        .pro-share-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
+        .share-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 15px 5px; background: #171721; border-radius: 16px; border: 1px solid #2a2a3d; cursor: pointer; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(255,255,255,0.02);}
+        .share-btn:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .share-btn img { width: 32px; height: 32px; } .share-btn span { font-size: 11px; font-weight: 700; color: #d0d0e0; }
+        .link-icon, .more-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 50%; color: #fff; } .link-icon { background: #007bff; } .more-icon { background: #4a4a6a; }
+
+        /* Others & Inputs */
+        .login-box { background-color: #171721; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 4px 25px rgba(0,0,0,0.8); border: 1px solid #2a2a35; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #7a7a9d; margin-top: 15px; text-align: left;} .input-group select, .input-group input { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #33334d; background-color: #0b0b13; color: white; font-size: 15px; transition: 0.3s;} .input-group input:focus { border-color: #ff007f; outline: none; box-shadow: 0 0 10px rgba(255,0,127,0.2); }
+        .submit-btn { background: linear-gradient(90deg, #8a2be2, #ff007f); width: 100%; border: none; border-radius: 10px; color: white; padding: 15px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 25px; transition: 0.3s;} .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,0,127,0.4);}
+        .voucher-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; } .voucher-card { background-color: #ffffff; border-radius: 16px; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 2px solid transparent; position: relative;} .voucher-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(138,43,226,0.3); border-color: #ff007f; } .voucher-card img { width: 85%; max-height: 45px; object-fit: contain; } .voucher-title { font-size: 11px; font-weight: bold; color: #555; text-transform: uppercase; margin-top: 8px;} .voucher-card.dark-bg { background-color: #171721; } .voucher-card.dark-bg .voucher-title { color: #aaa; }
+        .redeem-banner { background: #171721; border-radius: 15px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #33334d; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); } .redeem-banner img { max-height: 60px; max-width: 150px; margin-bottom: 15px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));} .redeem-banner h3 { font-size: 22px; color: #fff; margin-bottom: 5px; } .redeem-min-text { background: rgba(0, 255, 204, 0.1); border: 1px solid rgba(0, 255, 204, 0.3); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #00ffcc; display: inline-flex; align-items: center; gap: 5px;}
+    </style>
+</head>
+<body>
+    <span id="user-name" class="hidden"></span>
+    
+    <!-- GLOBAL BOTTOM NAV (Visible on all main screens) -->
+    <div class="bottom-nav hidden" id="global-bottom-nav">
+        <div class="nav-item active" id="nav-home" onclick="switchTab('dashboard-screen', this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
+        <div class="nav-item" id="nav-task" onclick="alert('Tasks section coming soon!')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Tasks</span></div>
+        <div class="nav-item" id="nav-invite" onclick="switchTab('invite-screen', this); loadMyReferrals();"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="14" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="22"></line><path d="M19 8c0-3.3-2.7-6-6-6-1.5 0-2.8.5-3.8 1.4A5.9 5.9 0 0 0 5 8"></path></svg><span>Invite</span></div>
+        <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', this)"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
+        <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', this);"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
+    </div>
+
+    <!-- Sidebar Overlay & Container -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar" id="main-sidebar">
+        <div class="sidebar-header">
+            <div class="brand-logo"><img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f" alt="Logo" style="height:28px; width:28px;"><span style="font-weight:900; color:#fff; font-size:15px; letter-spacing: 0.5px;">EarnNova</span></div>
+            <button class="sidebar-close" id="close-sidebar">×</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-category">My Account</div>
+            <div class="sidebar-item" id="side-profile"><span class="sidebar-icon icon-profile">👤</span> Profile</div>
+            <div class="sidebar-item" onclick="alert('Time / History coming soon!')"><span class="sidebar-icon icon-time">⏱️</span> Time / History</div>
+            
+            <div class="sidebar-category">Our Community</div>
+            <div class="sidebar-item" onclick="window.open('https://telegram.org', '_blank')"><span class="sidebar-icon icon-tg">✈️</span> Telegram</div>
+            <div class="sidebar-item" onclick="window.open('https://whatsapp.com', '_blank')"><span class="sidebar-icon icon-wa">💬</span> WhatsApp</div>
+            <div class="sidebar-item" onclick="window.open('https://youtube.com', '_blank')"><span class="sidebar-icon icon-yt">▶️</span> YouTube</div>
+            
+            <div class="sidebar-category">Help & Support</div>
+            <div class="sidebar-item" onclick="window.location.href='mailto:support@earnnova.com'"><span class="sidebar-icon icon-support">🎧</span> Support</div>
+            <div class="sidebar-item" onclick="alert('Connecting to agent...')"><span class="sidebar-icon icon-chat">💬</span> Live Chat</div>
+            <div class="sidebar-item" onclick="alert('FAQ Page loading...')"><span class="sidebar-icon icon-faq">❓</span> FAQ</div>
+            
+            <div class="sidebar-category">Account</div>
+            <!-- BOTTOM LOGOUT IN SIDEBAR -->
+            <div class="sidebar-item" id="side-logout" style="color: #ff5e62; margin-top: 10px; border-left: 3px solid #ff5e62; background: rgba(255,94,98,0.1);"><span class="sidebar-icon icon-logout">🚪</span> Logout</div>
+        </div>
+    </div>
+    
+    <!-- 1. LOGIN SCREEN -->
+    <div id="login-screen">
+        <div class="floating-element fe-1">🪙</div><div class="floating-element fe-2">🎁</div><div class="floating-element fe-3">🎮</div><div class="floating-element fe-4">💎</div><div class="floating-element fe-5">⚡</div><div class="floating-element fe-6">✨</div>
+        <div class="login-glass-card">
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f" class="main-logo" alt="EarnNova Logo">
+            <h1 class="gradient-text">EarnNova Pro</h1>
+            <p>Play games, complete quick tasks, and earn real cash & rewards instantly.</p>
+            <div class="terms-container" id="terms-container">
+                <input type="checkbox" id="terms-checkbox">
+                <label for="terms-checkbox">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.</label>
+            </div>
+            <button id="login-btn" class="google-btn-new">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" class="google-icon">
+                Continue with Google
+            </button>
+        </div>
+    </div>
+    
+    <!-- ONBOARDING -->
+    <div id="onboarding-screen" class="hidden" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; position: relative; z-index: 10;">
+        <div class="login-box" style="width: 90%; max-width: 400px; text-align: left;">
+            <h3 style="font-size: 22px; margin-bottom: 10px; text-align: center; color: #fff;">Set Your Profile 🚀</h3>
+            <p style="color: #7a7a9d; font-size: 13px; text-align: center; margin-bottom: 20px;">Just a few more steps to create your account.</p>
+            <div class="input-group"><label>Choose Username</label><input type="text" id="setup-username" placeholder="e.g., rohit_45" required></div>
+            <div class="input-group"><label>Referral Code (Optional)</label><input type="text" id="setup-referral" placeholder="Enter code if you have one"></div>
+            <button id="submit-onboarding" class="submit-btn">Complete Registration</button>
+        </div>
+    </div>
+    
+    <!-- 2. MAIN DASHBOARD -->
+    <div id="dashboard-screen" class="main-container hidden app-screen">
+        <div class="top-header">
+            <div style="display: flex; align-items: center;">
+                <div class="menu-btn" id="open-sidebar-btn"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+                <div class="brand-logo">
+                    <img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f" alt="EarnNova Logo">
+                    <div class="brand-text"><span>EARN</span><span>NOVA</span></div>
+                    <span id="live-ist-time" style="font-size: 10px; color: #00ffcc; margin-left: 8px; font-weight: bold; padding: 4px 8px; background: rgba(0, 255, 204, 0.1); border: 1px solid rgba(0, 255, 204, 0.3); border-radius: 8px;">--:-- IST</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="action-icon-group" onclick="alert('Tutorials coming soon!')"><div class="action-circle ac-red">▶</div><span class="action-label">Tutorials</span></div>
+                <div class="action-icon-group" onclick="alert('No new notifications')"><div class="action-circle ac-orange">🔔</div><span class="action-label">Notification</span></div>
+            </div>
+        </div>
+       
+        <!-- BANNERS -->
+        <div class="banner-container">
+            <div class="banner-track" id="auto-banner-track">
+                <div class="banner-slide slide-1"><div class="banner-text-content"><div class="banner-title">Weekly Leaderboard</div><div class="banner-main">Top 50 Earners</div><div class="banner-highlight">25,000 Coins</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=prize" class="banner-img" alt="Prize"></div>
+                <div class="banner-slide slide-2"><div class="banner-text-content"><div class="banner-title">Refer & Earn</div><div class="banner-main">Invite Friends</div><div class="banner-highlight">50 Gems Instant</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=friends" class="banner-img" alt="Refer"></div>
+                <div class="banner-slide slide-3"><div class="banner-text-content"><div class="banner-title">Mega Tasks</div><div class="banner-main">Complete & Earn</div><div class="banner-highlight">Extra ₹100 Daily</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=cash" class="banner-img" alt="Cash"></div>
+            </div>
+            <div class="banner-dots"><div class="b-dot active" id="dot-0"></div><div class="b-dot" id="dot-1"></div><div class="b-dot" id="dot-2"></div></div>
+        </div>
+
+        <!-- 7-COLOR ANIMATED WALLET -->
+        <div class="wallet-wrapper">
+            <div class="wallet-inner">
+                <div class="wallet-left">
+                    <span style="font-size: 28px; filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.8));">💎</span>
+                    <span class="w-balance" id="user-balance">0.00</span>
+                </div>
+                <button class="w-btn-pro" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">Withdraw Coins</button>
+            </div>
+        </div>
+        
+        <!-- ADVANCED ACTION GRID -->
+        <div class="adv-action-grid">
+            <div class="adv-card t-tasks" onclick="alert('Tasks loading...')">
+                <div class="adv-icon-box">📋</div><div class="adv-info"><h4>Tasks</h4><p>Earn Daily</p></div>
+            </div>
+            <div class="adv-card t-ranks" onclick="switchTab('leaderboard-screen', null); loadAdvancedLeaderboard();">
+                <div class="adv-icon-box">🏆</div><div class="adv-info"><h4>Ranks</h4><p>Leaderboard</p></div>
+            </div>
+            <div class="adv-card t-micro" onclick="alert('Micro tasks loading...')">
+                <div class="adv-icon-box">🗂</div><div class="adv-info"><h4>Micro Jobs</h4><p>Quick Cash</p></div>
+            </div>
+            <div class="adv-card t-games" onclick="alert('Games loading...')">
+                <div class="adv-icon-box">🎮</div><div class="adv-info"><h4>Games</h4><p>Fun Rewards</p></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 3. ADVANCED LEADERBOARD -->
+    <div id="leaderboard-screen" class="main-container hidden app-screen">
+        <div class="main-page-header"><h2>Leaderboard</h2></div>
+        <div class="lb-pro-container">
+            <div class="lb-dropdown"><button class="lb-drop-btn" id="lb-drop-toggle"><span id="lb-active-cat">Earnings</span> <span style="font-size: 10px;">▼</span></button>
+                <div class="lb-drop-menu" id="lb-drop-menu"><div class="lb-drop-item active" data-cat="earnings">Earnings</div><div class="lb-drop-item" data-cat="referrals">Referrals</div></div>
+            </div>
+            <div class="lb-pro-title"><span>Pro Rewards</span><h2>Top Ranks</h2></div>
+            <div id="lb-timer">⏳ Resets in: --:--:--</div>
+            <div class="podium-pro-box" id="podium-pro-box"><p style="color: #7a7a9d; text-align: center; width:100%;">Loading Pro Ranks...</p></div>
+            <div class="lb-bottom-tabs" id="lb-time-tabs"><button class="lb-b-tab active" data-time="all">All</button><button class="lb-b-tab" data-time="today">Today</button><button class="lb-b-tab" data-time="weekly">Weekly</button><button class="lb-b-tab" data-time="monthly">Monthly</button></div>
+        </div>
+        <div class="list-header"><div>RANK</div><div>USER</div><div style="text-align: right;" id="lb-score-title">SCORE</div></div>
+        <div class="list-container" id="leaderboard-list"></div>
+    </div>
+    
+    <!-- 4. PROFILE SCREEN -->
+    <div id="profile-screen" class="main-container hidden app-screen">
+        <div class="main-page-header"><h2>My Profile</h2></div>
+        <div class="pro-profile-header">
+            <div class="pro-avatar-wrapper"><img id="profile-avatar" src="" alt="Avatar"><div class="pro-avatar-edit" id="edit-avatar-btn">✏️</div></div>
+            <input type="file" id="avatar-upload" accept="image/*" class="hidden">
+            <div class="pro-name-row"><h3 id="profile-name">User Name</h3><div class="pro-edit-btn" id="edit-name-btn">Edit</div></div>
+            <p class="pro-email" id="profile-email">user@email.com</p>
+            <div class="pro-stats-row">
+                <div class="pro-stat-box"><span>Total Balance</span><h4>💎 <span id="profile-balance">0</span></h4></div>
+                <div class="pro-stat-box"><span>Total Invites</span><h4>👥 <span id="profile-ref-count">0</span></h4></div>
+            </div>
+        </div>
+        
+        <div class="profile-options-container">
+            <div class="profile-option" onclick="openSubScreen('analytics-screen')">
+                <div class="po-left"><span class="po-icon">📊</span> <span>Earning Analytics</span></div><div class="po-right">❯</div>
+            </div>
+            <div class="profile-option" onclick="openSubScreen('transactions-screen')">
+                <div class="po-left"><span class="po-icon">🧾</span> <span>Earn Transactions</span></div><div class="po-right">❯</div>
+            </div>
+            <div class="profile-option" onclick="openSubScreen('network-screen'); loadMyReferrals();">
+                <div class="po-left"><span class="po-icon">🤝</span> <span>My Network</span></div><div class="po-right">❯</div>
+            </div>
+            <div class="profile-option" onclick="openSubScreen('redeem-history-screen'); loadProfileData();">
+                <div class="po-left"><span class="po-icon">🎁</span> <span>Redeem History</span></div><div class="po-right">❯</div>
+            </div>
+        </div>
+        <button id="profile-logout-btn" class="profile-logout-btn">🚪 Logout From Account</button>
+    </div>
+    
+    <!-- 5. WITHDRAW SCREEN -->
+    <div id="withdraw-screen" class="main-container hidden app-screen">
+        <div class="main-page-header"><h2>Redeem Rewards</h2></div>
+        <p style="font-size: 12px; color: #7a7a9d; margin-bottom: 15px; text-transform: uppercase; font-weight: bold;">Select Withdraw Method</p>
+        <div class="voucher-grid">
+            <div class="voucher-card" data-method="UPI" data-req="upi" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" style="max-height:35px;"><span class="voucher-title">UPI Transfer</span></div>
+            <div class="voucher-card" data-method="Google Play" data-req="email" data-min="450" data-cash="₹30" data-img="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play"><span class="voucher-title">Google Play</span></div>
+            <div class="voucher-card" data-method="Amazon Gift Card" data-req="email" data-min="300" data-cash="₹20" data-img="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" style="background-color: #FFF3E0;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon"><span class="voucher-title">Amazon</span></div>
+            <div class="voucher-card dark-bg" data-method="Uber Voucher" data-req="email" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg" alt="Uber" style="filter: invert(1);"><span class="voucher-title">Uber</span></div>
+        </div>
+    </div>
+    
+    <!-- 6. INVITE SCREEN -->
+    <div id="invite-screen" class="main-container hidden app-screen">
+        <div class="main-page-header"><h2>Refer & Earn</h2></div>
+        <div class="invite-hero">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=gift" class="invite-hero-img">
+            <h2 class="invite-title">Invite Friends & Earn</h2>
+            <p class="invite-sub">Get <span class="highlight">💎50</span> instantly + <span class="highlight">10%</span> lifetime commission for every friend who joins!</p>
+        </div>
+        <div class="invite-code-box">
+            <span>Your Referral Code</span>
+            <div class="code-row">
+                <div id="my-referral-code" class="the-code">LOADING...</div>
+                <button id="copy-ref-btn">COPY</button>
+            </div>
+        </div>
+        <h3 class="share-title">Share via</h3>
+        <div class="pro-share-grid">
+            <div class="share-btn wa" id="share-wa"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"><span>WhatsApp</span></div>
+            <div class="share-btn tg" id="share-tg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG"><span>Telegram</span></div>
+            <div class="share-btn link" id="share-link"><div class="link-icon">🔗</div><span>Copy Link</span></div>
+            <div class="share-btn more" id="share-more"><div class="more-icon">•••</div><span>More</span></div>
+        </div>
+    </div>
+
+    <!-- ================== PROFILE SUB-SCREENS ================== -->
+    <!-- Analytics -->
+    <div id="analytics-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Analytics</h2></div>
+        <div style="background: rgba(0,0,0,0.4); padding: 30px; border-radius: 20px; text-align: center; border: 1px dashed #33334d; margin-top: 20px;">
+            <span style="font-size: 40px;">📊</span><h3 style="margin-top: 10px; color:#fff;">Analytics Dashboard</h3><p style="color:#7a7a9d; font-size:12px; margin-top: 5px;">Charts and detailed statistics coming soon in the next update!</p>
+        </div>
+    </div>
+    
+    <!-- Earn Transactions -->
+    <div id="transactions-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
+        <div id="earn-tx-list">
+            <!-- Simulated Transactions -->
+            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(0,255,204,0.1);color:#00ffcc;">📋</div><div class="mh-info"><h5>Daily Task Completed</h5><p>Today</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#00ffcc;">+ 20 💎</div></div></div>
+            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(255,215,0,0.1);color:#ffd700;">🎁</div><div class="mh-info"><h5>Welcome Bonus</h5><p>Account Created</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#ffd700;">+ 50 💎</div></div></div>
+        </div>
+    </div>
+
+    <!-- My Network (Referral Tree) -->
+    <div id="network-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Network</h2></div>
+        <div class="referral-stats-head" style="margin-top: 20px; border: none;">
+            <h3>Total Friends Joined</h3>
+            <span class="ref-count-badge" id="network-page-ref-count">0 Friends</span>
+        </div>
+        <div id="referral-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading network...</p></div>
+    </div>
+
+    <!-- Redeem History -->
+    <div id="redeem-history-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Redeem History</h2></div>
+        <div id="history-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
+    </div>
+
+    <!-- Checkout Sub-Screen (From withdraw) -->
+    <div id="brand-redeem-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">← Back</button><h2>Checkout</h2></div>
+        <div class="redeem-banner"><img id="br-img" src="" alt="Brand Logo"><h3 id="br-name">Brand Name</h3><div class="redeem-min-text">💎 <span id="br-min-gems">0</span> Gems required for <span id="br-cash">0</span></div></div>
+        <div style="background: #171721; padding: 25px 20px; border-radius: 15px; border: 1px solid #2a2a3d; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <div id="input-group-upi" class="dynamic-input hidden"><div class="input-group"><label>Enter UPI ID</label><input type="text" id="redeem-upi" placeholder="e.g., username@bank" autocomplete="off"></div></div>
+            <div id="input-group-email" class="dynamic-input hidden"><div class="input-group"><label>Delivery Email Address</label><input type="email" id="redeem-email" placeholder="e.g., user@gmail.com" autocomplete="off"></div></div>
+            <div id="input-group-bank" class="dynamic-input hidden"><div class="input-group"><label>Account Number</label><input type="number" id="redeem-acct" placeholder="Enter Account Number"></div><div class="input-group"><label>IFSC Code</label><input type="text" id="redeem-ifsc" placeholder="e.g., SBIN0001234" style="text-transform: uppercase;"></div></div>
+            <div class="input-group"><label>Amount to Withdraw (Gems)</label><input type="number" id="redeem-amount" placeholder="Enter amount of Gems"></div>
+            <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
+        </div>
+    </div>
+    
+    <!-- FIREBASE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, onSnapshot, setDoc, updateDoc, increment, collection, addDoc, query, orderBy, limit, getDocs, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";        
+       
+        const firebaseConfig = { apiKey: "AIzaSyCltyZMbm3uSQgMCTwzxwYO0O4CxLULzF4", authDomain: "earnnova-3adf9.firebaseapp.com", projectId: "earnnova-3adf9", storageBucket: "earnnova-3adf9.firebasestorage.app", messagingSenderId: "877247915302", appId: "1:877247915302:web:1106e099a65ea3f4234de7" };
+        const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+        
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search); const refCode = urlParams.get('ref');
+            if (refCode) { const refInput = document.getElementById('setup-referral'); if (refInput) { refInput.value = refCode; refInput.readOnly = true; } }
+        };
+       
+        const uiBalance = document.getElementById('user-balance');
+        let currentUser = null; let currentBalance = 0; let actMethod = ""; let actReqType = ""; let actMin = 0;
+        
+        // --- NAVIGATION LOGIC ---
+        window.switchTab = function(screenId, navEl) {
+            document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+            if(navEl) {
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                navEl.classList.add('active');
+            }
+        };
+
+        window.openSubScreen = function(screenId) {
+            document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+            document.getElementById('global-bottom-nav').style.display = 'none'; // Hide nav in sub-screens
+        };
+
+        window.closeSubScreen = function() {
+            switchTab('profile-screen', document.getElementById('nav-profile'));
+            document.getElementById('global-bottom-nav').style.display = 'flex'; // Show nav again
+        };
+        
+        setInterval(() => {
+            const timeSpan = document.getElementById('live-ist-time');
+            if (timeSpan) {
+                const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                timeSpan.innerText = new Intl.DateTimeFormat('en-IN', options).format(new Date()) + " IST";
+            }
+        }, 1000);
+
+        let bannerIdx = 0; const bannerTrack = document.getElementById('auto-banner-track');
+        setInterval(() => {
+            bannerIdx = (bannerIdx + 1) % 3; bannerTrack.style.transform = `translateX(-${bannerIdx * 33.33}%)`;
+            document.querySelectorAll('.b-dot').forEach((d, i) => { if(i === bannerIdx) d.classList.add('active'); else d.classList.remove('active'); });
+        }, 3500);
+
+        const sidebar = document.getElementById('main-sidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const openSidebarBtn = document.getElementById('open-sidebar-btn'); const closeSidebarBtn = document.getElementById('close-sidebar');
+        function openSidebar() { sidebar.classList.add('active'); sidebarOverlay.classList.add('show'); }
+        function closeSidebar() { sidebar.classList.remove('active'); sidebarOverlay.classList.remove('show'); }
+        openSidebarBtn.addEventListener('click', openSidebar); closeSidebarBtn.addEventListener('click', closeSidebar); sidebarOverlay.addEventListener('click', closeSidebar);
+        document.getElementById('side-profile').addEventListener('click', () => { closeSidebar(); switchTab('profile-screen', document.getElementById('nav-profile')); });
+        document.getElementById('side-share').addEventListener('click', () => { closeSidebar(); switchTab('invite-screen', document.getElementById('nav-invite')); });
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const termsBox = document.getElementById('terms-checkbox'); const termsContainer = document.getElementById('terms-container');
+            if (!termsBox.checked) { termsContainer.classList.add('shake'); setTimeout(() => termsContainer.classList.remove('shake'), 500); alert("⚠️ Please agree to the Terms of Service and Privacy Policy before continuing."); return; }
+            signInWithPopup(auth, new GoogleAuthProvider());
+        });
+        
+        const handleLogout = () => { closeSidebar(); signOut(auth); document.getElementById('global-bottom-nav').style.display = 'none'; };
+        document.getElementById('profile-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('side-logout').addEventListener('click', handleLogout);
+       
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user; 
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('global-bottom-nav').style.display = 'flex';
+                try {
+                    const docSnap = await getDoc(doc(db, 'users', user.uid));
+                    if (docSnap.exists()) { 
+                        document.getElementById('onboarding-screen').classList.add('hidden'); 
+                        switchTab('dashboard-screen', document.getElementById('nav-home')); 
+                        startLiveSnapshot(user); 
+                    } else { 
+                        document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
+                        document.getElementById('global-bottom-nav').style.display = 'none';
+                        document.getElementById('onboarding-screen').classList.remove('hidden'); 
+                        document.getElementById('setup-username').value = user.displayName ? user.displayName.toLowerCase().replace(/ /g, '_') : ''; 
+                    }
+                } catch (error) {}
+            } else { 
+                document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden')); 
+                document.getElementById('onboarding-screen').classList.add('hidden');
+                document.getElementById('global-bottom-nav').style.display = 'none';
+                document.getElementById('login-screen').classList.remove('hidden'); 
+            }
+        });
+
+        // FIXED REFERRAL REWARD LOGIC + TRANSACTIONS
+        document.getElementById('submit-onboarding').addEventListener('click', async () => {
+            const usernameInput = document.getElementById('setup-username').value.trim(); const referralInput = document.getElementById('setup-referral').value.trim(); const btn = document.getElementById('submit-onboarding');
+            if(!usernameInput) return alert("Please choose a valid username!"); btn.innerText = "Creating..."; btn.disabled = true;
+            
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            try {
+                // Set initial fields including tracking dates
+                await setDoc(doc(db, 'users', currentUser.uid), { 
+                    name: usernameInput, balance: 0, photoURL: '', referredBy: referralInput || null, email: currentUser.email || "", 
+                    referralCount: 0, refCode: currentUser.uid.substring(0, 8).toUpperCase(),
+                    dailyEarn: 0, weeklyEarn: 0, monthlyEarn: 0, lastEarnDate: todayStr
+                }, { merge: true });
+
+                if(referralInput) {
+                    try {
+                        let referrerRef = null;
+                        if (referralInput.length > 15) { referrerRef = doc(db, 'users', referralInput); } else { const refQuery = query(collection(db, 'users'), where('refCode', '==', referralInput.toUpperCase()), limit(1)); const refSnap = await getDocs(refQuery); if(!refSnap.empty) { referrerRef = doc(db, 'users', refSnap.docs[0].id); } }
+                        
+                        if(referrerRef) { 
+                            const referrerSnap = await getDoc(referrerRef); 
+                            if(referrerSnap.exists()) { 
+                                // Update referrer balance AND daily score
+                                await updateDoc(referrerRef, { 
+                                    balance: increment(50), 
+                                    referralCount: increment(1),
+                                    dailyEarn: increment(50),
+                                    weeklyEarn: increment(50),
+                                    monthlyEarn: increment(50),
+                                    lastEarnDate: todayStr
+                                }); 
+                                // Create Transaction Record
+                                await addDoc(collection(db, 'transactions'), {
+                                    userId: referrerRef.id, title: 'Referral Reward', amount: 50, type: 'earn', timestamp: serverTimestamp()
+                                });
+                            } 
+                        }
+                    } catch(e) { console.log("Referral error", e); }
+                }
+                alert("Welcome to EarnNova Pro! 🎉"); 
+                document.getElementById('onboarding-screen').classList.add('hidden'); 
+                document.getElementById('global-bottom-nav').style.display = 'flex';
+                switchTab('dashboard-screen', document.getElementById('nav-home')); 
+                startLiveSnapshot(currentUser);
+            } catch (error) { alert("Registration failed! Please try again."); }
+            btn.innerText = "Complete Registration"; btn.disabled = false;
+        });
+
+        // FIXED "0 FRIENDS" BUG 
+        window.loadMyReferrals = async function() {
+            if(!currentUser) return; 
+            const refList = document.getElementById('referral-list'); 
+            refList.innerHTML = "<p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>Fetching your invites...</p>";
+            try {
+                const myShortCode = currentUser.uid.substring(0, 8).toUpperCase(); const myFullCode = currentUser.uid;
+                const q = query(collection(db, "users"), where("referredBy", "in", [myShortCode, myFullCode])); 
+                const snap = await getDocs(q); 
+                let html = "";
+                
+                // Count the real referrals and update badages immediately
+                const realCount = snap.size;
+                const networkBadge = document.getElementById('network-page-ref-count');
+                const profileBadge = document.getElementById('profile-ref-count');
+                if(networkBadge) networkBadge.innerText = `${realCount} Friends`;
+                if(profileBadge) profileBadge.innerText = realCount;
+
+                snap.forEach(doc => { const data = doc.data(); html += `<div style="background: rgba(23, 23, 33, 0.6); padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #2a2a3d; display: flex; justify-content: space-between; align-items: center;"><span style="color:#fff; font-size:14px; font-weight: 500;">${data.name || 'User'}</span><span style="color:#00ffcc; font-size:12px; font-weight:bold; background: rgba(0, 255, 204, 0.1); padding: 4px 8px; border-radius: 6px;">+💎 50</span></div>`; });
+                if(html === "") html = "<p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>You haven't referred anyone yet. Start sharing!</p>"; 
+                refList.innerHTML = html;
+            } catch(e) { refList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>Error loading referrals.</p>"; }
+        }
+
+        function startLiveSnapshot(user) {
+            onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data(); currentBalance = data.balance || 0; uiBalance.innerText = currentBalance;
+                    const profileBal = document.getElementById('profile-balance'); if(profileBal) profileBal.innerText = currentBalance;
+                    
+                    // Fallback to saved count if live fetch hasn't completed
+                    if(document.getElementById('profile-ref-count').innerText === "0") {
+                        document.getElementById('profile-ref-count').innerText = data.referralCount || 0;
+                    }
+
+                    const safeName = data.name || "User"; document.getElementById('profile-name').innerText = safeName; document.getElementById('profile-email').innerText = user.email || "No Email"; document.getElementById('profile-avatar').src = data.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${safeName.replace(/ /g, '')}&backgroundColor=ff007f`;
+                }
+            });
+        }
+        
+        document.querySelectorAll('.voucher-card').forEach(card => {
+            card.addEventListener('click', function() {
+                actMethod = this.getAttribute('data-method'); actReqType = this.getAttribute('data-req'); actMin = parseInt(this.getAttribute('data-min'));
+                const cashStr = this.getAttribute('data-cash'); const imgSrc = this.getAttribute('data-img');
+                document.getElementById('br-name').innerText = actMethod; document.getElementById('br-min-gems').innerText = actMin; document.getElementById('br-cash').innerText = cashStr;
+                const imgEl = document.getElementById('br-img'); if (imgSrc) { imgEl.src = imgSrc; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
+                document.getElementById('redeem-amount').value = actMin;
+                document.querySelectorAll('.dynamic-input').forEach(el => el.classList.add('hidden')); document.getElementById(`input-group-${actReqType}`).classList.remove('hidden');
+                document.getElementById('redeem-upi').value = ''; document.getElementById('redeem-email').value = ''; document.getElementById('redeem-acct').value = ''; document.getElementById('redeem-ifsc').value = '';
+                openSubScreen('brand-redeem-screen');
+            });
+        });
+        
+        document.getElementById('final-submit-redeem').addEventListener('click', async () => {
+            const btn = document.getElementById('final-submit-redeem'); const gemsInput = parseInt(document.getElementById('redeem-amount').value); let finalDetails = "";
+            if (actReqType === 'upi') { const upiStr = document.getElementById('redeem-upi').value.trim(); if (!/^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/.test(upiStr)) return alert("❌ Please enter a valid UPI ID"); finalDetails = upiStr; }
+            else if (actReqType === 'email') { const emailStr = document.getElementById('redeem-email').value.trim(); if (!/^\S+@\S+\.\S+$/.test(emailStr)) return alert("❌ Please enter a valid Email Address"); finalDetails = emailStr; }
+            else if (actReqType === 'bank') { const acctStr = document.getElementById('redeem-acct').value.trim(); const ifscStr = document.getElementById('redeem-ifsc').value.trim().toUpperCase(); if (acctStr.length < 8) return alert("❌ Please enter a valid Account Number"); if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifscStr)) return alert("❌ Please enter a valid IFSC Code"); finalDetails = `A/C: ${acctStr}, IFSC: ${ifscStr}`; }
+            if (isNaN(gemsInput) || gemsInput < actMin) return alert(`❌ Minimum withdrawal is ${actMin} Gems!`);
+            if (gemsInput > currentBalance) return alert("❌ Insufficient Gems balance!");
+            btn.innerText = "Processing..."; btn.disabled = true;
+            try {
+                await updateDoc(doc(db, 'users', currentUser.uid), { balance: increment(-gemsInput) });
+                await addDoc(collection(db, 'withdrawals'), { userId: currentUser.uid, name: currentUser.displayName || "User", amount: gemsInput, method: actMethod, details: finalDetails, status: "Pending", timestamp: serverTimestamp() });
+                alert(`✅ Withdrawal requested successfully!`); switchTab('profile-screen', document.getElementById('nav-profile')); document.getElementById('global-bottom-nav').style.display = 'flex';
+            } catch (e) { alert("Error submitting request! Please try again."); }
+            btn.innerText = "Proceed to Transfer"; btn.disabled = false;
+        });
+        
+        // --- FIXED LEADERBOARD DAILY EARNINGS LOGIC ---
+        let currentLbCat = 'earnings'; let currentLbTime = 'all';     
+        const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
+        const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
+        const lbTimer = document.getElementById('lb-timer');
+        lbDropToggle.addEventListener('click', (e) => { e.stopPropagation(); lbDropMenu.classList.toggle('show'); }); document.addEventListener('click', () => { lbDropMenu.classList.remove('show'); });
+        document.querySelectorAll('.lb-drop-item').forEach(item => { item.addEventListener('click', (e) => { document.querySelectorAll('.lb-drop-item').forEach(i => i.classList.remove('active')); e.target.classList.add('active'); currentLbCat = e.target.getAttribute('data-cat'); lbActiveCat.innerText = currentLbCat === 'earnings' ? "Earnings" : "Referrals"; lbScoreTitle.innerText = currentLbCat === 'earnings' ? "COINS" : "INVITES"; window.loadAdvancedLeaderboard(); }); });
+        document.querySelectorAll('.lb-b-tab').forEach(tab => { tab.addEventListener('click', (e) => { document.querySelectorAll('.lb-b-tab').forEach(t => t.classList.remove('active')); e.target.classList.add('active'); currentLbTime = e.target.getAttribute('data-time'); window.loadAdvancedLeaderboard(); }); });
+
+        setInterval(() => {
+            if (currentLbTime === 'all') { lbTimer.style.display = 'none'; return; } else { lbTimer.style.display = 'block'; }
+            const now = new Date(); let target = new Date();
+            if (currentLbTime === 'today') { target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); } else if (currentLbTime === 'weekly') { const day = now.getDay(); const diffToMonday = (7 - day + 1) % 7 || 7; target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMonday); target.setHours(0,0,0,0); } else if (currentLbTime === 'monthly') { target = new Date(now.getFullYear(), now.getMonth() + 1, 1); }
+            const diff = target - now; const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'); const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0'); const s = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            if (currentLbTime === 'today') { lbTimer.innerText = `⏳ Resets in: ${h}h ${m}m ${s}s`; } else { lbTimer.innerText = `⏳ Resets in: ${d}d ${h}h ${m}m ${s}s`; }
+        }, 1000);
+
+        window.loadAdvancedLeaderboard = async function() {
+            const podiumContainer = document.getElementById('podium-pro-box'); const listContainer = document.getElementById('leaderboard-list'); podiumContainer.innerHTML = "<p style='width:100%; text-align:center;'>Loading Data...</p>";
+            try {
+                // Fetch top 100 users based on total balance/referral as baseline
+                let baseField = currentLbCat === 'referrals' ? "referralCount" : "balance";
+                let q = query(collection(db, "users"), orderBy(baseField, "desc"), limit(100));
+                const querySnapshot = await getDocs(q); 
+                
+                let users = []; 
+                const todayStr = new Date().toISOString().split('T')[0];
+                
+                querySnapshot.forEach(doc => {
+                    let data = doc.data();
+                    // NEW: Filter out old earnings if period has passed
+                    if (currentLbCat === 'earnings' && currentLbTime === 'today') {
+                        if (data.lastEarnDate !== todayStr) data.dailyEarn = 0;
+                    }
+                    users.push(data);
+                });
+
+                // Client Side Sort based on selected time
+                users.sort((a, b) => {
+                    if(currentLbCat === 'referrals') return (b.referralCount || 0) - (a.referralCount || 0);
+                    if(currentLbTime === 'today') return (b.dailyEarn || 0) - (a.dailyEarn || 0);
+                    if(currentLbTime === 'weekly') return (b.weeklyEarn || 0) - (a.weeklyEarn || 0);
+                    if(currentLbTime === 'monthly') return (b.monthlyEarn || 0) - (a.monthlyEarn || 0);
+                    return (b.balance || 0) - (a.balance || 0);
+                });
+
+                // Keep top 50 valid earners
+                if(currentLbTime !== 'all') {
+                    users = users.filter(u => {
+                        if(currentLbCat === 'referrals') return (u.referralCount || 0) > 0;
+                        if(currentLbTime === 'today') return (u.dailyEarn || 0) > 0;
+                        return true;
+                    });
+                }
+
+                if(users.length === 0) { podiumContainer.innerHTML = "<p style='width:100%; text-align:center; margin-top:30px; font-weight:bold; color:#7a7a9d;'>No data for selected period.</p>"; listContainer.innerHTML = ""; return; }
+                
+                const getFirstName = (u) => (u && u.name) ? u.name.split(' ')[0] : "User"; const getAvatar = (u) => (u && u.photoURL) ? u.photoURL : `https://api.dicebear.com/7.x/bottts/svg?seed=${(u&&u.name)?u.name.replace(/ /g, ''):'user'}&backgroundColor=1f1b36`;
+                
+                const getScore = (u) => {
+                    if(!u) return 0;
+                    if(currentLbCat === 'referrals') return `${u.referralCount || 0} 👥`;
+                    if(currentLbTime === 'today') return `${u.dailyEarn || 0} 💎`;
+                    if(currentLbTime === 'weekly') return `${u.weeklyEarn || 0} 💎`;
+                    if(currentLbTime === 'monthly') return `${u.monthlyEarn || 0} 💎`;
+                    return `${u.balance || 0} 💎`;
+                }
+
+                const top1 = users[0] || null; const top2 = users[1] || null; const top3 = users[2] || null;
+                
+                let podiumHtml = "";
+                if(top2) podiumHtml += `<div class="podium-pillar rank-2-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top2)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">2. ${getFirstName(top2)}</div><div class="p-score">${getScore(top2)}</div></div></div></div>`;
+                if(top1) podiumHtml += `<div class="podium-pillar rank-1-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top1)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">1. ${getFirstName(top1)}</div><div class="p-score">${getScore(top1)}</div></div></div></div>`;
+                if(top3) podiumHtml += `<div class="podium-pillar rank-3-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top3)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">3. ${getFirstName(top3)}</div><div class="p-score">${getScore(top3)}</div></div></div></div>`;
+                
+                podiumContainer.innerHTML = podiumHtml;
+                
+                let listHtml = '';
+                for(let i = 3; i < users.length; i++) { 
+                    listHtml += `<div class="list-row"><div class="row-rank">${i + 1}</div><div class="row-user"><img src="${getAvatar(users[i])}" class="row-avatar"><div class="row-name">${users[i].name || "User"}</div></div><div class="row-score">${getScore(users[i])}</div></div>`; 
+                }
+                listContainer.innerHTML = listHtml;
+            } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
+        }
+
+        const getShareMessage = () => { return `Join EarnNova Pro! Use my code: ${document.getElementById('my-referral-code').innerText} to get 50 Gems instantly + Lifetime 10% Commission!\nStart earning today! 🚀`; };
+        const getShareUrl = () => { return window.location.href.split('?')[0] + "?ref=" + currentUser.uid; };        
+        document.getElementById('copy-ref-btn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('my-referral-code').innerText); const btn = document.getElementById('copy-ref-btn'); btn.innerText = "COPIED!"; btn.style.background = "#00ffcc"; btn.style.color = "#000"; setTimeout(() => { btn.innerText = "COPY"; btn.style.background = "linear-gradient(135deg, #ff007f, #8a2be2)"; btn.style.color = "#fff"; }, 2000); });
+        
+        document.getElementById('share-wa').addEventListener('click', () => { window.open(`https://wa.me/?text=${encodeURIComponent(getShareMessage() + "\n" + getShareUrl())}`); });
+        document.getElementById('share-tg').addEventListener('click', () => { window.open(`https://t.me/share/url?url=${encodeURIComponent(getShareUrl())}&text=${encodeURIComponent(getShareMessage())}`); });
+        document.getElementById('share-link').addEventListener('click', () => { navigator.clipboard.writeText(getShareUrl()); alert("Referral Link Copied to Clipboard!"); });
+        document.getElementById('share-more').addEventListener('click', async () => { if (navigator.share) { try { await navigator.share({ title: 'EarnNova Pro', text: getShareMessage(), url: getShareUrl() }); } catch (err) {} } else { alert("Native sharing is not supported on this browser."); } });
+        
+        window.loadProfileData = async function() {
+            if(!currentUser) return; const historyList = document.getElementById('history-list'); historyList.innerHTML = "<p style='text-align: center; color: #7a7a9d;'>Loading history...</p>";
+            try {
+                const q = query(collection(db, "withdrawals"), where("userId", "==", currentUser.uid)); const querySnapshot = await getDocs(q); let records = []; querySnapshot.forEach(doc => records.push(doc.data()));
+                if(records.length === 0) { historyList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>No withdrawals found.</p>"; return; }
+                records.sort((a, b) => (b.timestamp ? b.timestamp.toMillis() : 0) - (a.timestamp ? a.timestamp.toMillis() : 0)); let html = "";
+                records.forEach(data => { 
+                    const dateObj = data.timestamp ? new Date(data.timestamp.toDate()) : new Date(); const dateStr = dateObj.toLocaleDateString('en-GB') + " " + dateObj.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}); 
+                    const statusClass = (data.status || "Pending").toLowerCase();
+                    html += `<div class="modern-history-item"><div class="mh-left"><div class="mh-icon">💸</div><div class="mh-info"><h5>${data.method}</h5><p>${dateStr}</p></div></div><div class="mh-right"><div class="mh-amount" style="color: #fff;">- ${data.amount} 💎</div><div class="mh-status ${statusClass}">${data.status || "Pending"}</div></div></div>`; 
+                }); historyList.innerHTML = html;
+            } catch (error) { historyList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading history.</p>`; }
+        }
+       
+        document.getElementById('edit-name-btn').addEventListener('click', async () => { const currentName = document.getElementById('profile-name').innerText; const newName = prompt("Enter your new name:", currentName); if (newName && newName.trim() !== "" && newName !== currentName) { try { document.getElementById('edit-name-btn').innerText = "⏳"; await updateDoc(doc(db, 'users', currentUser.uid), { name: newName }); document.getElementById('edit-name-btn').innerText = "Edit"; } catch(e) { alert("Error updating name!"); document.getElementById('edit-name-btn').innerText = "Edit"; } } });
+        document.getElementById('edit-avatar-btn').addEventListener('click', () => document.getElementById('avatar-upload').click());
+        document.getElementById('avatar-upload').addEventListener('change', function(e) { const file = e.target.files[0]; if(!file) return; if(file.size > 800 * 1024) return alert("File is too large! Please upload under 800 KB."); const reader = new FileReader(); reader.onload = async function(event) { const base64String = event.target.result; document.getElementById('profile-avatar').src = base64String; try { await updateDoc(doc(db, 'users', currentUser.uid), { photoURL: base64String }); } catch(err) {} }; reader.readAsDataURL(file); });
+    </script>
+</body>
+</html>

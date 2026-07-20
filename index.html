@@ -57,10 +57,11 @@
         .brand-logo .brand-text { display: flex; flex-direction: column; line-height: 1; }
         .brand-logo .brand-text span:last-child { color: #ff007f; font-size: 14px; text-shadow: 0 0 10px rgba(255,0,127,0.4); }
         .header-actions { display: flex; gap: 15px; }
-        .action-icon-group { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+        .action-icon-group { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; position: relative;}
         .action-circle { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         .ac-red { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; } .ac-orange { background: rgba(255, 152, 0, 0.15); color: #ff9800; }
         .action-label { font-size: 10px; color: #a0a0b5; font-weight: 600; }
+        .notif-badge { position: absolute; top: -5px; right: -5px; background: #ff007f; color: #fff; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 8px rgba(255,0,127,0.8);}
         
         .banner-container { width: 100%; overflow: hidden; border-radius: 15px; margin-bottom: 20px; position: relative; background: #171721; border: 1px solid #232335; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .banner-track { display: flex; width: 300%; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -87,22 +88,40 @@
         .adv-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .adv-card::after { content: ''; position: absolute; right: -15px; top: -15px; width: 60px; height: 60px; border-radius: 50%; filter: blur(25px); z-index: -1; opacity: 0.5; transition: 0.3s; }
         .adv-card:hover::after { opacity: 0.8; transform: scale(1.2); }
-        .adv-card.t-tasks::after { background: #ffd700; } .adv-card.t-ranks::after { background: #007bff; } .adv-card.t-micro::after { background: #ff007f; } .adv-card.t-games::after { background: #8a2be2; }
-        .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #171721; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }        .adv-info h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #7a7a9d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        .adv-card.t-tasks::after { background: #ffd700; } .adv-card.t-ranks::after { background: #007bff; } .adv-card.t-spin::after { background: #ff007f; } .adv-card.t-scratch::after { background: #8a2be2; }
+        .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #171721; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }
+        .adv-info h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #7a7a9d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        
         /* --- GLOBAL BOTTOM NAV --- */
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px; background: rgba(23, 23, 33, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 100; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05); }
         .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #7a7a9d; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-size: 11px; font-weight: 600; flex: 1; position: relative; gap: 5px; }
         .nav-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: 0.3s; }
         .nav-item:hover { color: #fff; } .nav-item.active { color: #ff007f; transform: translateY(-4px); } .nav-item.active svg { filter: drop-shadow(0 0 8px rgba(255,0,127,0.6)); stroke-width: 2.5; }
         .nav-item::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #ff007f; opacity: 0; transition: 0.3s; box-shadow: 0 0 8px #ff007f; } .nav-item.active::after { opacity: 1; bottom: -6px; }
-        /* --- SCREENS HEADERS (No Back Buttons on Main Tabs) --- */
+        /* --- SCREENS HEADERS --- */
         .main-page-header { text-align: center; margin-bottom: 25px; padding-top: 10px; }
         .main-page-header h2 { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; }
-        
-        /* Sub-page Headers (With Back Button) */
         .sub-header { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; padding-top: 5px; }
         .back-btn { background: #171721; border: 1px solid #33334d; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         .sub-header h2 { flex-grow: 1; text-align: center; padding-right: 70px; font-size: 20px; font-weight: 800;}
+        
+        /* --- SPIN AND WIN --- */
+        .spin-wheel-container { position: relative; width: 280px; height: 280px; margin: 30px auto; border-radius: 50%; border: 8px solid #2b224d; box-shadow: 0 0 40px rgba(255,0,127,0.4), inset 0 0 20px rgba(0,0,0,0.8); overflow: hidden; background: #1a1a2e; }
+        .wheel { width: 100%; height: 100%; position: relative; transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); transform: rotate(0deg); border-radius: 50%; background: conic-gradient( #ff007f 0deg 36deg, #3d3269 36deg 72deg, #ff007f 72deg 108deg, #3d3269 108deg 144deg, #ff007f 144deg 180deg, #3d3269 180deg 216deg, #ff007f 216deg 252deg, #3d3269 252deg 288deg, #ff007f 288deg 324deg, #3d3269 324deg 360deg ); }
+        .wheel-segment { position: absolute; top: 0; left: 50%; width: 50%; height: 50%; transform-origin: 0% 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .wheel-segment span { transform: rotate(72deg) translateY(-80px); }
+        .spin-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid #ffd700; z-index: 10; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.5)); }
+        .spin-btn { display: block; margin: 30px auto; background: linear-gradient(135deg, #ff007f, #8a2be2); color: #fff; font-size: 20px; font-weight: 900; padding: 15px 40px; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 10px 25px rgba(255,0,127,0.5); transition: 0.3s; }
+        .spin-btn:hover { transform: scale(1.05); } .spin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* --- SCRATCH CARD --- */
+        .scratch-card-container { position: relative; width: 250px; height: 250px; margin: 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6); border: 2px solid #3d3269; }
+        .scratch-reward-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #12101f; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; }
+        .scratch-reward-bg h3 { font-size: 16px; color: #a0a0b5; margin-bottom: 10px; }
+        .scratch-reward-bg .s-gems { font-size: 40px; font-weight: 900; color: #00ffcc; filter: drop-shadow(0 0 10px rgba(0,255,204,0.4)); }
+        .scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; }
+        .scratch-info-box { text-align: center; background: rgba(138,43,226,0.1); border: 1px dashed rgba(138,43,226,0.5); padding: 15px; border-radius: 15px; margin-top: 20px; }
+        
         /* --- LEADERBOARD --- */
         .lb-pro-container { background: #12101f; border: 1px solid #2b224d; border-radius: 20px; padding: 25px 15px 15px 15px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative;}
         .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
@@ -174,7 +193,7 @@
 <body>
     <span id="user-name" class="hidden"></span>
     
-    <!-- GLOBAL BOTTOM NAV (Visible on all main screens) -->
+    <!-- GLOBAL BOTTOM NAV -->
     <div class="bottom-nav" id="global-bottom-nav" style="display: none;">
         <div class="nav-item active" id="nav-home" onclick="switchTab('dashboard-screen', this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
         <div class="nav-item" id="nav-task" onclick="alert('Tasks section coming soon!')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Tasks</span></div>
@@ -182,7 +201,8 @@
         <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', this)"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
         <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', this);"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
     </div>
-    <!-- Sidebar Overlay & Container -->
+    
+    <!-- Sidebar -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div class="sidebar" id="main-sidebar">
         <div class="sidebar-header">
@@ -193,37 +213,24 @@
             <div class="sidebar-category">My Account</div>
             <div class="sidebar-item" id="side-profile"><span class="sidebar-icon icon-profile">👤</span> Profile</div>
             <div class="sidebar-item" onclick="alert('Time / History coming soon!')"><span class="sidebar-icon icon-time">⏱️</span> Time / History</div>
-            
-            <div class="sidebar-category">Our Community</div>
-            <div class="sidebar-item" onclick="window.open('https://telegram.org', '_blank')"><span class="sidebar-icon icon-tg">✈️</span> Telegram</div>
-            <div class="sidebar-item" onclick="window.open('https://whatsapp.com', '_blank')"><span class="sidebar-icon icon-wa">💬</span> WhatsApp</div>
-            <div class="sidebar-item" onclick="window.open('https://youtube.com', '_blank')"><span class="sidebar-icon icon-yt">▶️</span> YouTube</div>
-            
-            <div class="sidebar-category">Help & Support</div>
-            <div class="sidebar-item" onclick="window.location.href='mailto:support@earnnova.com'"><span class="sidebar-icon icon-support">🎧</span> Support</div>
-            <div class="sidebar-item" onclick="alert('Connecting to agent...')"><span class="sidebar-icon icon-chat">💬</span> Live Chat</div>
-            <div class="sidebar-item" onclick="alert('FAQ Page loading...')"><span class="sidebar-icon icon-faq">❓</span> FAQ</div>
-            
             <div class="sidebar-category">Account</div>
-            <!-- BOTTOM LOGOUT IN SIDEBAR -->
             <div class="sidebar-item" id="side-logout" style="color: #ff5e62; margin-top: 10px; border-left: 3px solid #ff5e62; background: rgba(255,94,98,0.1);"><span class="sidebar-icon icon-logout">🚪</span> Logout</div>
         </div>
     </div>
     
     <!-- 1. LOGIN SCREEN -->
     <div id="login-screen">
-        <div class="floating-element fe-1">🪙</div><div class="floating-element fe-2">🎁</div><div class="floating-element fe-3">🎮</div><div class="floating-element fe-4">💎</div><div class="floating-element fe-5">⚡</div><div class="floating-element fe-6">✨</div>
+        <div class="floating-element fe-1">🪙</div><div class="floating-element fe-2">🎁</div><div class="floating-element fe-3">🎮</div><div class="floating-element fe-4">💎</div>
         <div class="login-glass-card">
             <img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f" class="main-logo" alt="EarnNova Logo">
             <h1 class="gradient-text">EarnNova Pro</h1>
             <p>Play games, complete quick tasks, and earn real cash & rewards instantly.</p>
             <div class="terms-container" id="terms-container">
                 <input type="checkbox" id="terms-checkbox">
-                <label for="terms-checkbox">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.</label>
+                <label for="terms-checkbox">I agree to the <a href="#">Terms of Service</a>.</label>
             </div>
             <button id="login-btn" class="google-btn-new">
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" class="google-icon">
-                Continue with Google
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" class="google-icon"> Continue with Google
             </button>
         </div>
     </div>
@@ -232,7 +239,6 @@
     <div id="onboarding-screen" class="hidden" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; position: relative; z-index: 10;">
         <div class="login-box" style="width: 90%; max-width: 400px; text-align: left;">
             <h3 style="font-size: 22px; margin-bottom: 10px; text-align: center; color: #fff;">Set Your Profile 🚀</h3>
-            <p style="color: #7a7a9d; font-size: 13px; text-align: center; margin-bottom: 20px;">Just a few more steps to create your account.</p>
             <div class="input-group"><label>Choose Username</label><input type="text" id="setup-username" placeholder="e.g., rohit_45" required></div>
             <div class="input-group"><label>Referral Code (Optional)</label><input type="text" id="setup-referral" placeholder="Enter code if you have one"></div>
             <button id="submit-onboarding" class="submit-btn">Complete Registration</button>
@@ -247,50 +253,87 @@
                 <div class="brand-logo">
                     <img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f" alt="EarnNova Logo">
                     <div class="brand-text"><span>EARN</span><span>NOVA</span></div>
-                    <span id="live-ist-time" style="font-size: 10px; color: #00ffcc; margin-left: 8px; font-weight: bold; padding: 4px 8px; background: rgba(0, 255, 204, 0.1); border: 1px solid rgba(0, 255, 204, 0.3); border-radius: 8px;">--:-- IST</span>
                 </div>
             </div>
             <div class="header-actions">
-                <div class="action-icon-group" onclick="alert('Tutorials coming soon!')"><div class="action-circle ac-red">▶</div><span class="action-label">Tutorials</span></div>
-                <div class="action-icon-group" onclick="alert('No new notifications')"><div class="action-circle ac-orange">🔔</div><span class="action-label">Notification</span></div>
+                <div class="action-icon-group" onclick="openSubScreen('scratch-list-screen')">
+                    <div class="action-circle ac-orange">🎁</div><span class="action-label">Scratch</span>
+                    <div class="notif-badge hidden" id="scratch-badge">0</div>
+                </div>
             </div>
         </div>
        
         <!-- BANNERS -->
         <div class="banner-container">
             <div class="banner-track" id="auto-banner-track">
-                <div class="banner-slide slide-1"><div class="banner-text-content"><div class="banner-title">Weekly Leaderboard</div><div class="banner-main">Top 50 Earners</div><div class="banner-highlight">25,000 Coins</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=prize" class="banner-img" alt="Prize"></div>
-                <div class="banner-slide slide-2"><div class="banner-text-content"><div class="banner-title">Refer & Earn</div><div class="banner-main">Invite Friends</div><div class="banner-highlight">50 Gems Instant</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=friends" class="banner-img" alt="Refer"></div>
-                <div class="banner-slide slide-3"><div class="banner-text-content"><div class="banner-title">Mega Tasks</div><div class="banner-main">Complete & Earn</div><div class="banner-highlight">Extra ₹100 Daily</div></div><img src="https://api.dicebear.com/7.x/bottts/svg?seed=cash" class="banner-img" alt="Cash"></div>
+                <div class="banner-slide slide-1"><div class="banner-text-content"><div class="banner-title">Weekly Leaderboard</div><div class="banner-main">Top 50 Earners</div><div class="banner-highlight">25,000 Coins</div></div></div>
+                <div class="banner-slide slide-2"><div class="banner-text-content"><div class="banner-title">Refer & Earn</div><div class="banner-main">Invite Friends</div><div class="banner-highlight">50 Gems Instant</div></div></div>
+                <div class="banner-slide slide-3"><div class="banner-text-content"><div class="banner-title">Mega Tasks</div><div class="banner-main">Complete & Earn</div><div class="banner-highlight">Extra ₹100 Daily</div></div></div>
             </div>
-            <div class="banner-dots"><div class="b-dot active" id="dot-0"></div><div class="b-dot" id="dot-1"></div><div class="b-dot" id="dot-2"></div></div>
         </div>
-        <!-- 7-COLOR ANIMATED WALLET -->
+        
+        <!-- WALLET -->
         <div class="wallet-wrapper">
             <div class="wallet-inner">
-                <div class="wallet-left">
-                    <span style="font-size: 28px; filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.8));">💎</span>
-                    <span class="w-balance" id="user-balance">0.00</span>
-                </div>
+                <div class="wallet-left"><span style="font-size: 28px;">💎</span><span class="w-balance" id="user-balance">0.00</span></div>
                 <button class="w-btn-pro" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">Withdraw Coins</button>
             </div>
         </div>
         
         <!-- ADVANCED ACTION GRID -->
         <div class="adv-action-grid">
-            <div class="adv-card t-tasks" onclick="alert('Tasks loading...')">
-                <div class="adv-icon-box">📋</div><div class="adv-info"><h4>Tasks</h4><p>Earn Daily</p></div>
+            <div class="adv-card t-spin" onclick="openSubScreen('spin-screen')">
+                <div class="adv-icon-box">🎡</div><div class="adv-info"><h4>Spin & Win</h4><p>Try Luck</p></div>
+            </div>
+            <div class="adv-card t-scratch" onclick="openSubScreen('scratch-list-screen')">
+                <div class="adv-icon-box">🎁</div><div class="adv-info"><h4>Scratch</h4><p>Lucky Cards</p></div>
             </div>
             <div class="adv-card t-ranks" onclick="switchTab('leaderboard-screen', null); loadAdvancedLeaderboard();">
                 <div class="adv-icon-box">🏆</div><div class="adv-info"><h4>Ranks</h4><p>Leaderboard</p></div>
-            </div>
-            <div class="adv-card t-micro" onclick="alert('Micro jobs loading...')">
-                <div class="adv-icon-box">🗂</div><div class="adv-info"><h4>Micro Jobs</h4><p>Quick Cash</p></div>
             </div>
             <div class="adv-card t-games" onclick="alert('Games loading...')">
                 <div class="adv-icon-box">🎮</div><div class="adv-info"><h4>Games</h4><p>Fun Rewards</p></div>
             </div>
         </div>
+    </div>
+    
+    <!-- SPIN AND WIN SCREEN -->
+    <div id="spin-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Spin & Win</h2></div>
+        <p style="text-align: center; color: #a0a0b5; font-size: 13px;">Spin the wheel to win 1 to 10 Gems!</p>
+        <div class="spin-wheel-container">
+            <div class="spin-pointer"></div>
+            <div class="wheel" id="roulette-wheel">
+                <!-- Javascript will populate 10 segments here -->
+            </div>
+        </div>
+        <button class="spin-btn" id="spin-action-btn">SPIN NOW</button>
+    </div>
+
+    <!-- SCRATCH CARDS LIST SCREEN -->
+    <div id="scratch-list-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Scratch Cards</h2></div>
+        <div class="scratch-info-box">
+            <h3 style="color:#fff; font-size: 15px;">Earn 100 Gems to get a Card!</h3>
+            <p style="color:#00ffcc; font-size: 12px; margin-top:5px; font-weight:bold;" id="scratch-progress-text">Progress: 0 / 100 Gems</p>
+        </div>
+        <h3 style="margin-top: 25px; color: #fff; font-size: 16px;">Available Cards: <span id="sc-count">0</span></h3>
+        <div id="scratch-cards-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px;">
+            <p style="color:#7a7a9d; font-size:12px; width:200%;">No scratch cards available right now.</p>
+        </div>
+    </div>
+
+    <!-- ACTIVE SCRATCH SCREEN -->
+    <div id="active-scratch-screen" class="main-container hidden app-screen">
+        <div class="sub-header"><button class="back-btn" onclick="openSubScreen('scratch-list-screen')">← Back</button><h2>Scratch Card</h2></div>
+        <div class="scratch-card-container">
+            <div class="scratch-reward-bg">
+                <h3>You Won!</h3>
+                <div class="s-gems">💎 <span id="won-scratch-amount">0</span></div>
+            </div>
+            <canvas id="scratch-canvas" class="scratch-canvas" width="250" height="250"></canvas>
+        </div>
+        <p style="text-align: center; color: #a0a0b5; font-size: 12px; margin-top: 10px;">Rub the card to reveal your prize!</p>
     </div>
     
     <!-- 3. ADVANCED LEADERBOARD -->
@@ -316,25 +359,10 @@
             <div class="pro-avatar-wrapper"><img id="profile-avatar" src="" alt="Avatar"><div class="pro-avatar-edit" id="edit-avatar-btn">✏️</div></div>
             <input type="file" id="avatar-upload" accept="image/*" class="hidden">
             <div class="pro-name-row"><h3 id="profile-name">User Name</h3><div class="pro-edit-btn" id="edit-name-btn">Edit</div></div>
-            <p class="pro-email" id="profile-email">user@email.com</p>
+            <p style="font-size: 10px; color: #ff5e62; margin-top: 5px;" id="changes-left-txt">Name/Avatar changes left: 2</p>
             <div class="pro-stats-row">
                 <div class="pro-stat-box"><span>Total Balance</span><h4>💎 <span id="profile-balance">0</span></h4></div>
                 <div class="pro-stat-box"><span>Total Invites</span><h4>👥 <span id="profile-ref-count">0</span></h4></div>
-            </div>
-        </div>
-        
-        <div class="profile-options-container">
-            <div class="profile-option" onclick="openSubScreen('analytics-screen')">
-                <div class="po-left"><span class="po-icon">📊</span> <span>Earning Analytics</span></div><div class="po-right">❯</div>
-            </div>
-            <div class="profile-option" onclick="openSubScreen('transactions-screen')">
-                <div class="po-left"><span class="po-icon">🧾</span> <span>Earn Transactions</span></div><div class="po-right">❯</div>
-            </div>
-            <div class="profile-option" onclick="openSubScreen('network-screen'); loadMyReferrals();">
-                <div class="po-left"><span class="po-icon">🤝</span> <span>My Network</span></div><div class="po-right">❯</div>
-            </div>
-            <div class="profile-option" onclick="openSubScreen('redeem-history-screen'); loadProfileData();">
-                <div class="po-left"><span class="po-icon">🎁</span> <span>Redeem History</span></div><div class="po-right">❯</div>
             </div>
         </div>
         <button id="profile-logout-btn" class="profile-logout-btn">🚪 Logout From Account</button>
@@ -343,80 +371,17 @@
     <!-- 5. WITHDRAW SCREEN -->
     <div id="withdraw-screen" class="main-container hidden app-screen">
         <div class="main-page-header"><h2>Redeem Rewards</h2></div>
-        <p style="font-size: 12px; color: #7a7a9d; margin-bottom: 15px; text-transform: uppercase; font-weight: bold;">Select Withdraw Method</p>
         <div class="voucher-grid">
             <div class="voucher-card" data-method="UPI" data-req="upi" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" style="max-height:35px;"><span class="voucher-title">UPI Transfer</span></div>
-            <div class="voucher-card" data-method="Google Play" data-req="email" data-min="450" data-cash="₹30" data-img="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play"><span class="voucher-title">Google Play</span></div>
-            <div class="voucher-card" data-method="Amazon Gift Card" data-req="email" data-min="300" data-cash="₹20" data-img="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" style="background-color: #FFF3E0;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon"><span class="voucher-title">Amazon</span></div>
-            <div class="voucher-card dark-bg" data-method="Uber Voucher" data-req="email" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg" alt="Uber" style="filter: invert(1);"><span class="voucher-title">Uber</span></div>
         </div>
     </div>
     
     <!-- 6. INVITE SCREEN -->
     <div id="invite-screen" class="main-container hidden app-screen">
         <div class="main-page-header"><h2>Refer & Earn</h2></div>
-        <div class="invite-hero">
-            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=gift" class="invite-hero-img">
-            <h2 class="invite-title">Invite Friends & Earn</h2>
-            <p class="invite-sub">Get <span class="highlight">💎50</span> instantly + <span class="highlight">10%</span> lifetime commission for every friend who joins!</p>
-        </div>
         <div class="invite-code-box">
             <span>Your Referral Code</span>
-            <div class="code-row">
-                <div id="my-referral-code" class="the-code">LOADING...</div>
-                <button id="copy-ref-btn">COPY</button>
-            </div>
-        </div>
-        <h3 class="share-title">Share via</h3>
-        <div class="pro-share-grid">
-            <div class="share-btn wa" id="share-wa"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"><span>WhatsApp</span></div>
-            <div class="share-btn tg" id="share-tg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG"><span>Telegram</span></div>
-            <div class="share-btn link" id="share-link"><div class="link-icon">🔗</div><span>Copy Link</span></div>
-            <div class="share-btn more" id="share-more"><div class="more-icon">•••</div><span>More</span></div>
-        </div>
-    </div>
-    <!-- ================== PROFILE SUB-SCREENS ================== -->
-    <!-- Analytics -->
-    <div id="analytics-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Analytics</h2></div>
-        <div style="background: rgba(0,0,0,0.4); padding: 30px; border-radius: 20px; text-align: center; border: 1px dashed #33334d; margin-top: 20px;">
-            <span style="font-size: 40px;">📊</span><h3 style="margin-top: 10px; color:#fff;">Analytics Dashboard</h3><p style="color:#7a7a9d; font-size:12px; margin-top: 5px;">Charts and detailed statistics coming soon in the next update!</p>
-        </div>
-    </div>
-    
-    <!-- Earn Transactions -->
-    <div id="transactions-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
-        <div id="earn-tx-list">
-            <!-- Simulated Transactions -->
-            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(0,255,204,0.1);color:#00ffcc;">📋</div><div class="mh-info"><h5>Daily Task Completed</h5><p>Today</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#00ffcc;">+ 20 💎</div></div></div>
-            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(255,215,0,0.1);color:#ffd700;">🎁</div><div class="mh-info"><h5>Welcome Bonus</h5><p>Account Created</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#ffd700;">+ 50 💎</div></div></div>
-        </div>
-    </div>
-    <!-- My Network (Referral Tree) -->
-    <div id="network-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Network</h2></div>
-        <div class="referral-stats-head" style="margin-top: 20px; border: none;">
-            <h3>Total Friends Joined</h3>
-            <span class="ref-count-badge" id="network-page-ref-count">0 Friends</span>
-        </div>
-        <div id="referral-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading network...</p></div>
-    </div>
-    <!-- Redeem History -->
-    <div id="redeem-history-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Redeem History</h2></div>
-        <div id="history-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
-    </div>
-    <!-- Checkout Sub-Screen (From withdraw) -->
-    <div id="brand-redeem-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">← Back</button><h2>Checkout</h2></div>
-        <div class="redeem-banner"><img id="br-img" src="" alt="Brand Logo"><h3 id="br-name">Brand Name</h3><div class="redeem-min-text">💎 <span id="br-min-gems">0</span> Gems required for <span id="br-cash">0</span></div></div>
-        <div style="background: #171721; padding: 25px 20px; border-radius: 15px; border: 1px solid #2a2a3d; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-            <div id="input-group-upi" class="dynamic-input hidden"><div class="input-group"><label>Enter UPI ID</label><input type="text" id="redeem-upi" placeholder="e.g., username@bank" autocomplete="off"></div></div>
-            <div id="input-group-email" class="dynamic-input hidden"><div class="input-group"><label>Delivery Email Address</label><input type="email" id="redeem-email" placeholder="e.g., user@gmail.com" autocomplete="off"></div></div>
-            <div id="input-group-bank" class="dynamic-input hidden"><div class="input-group"><label>Account Number</label><input type="number" id="redeem-acct" placeholder="Enter Account Number"></div><div class="input-group"><label>IFSC Code</label><input type="text" id="redeem-ifsc" placeholder="e.g., SBIN0001234" style="text-transform: uppercase;"></div></div>
-            <div class="input-group"><label>Amount to Withdraw (Gems)</label><input type="number" id="redeem-amount" placeholder="Enter amount of Gems"></div>
-            <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
+            <div class="code-row"><div id="my-referral-code" class="the-code">LOADING...</div><button id="copy-ref-btn">COPY</button></div>
         </div>
     </div>
     
@@ -429,305 +394,254 @@
         const firebaseConfig = { apiKey: "AIzaSyCltyZMbm3uSQgMCTwzxwYO0O4CxLULzF4", authDomain: "earnnova-3adf9.firebaseapp.com", projectId: "earnnova-3adf9", storageBucket: "earnnova-3adf9.firebasestorage.app", messagingSenderId: "877247915302", appId: "1:877247915302:web:1106e099a65ea3f4234de7" };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
         
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search); const refCode = urlParams.get('ref');
-            if (refCode) { const refInput = document.getElementById('setup-referral'); if (refInput) { refInput.value = refCode; refInput.readOnly = true; } }
-        };
-       
         const uiBalance = document.getElementById('user-balance');
-        let currentUser = null; let currentBalance = 0; let actMethod = ""; let actReqType = ""; let actMin = 0;
+        let currentUser = null; let currentBalance = 0; let userFullData = {};
         
-        // --- NAVIGATION LOGIC ---
         window.switchTab = function(screenId, navEl) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            if(navEl) {
-                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                navEl.classList.add('active');
-            }
+            if(navEl) { document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); navEl.classList.add('active'); }
         };
         window.openSubScreen = function(screenId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            document.getElementById('global-bottom-nav').style.display = 'none'; // Hide nav in sub-screens
+            document.getElementById('global-bottom-nav').style.display = 'none';
         };
         window.closeSubScreen = function() {
-            switchTab('profile-screen', document.getElementById('nav-profile'));
-            document.getElementById('global-bottom-nav').style.display = 'flex'; // Show nav again
+            switchTab('dashboard-screen', document.getElementById('nav-home'));
+            document.getElementById('global-bottom-nav').style.display = 'flex';
         };
         
-        setInterval(() => {
-            const timeSpan = document.getElementById('live-ist-time');
-            if (timeSpan) {
-                const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-                timeSpan.innerText = new Intl.DateTimeFormat('en-IN', options).format(new Date()) + " IST";
-            }
-        }, 1000);
-        let bannerIdx = 0; const bannerTrack = document.getElementById('auto-banner-track');
-        setInterval(() => {
-            bannerIdx = (bannerIdx + 1) % 3; bannerTrack.style.transform = `translateX(-${bannerIdx * 33.33}%)`;
-            document.querySelectorAll('.b-dot').forEach((d, i) => { if(i === bannerIdx) d.classList.add('active'); else d.classList.remove('active'); });
-        }, 3500);
-        const sidebar = document.getElementById('main-sidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay');
-        const openSidebarBtn = document.getElementById('open-sidebar-btn'); const closeSidebarBtn = document.getElementById('close-sidebar');
-        function openSidebar() { sidebar.classList.add('active'); sidebarOverlay.classList.add('show'); }
-        function closeSidebar() { sidebar.classList.remove('active'); sidebarOverlay.classList.remove('show'); }
-        openSidebarBtn.addEventListener('click', openSidebar); closeSidebarBtn.addEventListener('click', closeSidebar); sidebarOverlay.addEventListener('click', closeSidebar);
-        document.getElementById('side-profile').addEventListener('click', () => { closeSidebar(); switchTab('profile-screen', document.getElementById('nav-profile')); });
-        
-        // FIX: The line causing the crash was here. The element 'side-share' did not exist in the HTML.
-        
-        document.getElementById('login-btn').addEventListener('click', () => {
-            const termsBox = document.getElementById('terms-checkbox'); const termsContainer = document.getElementById('terms-container');
-            if (!termsBox.checked) { termsContainer.classList.add('shake'); setTimeout(() => termsContainer.classList.remove('shake'), 500); alert("⚠️ Please agree to the Terms of Service and Privacy Policy before continuing."); return; }
-            signInWithPopup(auth, new GoogleAuthProvider());
-        });
-        
-        const handleLogout = () => { closeSidebar(); signOut(auth); document.getElementById('global-bottom-nav').style.display = 'none'; };
-        document.getElementById('profile-logout-btn').addEventListener('click', handleLogout);
-        document.getElementById('side-logout').addEventListener('click', handleLogout);
+        // Populate Spin Wheel 1 to 10
+        const wheel = document.getElementById('roulette-wheel');
+        for(let i=1; i<=10; i++) {
+            let deg = (i-1) * 36;
+            wheel.innerHTML += `<div class="wheel-segment" style="transform: rotate(${deg}deg)"><span style="transform: rotate(18deg) translateY(-100px)">${i}</span></div>`;
+        }
+
+        document.getElementById('login-btn').addEventListener('click', () => { signInWithPopup(auth, new GoogleAuthProvider()); });
+        document.getElementById('profile-logout-btn').addEventListener('click', () => signOut(auth));
        
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user; 
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('global-bottom-nav').style.display = 'flex';
-                try {
-                    const docSnap = await getDoc(doc(db, 'users', user.uid));
-                    if (docSnap.exists()) { 
-                        document.getElementById('onboarding-screen').classList.add('hidden'); 
-                        switchTab('dashboard-screen', document.getElementById('nav-home')); 
-                        startLiveSnapshot(user); 
-                    } else { 
-                        document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
-                        document.getElementById('global-bottom-nav').style.display = 'none';
-                        document.getElementById('onboarding-screen').classList.remove('hidden'); 
-                        document.getElementById('setup-username').value = user.displayName ? user.displayName.toLowerCase().replace(/ /g, '_') : ''; 
-                    }
-                } catch (error) {}
+                const docSnap = await getDoc(doc(db, 'users', user.uid));
+                if (docSnap.exists()) { 
+                    document.getElementById('onboarding-screen').classList.add('hidden'); 
+                    switchTab('dashboard-screen', document.getElementById('nav-home')); 
+                    startLiveSnapshot(user); 
+                } else { 
+                    document.getElementById('global-bottom-nav').style.display = 'none';
+                    document.getElementById('onboarding-screen').classList.remove('hidden'); 
+                }
             } else { 
                 document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden')); 
-                document.getElementById('onboarding-screen').classList.add('hidden');
                 document.getElementById('global-bottom-nav').style.display = 'none';
                 document.getElementById('login-screen').classList.remove('hidden'); 
             }
         });
-        // FIXED REFERRAL REWARD LOGIC + TRANSACTIONS
+
         document.getElementById('submit-onboarding').addEventListener('click', async () => {
-            const usernameInput = document.getElementById('setup-username').value.trim(); const referralInput = document.getElementById('setup-referral').value.trim(); const btn = document.getElementById('submit-onboarding');
-            if(!usernameInput) return alert("Please choose a valid username!"); btn.innerText = "Creating..."; btn.disabled = true;
-            
+            const usernameInput = document.getElementById('setup-username').value.trim();
+            if(!usernameInput) return;
             const todayStr = new Date().toISOString().split('T')[0];
-            try {
-                // Set initial fields including tracking dates
-                await setDoc(doc(db, 'users', currentUser.uid), { 
-                    name: usernameInput, balance: 0, photoURL: '', referredBy: referralInput || null, email: currentUser.email || "", 
-                    referralCount: 0, refCode: currentUser.uid.substring(0, 8).toUpperCase(),
-                    dailyEarn: 0, weeklyEarn: 0, monthlyEarn: 0, lastEarnDate: todayStr
-                }, { merge: true });
-                if(referralInput) {
-                    try {
-                        let referrerRef = null;
-                        if (referralInput.length > 15) { referrerRef = doc(db, 'users', referralInput); } else { const refQuery = query(collection(db, 'users'), where('refCode', '==', referralInput.toUpperCase()), limit(1)); const refSnap = await getDocs(refQuery); if(!refSnap.empty) { referrerRef = doc(db, 'users', refSnap.docs[0].id); } }
-                        
-                        if(referrerRef) { 
-                            const referrerSnap = await getDoc(referrerRef); 
-                            if(referrerSnap.exists()) { 
-                                // Update referrer balance AND daily score
-                                await updateDoc(referrerRef, { 
-                                    balance: increment(50), 
-                                    referralCount: increment(1),
-                                    dailyEarn: increment(50),
-                                    weeklyEarn: increment(50),
-                                    monthlyEarn: increment(50),
-                                    lastEarnDate: todayStr
-                                }); 
-                                // Create Transaction Record
-                                await addDoc(collection(db, 'transactions'), {
-                                    userId: referrerRef.id, title: 'Referral Reward', amount: 50, type: 'earn', timestamp: serverTimestamp()
-                                });
-                            } 
-                        }
-                    } catch(e) { console.log("Referral error", e); }
-                }
-                alert("Welcome to EarnNova Pro! 🎉"); 
-                document.getElementById('onboarding-screen').classList.add('hidden'); 
-                document.getElementById('global-bottom-nav').style.display = 'flex';
-                switchTab('dashboard-screen', document.getElementById('nav-home')); 
-                startLiveSnapshot(currentUser);
-            } catch (error) { alert("Registration failed! Please try again."); }
-            btn.innerText = "Complete Registration"; btn.disabled = false;
+            await setDoc(doc(db, 'users', currentUser.uid), { 
+                name: usernameInput, balance: 0, photoURL: '',
+                nameChanges: 0, avatarChanges: 0, totalSpins: 0, totalScratches: 0, availableScratches: 0, totalGemsEarned: 0,
+                dailyEarn: 0, lastEarnDate: todayStr
+            }, { merge: true });
+            document.getElementById('onboarding-screen').classList.add('hidden'); 
+            document.getElementById('global-bottom-nav').style.display = 'flex';
+            switchTab('dashboard-screen', document.getElementById('nav-home')); 
+            startLiveSnapshot(currentUser);
         });
-        // FIXED "0 FRIENDS" BUG 
-        window.loadMyReferrals = async function() {
-            if(!currentUser) return; 
-            const refList = document.getElementById('referral-list'); 
-            refList.innerHTML = "<p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>Fetching your invites...</p>";
-            try {
-                const myShortCode = currentUser.uid.substring(0, 8).toUpperCase(); const myFullCode = currentUser.uid;
-                const q = query(collection(db, "users"), where("referredBy", "in", [myShortCode, myFullCode])); 
-                const snap = await getDocs(q); 
-                let html = "";
-                
-                // Count the real referrals and update badages immediately
-                const realCount = snap.size;
-                const networkBadge = document.getElementById('network-page-ref-count');
-                const profileBadge = document.getElementById('profile-ref-count');
-                if(networkBadge) networkBadge.innerText = `${realCount} Friends`;
-                if(profileBadge) profileBadge.innerText = realCount;
-                snap.forEach(doc => { const data = doc.data(); html += `<div style="background: rgba(23, 23, 33, 0.6); padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #2a2a3d; display: flex; justify-content: space-between; align-items: center;"><span style="color:#fff; font-size:14px; font-weight: 500;">${data.name || 'User'}</span><span style="color:#00ffcc; font-size:12px; font-weight:bold; background: rgba(0, 255, 204, 0.1); padding: 4px 8px; border-radius: 6px;">+💎 50</span></div>`; });
-                if(html === "") html = "<p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>You haven't referred anyone yet. Start sharing!</p>"; 
-                refList.innerHTML = html;
-            } catch(e) { refList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>Error loading referrals.</p>"; }
-        }
+
         function startLiveSnapshot(user) {
             onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
                 if (docSnap.exists()) {
-                    const data = docSnap.data(); currentBalance = data.balance || 0; uiBalance.innerText = currentBalance;
-                    const profileBal = document.getElementById('profile-balance'); if(profileBal) profileBal.innerText = currentBalance;
+                    userFullData = docSnap.data();
+                    currentBalance = userFullData.balance || 0; 
+                    uiBalance.innerText = currentBalance;
+                    document.getElementById('profile-balance').innerText = currentBalance;
                     
-                    // Fallback to saved count if live fetch hasn't completed
-                    if(document.getElementById('profile-ref-count').innerText === "0") {
-                        document.getElementById('profile-ref-count').innerText = data.referralCount || 0;
+                    document.getElementById('profile-name').innerText = userFullData.name || "User";
+                    document.getElementById('profile-avatar').src = userFullData.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${userFullData.name}&backgroundColor=ff007f`;
+                    
+                    let changesLeft = 2 - (userFullData.nameChanges || 0);
+                    document.getElementById('changes-left-txt').innerText = `Name changes left: ${changesLeft < 0 ? 0 : changesLeft}`;
+                    
+                    // Scratch Logic Updates
+                    let totalEarned = userFullData.totalGemsEarned || 0;
+                    let nextScratchGoal = (Math.floor(totalEarned / 100) + 1) * 100;
+                    let currentProgress = totalEarned % 100;
+                    document.getElementById('scratch-progress-text').innerText = `Progress: ${currentProgress} / 100 Gems`;
+                    
+                    let avScratches = userFullData.availableScratches || 0;
+                    document.getElementById('sc-count').innerText = avScratches;
+                    
+                    if(avScratches > 0) {
+                        document.getElementById('scratch-badge').innerText = avScratches;
+                        document.getElementById('scratch-badge').classList.remove('hidden');
+                        document.getElementById('scratch-cards-grid').innerHTML = `<div onclick="openScratchCard()" style="background: linear-gradient(135deg, #8a2be2, #ff007f); padding: 20px; border-radius:15px; text-align:center; cursor:pointer; box-shadow: 0 5px 15px rgba(255,0,127,0.4);"><span style="font-size:30px;">🎁</span><p style="color:#fff; font-weight:bold; font-size:12px; margin-top:5px;">Tap to Scratch</p></div>`;
+                    } else {
+                        document.getElementById('scratch-badge').classList.add('hidden');
+                        document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#7a7a9d; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
                     }
-                    const safeName = data.name || "User"; document.getElementById('profile-name').innerText = safeName; document.getElementById('profile-email').innerText = user.email || "No Email"; document.getElementById('profile-avatar').src = data.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${safeName.replace(/ /g, '')}&backgroundColor=ff007f`;
                 }
             });
         }
-        
-        document.querySelectorAll('.voucher-card').forEach(card => {
-            card.addEventListener('click', function() {
-                actMethod = this.getAttribute('data-method'); actReqType = this.getAttribute('data-req'); actMin = parseInt(this.getAttribute('data-min'));
-                const cashStr = this.getAttribute('data-cash'); const imgSrc = this.getAttribute('data-img');
-                document.getElementById('br-name').innerText = actMethod; document.getElementById('br-min-gems').innerText = actMin; document.getElementById('br-cash').innerText = cashStr;
-                const imgEl = document.getElementById('br-img'); if (imgSrc) { imgEl.src = imgSrc; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
-                document.getElementById('redeem-amount').value = actMin;
-                document.querySelectorAll('.dynamic-input').forEach(el => el.classList.add('hidden')); document.getElementById(`input-group-${actReqType}`).classList.remove('hidden');
-                document.getElementById('redeem-upi').value = ''; document.getElementById('redeem-email').value = ''; document.getElementById('redeem-acct').value = ''; document.getElementById('redeem-ifsc').value = '';
-                openSubScreen('brand-redeem-screen');
+
+        // --- NAME / AVATAR CHANGE LIMITS ---
+        document.getElementById('edit-name-btn').addEventListener('click', async () => { 
+            let usedChanges = userFullData.nameChanges || 0;
+            if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
+            const newName = prompt("Enter your new name:", userFullData.name); 
+            if (newName && newName.trim() !== "") { 
+                await updateDoc(doc(db, 'users', currentUser.uid), { name: newName, nameChanges: increment(1) }); 
+                alert("Name updated successfully!");
+            } 
+        });
+        document.getElementById('edit-avatar-btn').addEventListener('click', () => {
+            let usedAvChanges = userFullData.avatarChanges || 0;
+            if (usedAvChanges >= 2) return alert("❌ You have reached your 2-time avatar change limit!");
+            document.getElementById('avatar-upload').click();
+        });
+        document.getElementById('avatar-upload').addEventListener('change', function(e) { 
+            const file = e.target.files[0]; if(!file) return; 
+            const reader = new FileReader(); reader.onload = async function(event) { 
+                await updateDoc(doc(db, 'users', currentUser.uid), { photoURL: event.target.result, avatarChanges: increment(1) }); 
+                alert("Avatar updated successfully!");
+            }; 
+            reader.readAsDataURL(file); 
+        });
+
+        // --- EARN REWARD HELPER ---
+        async function awardGems(amount) {
+            let oldTotal = userFullData.totalGemsEarned || 0;
+            let newTotal = oldTotal + amount;
+            let newScratchesEarned = Math.floor(newTotal / 100) - Math.floor(oldTotal / 100);
+            
+            await updateDoc(doc(db, 'users', currentUser.uid), { 
+                balance: increment(amount), 
+                totalGemsEarned: increment(amount),
+                dailyEarn: increment(amount),
+                availableScratches: increment(newScratchesEarned)
             });
+            if (newScratchesEarned > 0) alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`);
+        }
+
+        // --- SPIN AND WIN LOGIC ---
+        let currentRotation = 0;
+        document.getElementById('spin-action-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('spin-action-btn');
+            btn.disabled = true; btn.innerText = "SPINNING...";
+            
+            let spins = userFullData.totalSpins || 0;
+            let finalReward = 0;
+            
+            // 100th spin jackpot logic
+            if (spins > 0 && (spins + 1) % 100 === 0) {
+                finalReward = Math.floor(Math.random() * 4) + 7; // 7, 8, 9, 10
+            } else {
+                // Often 5, sometimes 4 or 6
+                let r = Math.random();
+                if (r < 0.2) finalReward = 4;
+                else if (r < 0.8) finalReward = 5;
+                else finalReward = 6;
+            }
+            
+            // Calculate slice to land on (1 to 10 arranged 0 to 324 deg)
+            let targetSlice = finalReward; 
+            let targetAngle = (targetSlice - 1) * 36;
+            
+            let extraSpins = 5 * 360; // 5 full rotations
+            let landAngle = 360 - targetAngle; // reverse for correct pointer alignment
+            currentRotation += extraSpins + landAngle;
+            
+            const wheel = document.getElementById('roulette-wheel');
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(async () => {
+                alert(`🎉 You won ${finalReward} Gems!`);
+                await updateDoc(doc(db, 'users', currentUser.uid), { totalSpins: increment(1) });
+                await awardGems(finalReward);
+                btn.disabled = false; btn.innerText = "SPIN NOW";
+            }, 4200);
         });
+
+        // --- CANVAS SCRATCH CARD LOGIC ---
+        let scratchRewardVal = 0;
+        let isScratched = false;
         
-        document.getElementById('final-submit-redeem').addEventListener('click', async () => {
-            const btn = document.getElementById('final-submit-redeem'); const gemsInput = parseInt(document.getElementById('redeem-amount').value); let finalDetails = "";
-            if (actReqType === 'upi') { const upiStr = document.getElementById('redeem-upi').value.trim(); if (!/^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/.test(upiStr)) return alert("❌ Please enter a valid UPI ID"); finalDetails = upiStr; }
-            else if (actReqType === 'email') { const emailStr = document.getElementById('redeem-email').value.trim(); if (!/^\S+@\S+\.\S+$/.test(emailStr)) return alert("❌ Please enter a valid Email Address"); finalDetails = emailStr; }
-            else if (actReqType === 'bank') { const acctStr = document.getElementById('redeem-acct').value.trim(); const ifscStr = document.getElementById('redeem-ifsc').value.trim().toUpperCase(); if (acctStr.length < 8) return alert("❌ Please enter a valid Account Number"); if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifscStr)) return alert("❌ Please enter a valid IFSC Code"); finalDetails = `A/C: ${acctStr}, IFSC: ${ifscStr}`; }
-            if (isNaN(gemsInput) || gemsInput < actMin) return alert(`❌ Minimum withdrawal is ${actMin} Gems!`);
-            if (gemsInput > currentBalance) return alert("❌ Insufficient Gems balance!");
-            btn.innerText = "Processing..."; btn.disabled = true;
-            try {
-                await updateDoc(doc(db, 'users', currentUser.uid), { balance: increment(-gemsInput) });
-                await addDoc(collection(db, 'withdrawals'), { userId: currentUser.uid, name: currentUser.displayName || "User", amount: gemsInput, method: actMethod, details: finalDetails, status: "Pending", timestamp: serverTimestamp() });
-                alert(`✅ Withdrawal requested successfully!`); switchTab('profile-screen', document.getElementById('nav-profile')); document.getElementById('global-bottom-nav').style.display = 'flex';
-            } catch (e) { alert("Error submitting request! Please try again."); }
-            btn.innerText = "Proceed to Transfer"; btn.disabled = false;
-        });
-        
-        // --- FIXED LEADERBOARD DAILY EARNINGS LOGIC ---
-        let currentLbCat = 'earnings'; let currentLbTime = 'all';     
-        const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
-        const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
-        const lbTimer = document.getElementById('lb-timer');
-        lbDropToggle.addEventListener('click', (e) => { e.stopPropagation(); lbDropMenu.classList.toggle('show'); }); document.addEventListener('click', () => { lbDropMenu.classList.remove('show'); });
-        document.querySelectorAll('.lb-drop-item').forEach(item => { item.addEventListener('click', (e) => { document.querySelectorAll('.lb-drop-item').forEach(i => i.classList.remove('active')); e.target.classList.add('active'); currentLbCat = e.target.getAttribute('data-cat'); lbActiveCat.innerText = currentLbCat === 'earnings' ? "Earnings" : "Referrals"; lbScoreTitle.innerText = currentLbCat === 'earnings' ? "COINS" : "INVITES"; window.loadAdvancedLeaderboard(); }); });
-        document.querySelectorAll('.lb-b-tab').forEach(tab => { tab.addEventListener('click', (e) => { document.querySelectorAll('.lb-b-tab').forEach(t => t.classList.remove('active')); e.target.classList.add('active'); currentLbTime = e.target.getAttribute('data-time'); window.loadAdvancedLeaderboard(); }); });
-        setInterval(() => {
-            if (currentLbTime === 'all') { lbTimer.style.display = 'none'; return; } else { lbTimer.style.display = 'block'; }
-            const now = new Date(); let target = new Date();
-            if (currentLbTime === 'today') { target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); } else if (currentLbTime === 'weekly') { const day = now.getDay(); const diffToMonday = (7 - day + 1) % 7 || 7; target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMonday); target.setHours(0,0,0,0); } else if (currentLbTime === 'monthly') { target = new Date(now.getFullYear(), now.getMonth() + 1, 1); }
-            const diff = target - now; const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'); const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0'); const s = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-            if (currentLbTime === 'today') { lbTimer.innerText = `⏳ Resets in: ${h}h ${m}m ${s}s`; } else { lbTimer.innerText = `⏳ Resets in: ${d}d ${h}h ${m}m ${s}s`; }
-        }, 1000);
-        window.loadAdvancedLeaderboard = async function() {
-            const podiumContainer = document.getElementById('podium-pro-box'); const listContainer = document.getElementById('leaderboard-list'); podiumContainer.innerHTML = "<p style='width:100%; text-align:center;'>Loading Data...</p>";
-            try {
-                // Fetch top 100 users based on total balance/referral as baseline
-                let baseField = currentLbCat === 'referrals' ? "referralCount" : "balance";
-                let q = query(collection(db, "users"), orderBy(baseField, "desc"), limit(100));
-                const querySnapshot = await getDocs(q); 
-                
-                let users = []; 
-                const todayStr = new Date().toISOString().split('T')[0];
-                
-                querySnapshot.forEach(doc => {
-                    let data = doc.data();
-                    // NEW: Filter out old earnings if period has passed
-                    if (currentLbCat === 'earnings' && currentLbTime === 'today') {
-                        if (data.lastEarnDate !== todayStr) data.dailyEarn = 0;
-                    }
-                    users.push(data);
-                });
-                // Client Side Sort based on selected time
-                users.sort((a, b) => {
-                    if(currentLbCat === 'referrals') return (b.referralCount || 0) - (a.referralCount || 0);
-                    if(currentLbTime === 'today') return (b.dailyEarn || 0) - (a.dailyEarn || 0);
-                    if(currentLbTime === 'weekly') return (b.weeklyEarn || 0) - (a.weeklyEarn || 0);
-                    if(currentLbTime === 'monthly') return (b.monthlyEarn || 0) - (a.monthlyEarn || 0);
-                    return (b.balance || 0) - (a.balance || 0);
-                });
-                // Keep top 50 valid earners
-                if(currentLbTime !== 'all') {
-                    users = users.filter(u => {
-                        if(currentLbCat === 'referrals') return (u.referralCount || 0) > 0;
-                        if(currentLbTime === 'today') return (u.dailyEarn || 0) > 0;
-                        return true;
+        window.openScratchCard = function() {
+            if(userFullData.availableScratches <= 0) return;
+            isScratched = false;
+            
+            let scratches = userFullData.totalScratches || 0;
+            if (scratches > 0 && (scratches + 1) % 50 === 0) {
+                scratchRewardVal = Math.floor(Math.random() * 4) + 7; // 7 to 10
+            } else {
+                let r = Math.random();
+                if(r < 0.33) scratchRewardVal = 3;
+                else if(r < 0.66) scratchRewardVal = 4;
+                else scratchRewardVal = 5;
+            }
+            document.getElementById('won-scratch-amount').innerText = scratchRewardVal;
+            
+            openSubScreen('active-scratch-screen');
+            initCanvas();
+        }
+
+        function initCanvas() {
+            const canvas = document.getElementById('scratch-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // Draw scratch layer
+            let gradient = ctx.createLinearGradient(0, 0, 250, 250);
+            gradient.addColorStop(0, "#ff007f"); gradient.addColorStop(1, "#8a2be2");
+            ctx.fillStyle = gradient; ctx.fillRect(0, 0, 250, 250);
+            
+            ctx.fillStyle = "#ffffff"; ctx.font = "bold 20px Arial"; ctx.textAlign = "center";
+            ctx.fillText("SCRATCH HERE", 125, 125);
+
+            let isDrawing = false;
+            let scratchedPixels = 0;
+
+            function scratch(x, y) {
+                if(!isDrawing) return;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI * 2); ctx.fill();
+                checkScratchCompletion();
+            }
+
+            canvas.onmousedown = (e) => { isDrawing = true; scratch(e.offsetX, e.offsetY); }
+            canvas.onmousemove = (e) => scratch(e.offsetX, e.offsetY);
+            canvas.onmouseup = () => isDrawing = false;
+            
+            // Touch support
+            canvas.ontouchstart = (e) => { isDrawing = true; let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
+            canvas.ontouchmove = (e) => { e.preventDefault(); let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
+            canvas.ontouchend = () => isDrawing = false;
+            
+            async function checkScratchCompletion() {
+                if (isScratched) return;
+                scratchedPixels++;
+                if (scratchedPixels > 40) { // Rough estimate for completion
+                    isScratched = true;
+                    ctx.clearRect(0, 0, 250, 250);
+                    alert(`🎊 Congratulations! You scratched ${scratchRewardVal} Gems!`);
+                    
+                    await updateDoc(doc(db, 'users', currentUser.uid), { 
+                        availableScratches: increment(-1),
+                        totalScratches: increment(1)
                     });
+                    await awardGems(scratchRewardVal);
                 }
-                if(users.length === 0) { podiumContainer.innerHTML = "<p style='width:100%; text-align:center; margin-top:30px; font-weight:bold; color:#7a7a9d;'>No data for selected period.</p>"; listContainer.innerHTML = ""; return; }
-                
-                const getFirstName = (u) => (u && u.name) ? u.name.split(' ')[0] : "User"; const getAvatar = (u) => (u && u.photoURL) ? u.photoURL : `https://api.dicebear.com/7.x/bottts/svg?seed=${(u&&u.name)?u.name.replace(/ /g, ''):'user'}&backgroundColor=1f1b36`;
-                
-                const getScore = (u) => {
-                    if(!u) return 0;
-                    if(currentLbCat === 'referrals') return `${u.referralCount || 0} 👥`;
-                    if(currentLbTime === 'today') return `${u.dailyEarn || 0} 💎`;
-                    if(currentLbTime === 'weekly') return `${u.weeklyEarn || 0} 💎`;
-                    if(currentLbTime === 'monthly') return `${u.monthlyEarn || 0} 💎`;
-                    return `${u.balance || 0} 💎`;
-                }
-                const top1 = users[0] || null; const top2 = users[1] || null; const top3 = users[2] || null;
-                
-                let podiumHtml = "";
-                if(top2) podiumHtml += `<div class="podium-pillar rank-2-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top2)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">2. ${getFirstName(top2)}</div><div class="p-score">${getScore(top2)}</div></div></div></div>`;
-                if(top1) podiumHtml += `<div class="podium-pillar rank-1-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top1)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">1. ${getFirstName(top1)}</div><div class="p-score">${getScore(top1)}</div></div></div></div>`;
-                if(top3) podiumHtml += `<div class="podium-pillar rank-3-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top3)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">3. ${getFirstName(top3)}</div><div class="p-score">${getScore(top3)}</div></div></div></div>`;
-                
-                podiumContainer.innerHTML = podiumHtml;
-                
-                let listHtml = '';
-                for(let i = 3; i < users.length; i++) { 
-                    listHtml += `<div class="list-row"><div class="row-rank">${i + 1}</div><div class="row-user"><img src="${getAvatar(users[i])}" class="row-avatar"><div class="row-name">${users[i].name || "User"}</div></div><div class="row-score">${getScore(users[i])}</div></div>`; 
-                }
-                listContainer.innerHTML = listHtml;
-            } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
+            }
         }
-        const getShareMessage = () => { return `Join EarnNova Pro! Use my code: ${document.getElementById('my-referral-code').innerText} to get 50 Gems instantly + Lifetime 10% Commission!\nStart earning today! 🚀`; };
-        const getShareUrl = () => { return window.location.href.split('?')[0] + "?ref=" + currentUser.uid; };        
-        document.getElementById('copy-ref-btn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('my-referral-code').innerText); const btn = document.getElementById('copy-ref-btn'); btn.innerText = "COPIED!"; btn.style.background = "#00ffcc"; btn.style.color = "#000"; setTimeout(() => { btn.innerText = "COPY"; btn.style.background = "linear-gradient(135deg, #ff007f, #8a2be2)"; btn.style.color = "#fff"; }, 2000); });
-        
-        document.getElementById('share-wa').addEventListener('click', () => { window.open(`https://wa.me/?text=${encodeURIComponent(getShareMessage() + "\n" + getShareUrl())}`); });
-        document.getElementById('share-tg').addEventListener('click', () => { window.open(`https://t.me/share/url?url=${encodeURIComponent(getShareUrl())}&text=${encodeURIComponent(getShareMessage())}`); });
-        document.getElementById('share-link').addEventListener('click', () => { navigator.clipboard.writeText(getShareUrl()); alert("Referral Link Copied to Clipboard!"); });
-        document.getElementById('share-more').addEventListener('click', async () => { if (navigator.share) { try { await navigator.share({ title: 'EarnNova Pro', text: getShareMessage(), url: getShareUrl() }); } catch (err) {} } else { alert("Native sharing is not supported on this browser."); } });
-        
-        window.loadProfileData = async function() {
-            if(!currentUser) return; const historyList = document.getElementById('history-list'); historyList.innerHTML = "<p style='text-align: center; color: #7a7a9d;'>Loading history...</p>";
-            try {
-                const q = query(collection(db, "withdrawals"), where("userId", "==", currentUser.uid)); const querySnapshot = await getDocs(q); let records = []; querySnapshot.forEach(doc => records.push(doc.data()));
-                if(records.length === 0) { historyList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>No withdrawals found.</p>"; return; }
-                records.sort((a, b) => (b.timestamp ? b.timestamp.toMillis() : 0) - (a.timestamp ? a.timestamp.toMillis() : 0)); let html = "";
-                records.forEach(data => { 
-                    const dateObj = data.timestamp ? new Date(data.timestamp.toDate()) : new Date(); const dateStr = dateObj.toLocaleDateString('en-GB') + " " + dateObj.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}); 
-                    const statusClass = (data.status || "Pending").toLowerCase();
-                    html += `<div class="modern-history-item"><div class="mh-left"><div class="mh-icon">💸</div><div class="mh-info"><h5>${data.method}</h5><p>${dateStr}</p></div></div><div class="mh-right"><div class="mh-amount" style="color: #fff;">- ${data.amount} 💎</div><div class="mh-status ${statusClass}">${data.status || "Pending"}</div></div></div>`; 
-                }); historyList.innerHTML = html;
-            } catch (error) { historyList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading history.</p>`; }
-        }
-       
-        document.getElementById('edit-name-btn').addEventListener('click', async () => { const currentName = document.getElementById('profile-name').innerText; const newName = prompt("Enter your new name:", currentName); if (newName && newName.trim() !== "" && newName !== currentName) { try { document.getElementById('edit-name-btn').innerText = "⏳"; await updateDoc(doc(db, 'users', currentUser.uid), { name: newName }); document.getElementById('edit-name-btn').innerText = "Edit"; } catch(e) { alert("Error updating name!"); document.getElementById('edit-name-btn').innerText = "Edit"; } } });
-        document.getElementById('edit-avatar-btn').addEventListener('click', () => document.getElementById('avatar-upload').click());
-        document.getElementById('avatar-upload').addEventListener('change', function(e) { const file = e.target.files[0]; if(!file) return; if(file.size > 800 * 1024) return alert("File is too large! Please upload under 800 KB."); const reader = new FileReader(); reader.onload = async function(event) { const base64String = event.target.result; document.getElementById('profile-avatar').src = base64String; try { await updateDoc(doc(db, 'users', currentUser.uid), { photoURL: base64String }); } catch(err) {} }; reader.readAsDataURL(file); });
     </script>
 </body>
 </html>

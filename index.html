@@ -1253,5 +1253,29 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
+    <!-- ANTI-HACK SECURITY SCRIPT -->
+<script>
+    // 1. Disable Right Click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Disable Keyboard Shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+    document.onkeydown = function (e) {
+        if (e.keyCode == 123) { return false; } // F12
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // Ctrl+Shift+J
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+    };
+
+    // 3. Detect Developer Tools Open (Advanced)
+    setInterval(function() {
+        const devtools = function() {};
+        devtools.toString = function() {
+            alert("⚠️ Security Warning: Malicious activity detected. Your account may be banned!");
+            window.location.href = "about:blank"; // Redirects them out of the app
+        }
+        console.log('%c', devtools);
+    }, 2000);
+</script>
 </body>
 </html>

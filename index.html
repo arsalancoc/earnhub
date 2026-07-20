@@ -115,7 +115,7 @@
         .wheel { width: 100%; height: 100%; position: relative; transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); transform: rotate(0deg); border-radius: 50%; background: conic-gradient( #ff007f 0deg 36deg, #3d3269 36deg 72deg, #ff007f 72deg 108deg, #3d3269 108deg 144deg, #ff007f 144deg 180deg, #3d3269 180deg 216deg, #ff007f 216deg 252deg, #3d3269 252deg 288deg, #ff007f 288deg 324deg, #3d3269 324deg 360deg ); }
         .wheel-segment { position: absolute; top: 0; left: 50%; width: 60px; height: 140px; margin-left: -30px; transform-origin: 50% 100%; display: flex; justify-content: center; align-items: flex-start; padding-top: 15px; font-size: 22px; font-weight: 900; color: #fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); }
         .spin-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid #ffd700; z-index: 10; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.5)); }
-        .spin-btn { display: block; margin: 30px auto; background: linear-gradient(135deg, #ff007f, #8a2be2); color: #fff; font-size: 20px; font-weight: 900; padding: 15px 40px; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 10px 25px rgba(255,0,127,0.5); transition: 0.3s; }
+        .spin-btn { display: block; margin: 15px auto; background: linear-gradient(135deg, #ff007f, #8a2be2); color: #fff; font-size: 20px; font-weight: 900; padding: 15px 40px; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 10px 25px rgba(255,0,127,0.5); transition: 0.3s; }
         .spin-btn:hover { transform: scale(1.05); } .spin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
         /* --- SCRATCH CARD --- */
@@ -127,17 +127,23 @@
         .scratch-info-box { text-align: center; background: rgba(138,43,226,0.1); border: 1px dashed rgba(138,43,226,0.5); padding: 15px; border-radius: 15px; margin-top: 20px; }
         
         /* --- LEADERBOARD --- */
-        .lb-pro-container { background: #12101f; border: 1px solid #2b224d; border-radius: 20px; padding: 25px 15px 15px 15px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative;}
+        .lb-pro-container { background: #12101f; border: 1px solid #2b224d; border-radius: 20px; padding: 25px 15px 0px 15px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative;}
         .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
         #lb-timer { text-align: center; color: #00ffcc; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: none; background: rgba(0, 255, 204, 0.1); padding: 6px; border-radius: 8px; border: 1px dashed rgba(0,255,204,0.5); width: fit-content; margin-left: auto; margin-right: auto;}
         
         .lb-dropdown { position: absolute; top: 0; right: 0; z-index: 10;} .lb-drop-btn { background: #1f1b36; border: 1px solid #3d3269; color: #fff; padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);} .lb-drop-btn:hover { background: #2b224d; } .lb-drop-menu { position: absolute; top: 100%; right: 0; margin-top: 5px; background: #1f1b36; border: 1px solid #3d3269; border-radius: 12px; width: 120px; overflow: hidden; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.7); flex-direction: column;} .lb-drop-menu.show { display: flex; } .lb-drop-item { padding: 12px 15px; font-size: 13px; color: #d0d0e0; font-weight: 600; cursor: pointer; transition: 0.2s;} .lb-drop-item:hover { background: #2b224d; color: #fff; } .lb-drop-item.active { background: #3d3269; color: #ffd700; }
-        .podium-pro-box { display: flex; justify-content: center; align-items: flex-end; gap: 5px; margin-top: 30px; margin-bottom: 10px; height: 180px; } .podium-pillar { display: flex; flex-direction: column; align-items: center; position: relative; width: 30%; } .hex-outer { display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; background: #c0c0c0; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); padding: 3px; } .hex-inner { width: 100%; height: 100%; background: #171721; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; } .hex-inner img { width: 100%; height: 100%; object-fit: cover; } .crown { position: absolute; top: -20px; font-size: 28px; z-index: 3; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); transform: rotate(15deg); right: -5px;}
-        .rank-2-pro { transform: translateY(20px); } .rank-2-pro .hex-outer { width: 65px; height: 65px; background: #c0c0c0; } .rank-2-pro .pillar-base { height: 80px; background: linear-gradient(180deg, #44327a, #1f1b36); clip-path: polygon(50% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%); width: 100%; margin-top: -15px; z-index: 1; border-top: 2px solid #c0c0c0;}
+        
+        /* FIXED PODIUM ALIGNMENT */
+        .podium-pro-box { display: flex; justify-content: center; align-items: flex-end; gap: 5px; margin-top: 30px; margin-bottom: 0px; height: 180px; } 
+        .podium-pillar { display: flex; flex-direction: column; align-items: center; position: relative; width: 30%; } 
+        .hex-outer { display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; background: #c0c0c0; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); padding: 3px; } .hex-inner { width: 100%; height: 100%; background: #171721; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; } .hex-inner img { width: 100%; height: 100%; object-fit: cover; } .crown { position: absolute; top: -20px; font-size: 28px; z-index: 3; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); transform: rotate(15deg); right: -5px;}
+        
+        .rank-2-pro .hex-outer { width: 65px; height: 65px; background: #c0c0c0; } .rank-2-pro .pillar-base { height: 80px; background: linear-gradient(180deg, #44327a, #1f1b36); clip-path: polygon(50% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%); width: 100%; margin-top: -15px; z-index: 1; border-top: 2px solid #c0c0c0;}
         .rank-1-pro { z-index: 5; } .rank-1-pro .hex-outer { width: 85px; height: 85px; background: #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.5); padding: 4px;} .rank-1-pro .pillar-base { height: 110px; background: linear-gradient(180deg, #59359a, #1f1b36); clip-path: polygon(50% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 15%); width: 100%; margin-top: -20px; z-index: 1; border-top: 2px solid #ffd700;} .rank-1-pro .crown { top: -28px; right: 0; font-size: 38px; left: 50%; transform: translateX(-50%); }
-        .rank-3-pro { transform: translateY(35px); } .rank-3-pro .hex-outer { width: 60px; height: 60px; background: #cd7f32; } .rank-3-pro .pillar-base { height: 65px; background: linear-gradient(180deg, #3c2a6b, #1f1b36); clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%); width: 100%; margin-top: -10px; z-index: 1; border-top: 2px solid #cd7f32;}
+        .rank-3-pro .hex-outer { width: 60px; height: 60px; background: #cd7f32; } .rank-3-pro .pillar-base { height: 65px; background: linear-gradient(180deg, #3c2a6b, #1f1b36); clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%); width: 100%; margin-top: -10px; z-index: 1; border-top: 2px solid #cd7f32;}
         .pillar-text { position: absolute; bottom: 10px; text-align: center; width: 100%; z-index: 2; } .p-name { font-size: 11px; font-weight: bold; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 0 5px; } .p-score { font-size: 12px; font-weight: 900; color: #ffd700; margin-top: 3px; }
-        .lb-bottom-tabs { display: flex; background: #0b0b13; border-radius: 12px; padding: 6px; margin-top: 15px; border: 1px solid #232335;} .lb-b-tab { flex: 1; padding: 10px 0; text-align: center; background: transparent; border: none; color: #7a7a9d; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s;} .lb-b-tab.active { background: #2b224d; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        
+        .lb-bottom-tabs { display: flex; background: #0b0b13; border-radius: 12px; padding: 6px; margin-top: 15px; margin-bottom: 15px; border: 1px solid #232335;} .lb-b-tab { flex: 1; padding: 10px 0; text-align: center; background: transparent; border: none; color: #7a7a9d; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s;} .lb-b-tab.active { background: #2b224d; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .list-header { display: grid; grid-template-columns: 50px 1fr 80px; padding: 0 15px 10px 15px; border-bottom: 1px solid #2a2a3d; color: #7a7a9d; font-size: 11px; font-weight: bold; letter-spacing: 1px; } .list-container { padding-top: 10px; padding-bottom: 20px;} .list-row { display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; background: rgba(23, 23, 33, 0.4); transition: 0.2s; } .list-row:hover { background: rgba(23, 23, 33, 0.8); } .row-rank { font-size: 14px; font-weight: bold; color: #7a7a9d; } .row-user { display: flex; align-items: center; gap: 12px; } .row-avatar { width: 35px; height: 35px; border-radius: 50%; background: #2a2a3d; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } .row-name { font-size: 14px; color: #e0e0e0; font-weight: 500; } .row-score { font-size: 14px; font-weight: bold; color: #00ffcc; text-align: right; }
         
         /* --- PRO PROFILE DASHBOARD --- */
@@ -294,7 +300,7 @@
             <div class="banner-dots"><div class="b-dot active" id="dot-0"></div><div class="b-dot" id="dot-1"></div><div class="b-dot" id="dot-2"></div></div>
         </div>
         
-        <!-- 7-COLOR ANIMATED WALLET -->
+        <!-- WALLET -->
         <div class="wallet-wrapper">
             <div class="wallet-inner">
                 <div class="wallet-left">
@@ -331,7 +337,7 @@
     <!-- SPIN AND WIN SCREEN -->
     <div id="spin-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Spin & Win</h2></div>
-        <p style="text-align: center; color: #a0a0b5; font-size: 13px;">Spin the wheel to win 1 to 10 Gems!</p>
+        <p style="text-align: center; color: #a0a0b5; font-size: 13px;">Spin the wheel to win 1 to 10 Gems! (Max 40 spins)</p>
         <div class="spin-wheel-container">
             <div class="spin-pointer"></div>
             <div class="wheel" id="roulette-wheel">
@@ -339,6 +345,7 @@
             </div>
         </div>
         <button class="spin-btn" id="spin-action-btn">SPIN NOW</button>
+        <p id="spin-left-text" style="text-align:center; color:#ff007f; font-weight:bold; font-size:14px; margin-top: 5px;">Spins left: 40</p>
     </div>
 
     <!-- SCRATCH CARDS LIST SCREEN -->
@@ -402,7 +409,8 @@
             <div class="profile-option" onclick="openSubScreen('analytics-screen')">
                 <div class="po-left"><span class="po-icon">📊</span> <span>Earning Analytics</span></div><div class="po-right">❯</div>
             </div>
-            <div class="profile-option" onclick="openSubScreen('transactions-screen')">
+            <!-- ERAN TRANSACTIONS OPTION -->
+            <div class="profile-option" onclick="openSubScreen('transactions-screen'); loadTransactionsData();">
                 <div class="po-left"><span class="po-icon">🧾</span> <span>Earn Transactions</span></div><div class="po-right">❯</div>
             </div>
             <div class="profile-option" onclick="openSubScreen('network-screen'); loadMyReferrals();">
@@ -463,8 +471,7 @@
     <div id="transactions-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
         <div id="earn-tx-list">
-            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(0,255,204,0.1);color:#00ffcc;">📋</div><div class="mh-info"><h5>Daily Task Completed</h5><p>Today</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#00ffcc;">+ 20 💎</div></div></div>
-            <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(255,215,0,0.1);color:#ffd700;">🎁</div><div class="mh-info"><h5>Welcome Bonus</h5><p>Account Created</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#ffd700;">+ 50 💎</div></div></div>
+            <p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>Loading transactions...</p>
         </div>
     </div>
     <!-- My Network (Referral Tree) -->
@@ -506,7 +513,7 @@
         const uiBalance = document.getElementById('user-balance');
         let currentUser = null; let currentBalance = 0; let userFullData = {}; let actMethod = ""; let actReqType = ""; let actMin = 0;
         
-        // Populate Spin Wheel 1 to 10 - FIXED DESIGN
+        // Populate Spin Wheel 1 to 10
         let wheelHtml = '';
         for(let i=1; i<=10; i++) {
             let deg = (i-1) * 36 + 18; 
@@ -631,6 +638,9 @@
                     uiBalance.innerText = currentBalance;
                     document.getElementById('profile-balance').innerText = currentBalance;
                     
+                    // FIX: Set Invite Code correctly
+                    document.getElementById('my-referral-code').innerText = userFullData.refCode || "ERROR";
+                    
                     if(document.getElementById('profile-ref-count').innerText === "0") {
                         document.getElementById('profile-ref-count').innerText = userFullData.referralCount || 0;
                     }
@@ -648,6 +658,10 @@
                     
                     let avScratches = userFullData.availableScratches || 0;
                     document.getElementById('sc-count').innerText = avScratches;
+                    
+                    let spinsUsed = userFullData.totalSpins || 0;
+                    let spinsLeft = 40 - spinsUsed;
+                    document.getElementById('spin-left-text').innerText = `Spins left: ${spinsLeft < 0 ? 0 : spinsLeft}`;
                     
                     if(avScratches > 0) {
                         document.getElementById('scratch-badge').innerText = avScratches;
@@ -686,8 +700,8 @@
             reader.readAsDataURL(file); 
         });
 
-        // --- EARN REWARD HELPER ---
-        async function awardGems(amount) {
+        // --- FIXED EARN REWARD HELPER ---
+        async function awardGems(amount, sourceText) {
             let oldTotal = userFullData.totalGemsEarned || 0;
             let newTotal = oldTotal + amount;
             let newScratchesEarned = Math.floor(newTotal / 100) - Math.floor(oldTotal / 100);
@@ -696,21 +710,32 @@
                 balance: increment(amount), 
                 totalGemsEarned: increment(amount),
                 dailyEarn: increment(amount),
+                weeklyEarn: increment(amount),
+                monthlyEarn: increment(amount),
                 availableScratches: increment(newScratchesEarned)
             });
+
+            await addDoc(collection(db, 'transactions'), {
+                userId: currentUser.uid, title: sourceText, amount: amount, type: 'earn', timestamp: serverTimestamp()
+            });
+
             if (newScratchesEarned > 0) alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`);
         }
 
-        // --- SPIN AND WIN LOGIC ---
+        // --- SPIN AND WIN LOGIC (FIXED) ---
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
+            let spins = userFullData.totalSpins || 0;
+            if (spins >= 40) {
+                alert("❌ You have reached your maximum limit of 40 spins!");
+                return;
+            }
+
             const btn = document.getElementById('spin-action-btn');
             btn.disabled = true; btn.innerText = "SPINNING...";
             
-            let spins = userFullData.totalSpins || 0;
             let finalReward = 0;
-            
-            if (spins > 0 && (spins + 1) % 100 === 0) {
+            if (spins > 0 && (spins + 1) % 100 === 0) { // Though limit is 40, keeping logic if limit changes
                 finalReward = Math.floor(Math.random() * 4) + 7;
             } else {
                 let r = Math.random();
@@ -719,12 +744,14 @@
                 else finalReward = 6;
             }
             
-            let targetSlice = finalReward; 
-            let targetAngle = (targetSlice - 1) * 36;
-            
-            let extraSpins = 5 * 360; 
+            // Precise Math Calculation
+            let targetAngle = (finalReward - 1) * 36 + 18; 
             let landAngle = 360 - targetAngle; 
-            currentRotation += extraSpins + landAngle;
+            let currentMod = currentRotation % 360;
+            let diff = landAngle - currentMod;
+            if (diff < 0) diff += 360;
+
+            currentRotation += (5 * 360) + diff; 
             
             const wheel = document.getElementById('roulette-wheel');
             wheel.style.transform = `rotate(${currentRotation}deg)`;
@@ -732,7 +759,7 @@
             setTimeout(async () => {
                 alert(`🎉 You won ${finalReward} Gems!`);
                 await updateDoc(doc(db, 'users', currentUser.uid), { totalSpins: increment(1) });
-                await awardGems(finalReward);
+                await awardGems(finalReward, "Spin & Win");
                 btn.disabled = false; btn.innerText = "SPIN NOW";
             }, 4200);
         });
@@ -801,7 +828,7 @@
                         availableScratches: increment(-1),
                         totalScratches: increment(1)
                     });
-                    await awardGems(scratchRewardVal);
+                    await awardGems(scratchRewardVal, "Scratch Card");
                 }
             }
         }
@@ -862,7 +889,7 @@
         document.getElementById('share-link').addEventListener('click', () => { navigator.clipboard.writeText(getShareUrl()); alert("Referral Link Copied to Clipboard!"); });
         document.getElementById('share-more').addEventListener('click', async () => { if (navigator.share) { try { await navigator.share({ title: 'EarnNova Pro', text: getShareMessage(), url: getShareUrl() }); } catch (err) {} } else { alert("Native sharing is not supported on this browser."); } });
 
-        // --- HISTORY LOGIC ---
+        // --- HISTORY & TRANSACTIONS LOGIC ---
         window.loadProfileData = async function() {
             if(!currentUser) return; const historyList = document.getElementById('history-list'); historyList.innerHTML = "<p style='text-align: center; color: #7a7a9d;'>Loading history...</p>";
             try {
@@ -875,6 +902,27 @@
                     html += `<div class="modern-history-item"><div class="mh-left"><div class="mh-icon">💸</div><div class="mh-info"><h5>${data.method}</h5><p>${dateStr}</p></div></div><div class="mh-right"><div class="mh-amount" style="color: #fff;">- ${data.amount} 💎</div><div class="mh-status ${statusClass}">${data.status || "Pending"}</div></div></div>`; 
                 }); historyList.innerHTML = html;
             } catch (error) { historyList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading history.</p>`; }
+        }
+
+        window.loadTransactionsData = async function() {
+            if(!currentUser) return;
+            const txList = document.getElementById('earn-tx-list');
+            txList.innerHTML = "<p style='text-align: center; color: #7a7a9d;'>Loading transactions...</p>";
+            try {
+                const q = query(collection(db, "transactions"), where("userId", "==", currentUser.uid));
+                const querySnapshot = await getDocs(q);
+                let records = []; querySnapshot.forEach(doc => records.push(doc.data()));
+                if(records.length === 0) { txList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>No earnings yet.</p>"; return; }
+                records.sort((a, b) => (b.timestamp ? b.timestamp.toMillis() : 0) - (a.timestamp ? a.timestamp.toMillis() : 0));
+                let html = "";
+                records.forEach(data => {
+                    const dateObj = data.timestamp ? new Date(data.timestamp.toDate()) : new Date();
+                    const dateStr = dateObj.toLocaleDateString('en-GB') + " " + dateObj.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+                    let icon = data.title === "Spin & Win" ? "🎡" : (data.title === "Scratch Card" ? "🎁" : "💰");
+                    html += `<div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(0,255,204,0.1);color:#00ffcc;">${icon}</div><div class="mh-info"><h5>${data.title}</h5><p>${dateStr}</p></div></div><div class="mh-right"><div class="mh-amount" style="color: #00ffcc;">+ ${data.amount} 💎</div></div></div>`;
+                });
+                txList.innerHTML = html;
+            } catch (error) { txList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading transactions.</p>`; }
         }
 
         // --- LEADERBOARD LOGIC ---

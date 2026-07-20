@@ -12,7 +12,6 @@
        
         /* --- GLOBAL BACKGROUND WATERMARK --- */
         body::after { content: ''; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; height: 90vw; max-width: 500px; max-height: 500px; background-image: url('https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=ff007f'); background-size: contain; background-repeat: no-repeat; opacity: 0.03; z-index: -1; pointer-events: none; border-radius: 50%; filter: grayscale(100%); }
-
         /* --- LOGIN SCREEN --- */
         #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background: radial-gradient(circle at center, #1f103b 0%, #05050a 100%); overflow: hidden; position: relative; z-index: 10; }
         .floating-element { position: absolute; pointer-events: none; animation: floatAnim 6s ease-in-out infinite; z-index: 0; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); font-size: 3rem; }
@@ -34,7 +33,6 @@
         .google-btn-new { display: flex; align-items: center; justify-content: center; gap: 12px; background: #ffffff; color: #000000; border: none; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .google-btn-new:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.3); } .google-btn-new:active { transform: translateY(0); box-shadow: 0 5px 10px rgba(0,0,0,0.3); }
         .google-icon { width: 24px; height: 24px; }
-
         /* --- GLOBAL CONTAINER --- */
         .main-container { max-width: 480px; margin: 0 auto; min-height: 100vh; padding: 20px; padding-bottom: 90px; position: relative; z-index: 1; }
        
@@ -52,7 +50,6 @@
         .sidebar-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-right: 5px; box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }
         .icon-profile { background: rgba(0, 123, 255, 0.15); color: #007bff; border: 1px solid rgba(0, 123, 255, 0.3); } .icon-time { background: rgba(255, 152, 0, 0.15); color: #ff9800; border: 1px solid rgba(255, 152, 0, 0.3); } .icon-tg { background: rgba(0, 136, 204, 0.15); color: #0088cc; border: 1px solid rgba(0, 136, 204, 0.3); } .icon-wa { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); } .icon-yt { background: rgba(255, 0, 0, 0.15); color: #ff0000; border: 1px solid rgba(255, 0, 0, 0.3); } .icon-support { background: rgba(138, 43, 226, 0.15); color: #8a2be2; border: 1px solid rgba(138, 43, 226, 0.3); } .icon-chat { background: rgba(0, 255, 204, 0.15); color: #00ffcc; border: 1px solid rgba(0, 255, 204, 0.3); } .icon-faq { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); } .icon-share { background: rgba(255, 0, 127, 0.15); color: #ff007f; border: 1px solid rgba(255, 0, 127, 0.3); } .icon-privacy { background: rgba(160, 160, 181, 0.15); color: #a0a0b5; border: 1px solid rgba(160, 160, 181, 0.3); } .icon-logout { background: rgba(255, 94, 98, 0.15); color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); }
         .menu-btn { font-size: 24px; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(23, 23, 33, 0.8); border-radius: 12px; border: 1px solid #2a2a3d; margin-right: 12px; transition: 0.3s;} .menu-btn:hover { background: #ff007f; border-color: #ff007f; }
-
         /* --- DASHBOARD UI --- */
         .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .brand-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; letter-spacing: 1px; color: #fff; }
@@ -75,7 +72,6 @@
         .banner-img { height: 75px; width: 75px; z-index: 2; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));}
         .banner-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5;}
         .b-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: 0.3s; } .b-dot.active { background: #fff; width: 15px; border-radius: 4px; }
-
         /* WALLET BOX */
         .wallet-wrapper { position: relative; border-radius: 18px; padding: 2px; overflow: hidden; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
         .wallet-wrapper::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient( #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000 ); animation: rotateBorder 3.5s linear infinite; z-index: 0; }
@@ -92,16 +88,13 @@
         .adv-card::after { content: ''; position: absolute; right: -15px; top: -15px; width: 60px; height: 60px; border-radius: 50%; filter: blur(25px); z-index: -1; opacity: 0.5; transition: 0.3s; }
         .adv-card:hover::after { opacity: 0.8; transform: scale(1.2); }
         .adv-card.t-tasks::after { background: #ffd700; } .adv-card.t-ranks::after { background: #007bff; } .adv-card.t-micro::after { background: #ff007f; } .adv-card.t-games::after { background: #8a2be2; }
-        .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #171721; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }
-        .adv-info h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #7a7a9d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
-
+        .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #171721; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 2px 5px rgba(255,255,255,0.05); }        .adv-info h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #7a7a9d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
         /* --- GLOBAL BOTTOM NAV --- */
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px; background: rgba(23, 23, 33, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 100; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05); }
         .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #7a7a9d; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-size: 11px; font-weight: 600; flex: 1; position: relative; gap: 5px; }
         .nav-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: 0.3s; }
         .nav-item:hover { color: #fff; } .nav-item.active { color: #ff007f; transform: translateY(-4px); } .nav-item.active svg { filter: drop-shadow(0 0 8px rgba(255,0,127,0.6)); stroke-width: 2.5; }
         .nav-item::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #ff007f; opacity: 0; transition: 0.3s; box-shadow: 0 0 8px #ff007f; } .nav-item.active::after { opacity: 1; bottom: -6px; }
-
         /* --- SCREENS HEADERS (No Back Buttons on Main Tabs) --- */
         .main-page-header { text-align: center; margin-bottom: 25px; padding-top: 10px; }
         .main-page-header h2 { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; }
@@ -110,7 +103,6 @@
         .sub-header { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; padding-top: 5px; }
         .back-btn { background: #171721; border: 1px solid #33334d; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         .sub-header h2 { flex-grow: 1; text-align: center; padding-right: 70px; font-size: 20px; font-weight: 800;}
-
         /* --- LEADERBOARD --- */
         .lb-pro-container { background: #12101f; border: 1px solid #2b224d; border-radius: 20px; padding: 25px 15px 15px 15px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative;}
         .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #ffd700; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
@@ -149,14 +141,12 @@
         
         .profile-logout-btn { width: 100%; padding: 16px; border-radius: 16px; background: rgba(255, 94, 98, 0.1); color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); font-size: 15px; font-weight: 900; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,94,98,0.15);}
         .profile-logout-btn:hover { background: #ff5e62; color: #fff; box-shadow: 0 8px 25px rgba(255,94,98,0.4); }
-
         /* History & Lists styling */
         .modern-history-item { display: flex; justify-content: space-between; align-items: center; background: #171721; border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid #2a2a3d; transition: 0.3s; }
         .modern-history-item:hover { border-color: #3a3a5c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
         .mh-left { display: flex; align-items: center; gap: 15px; } .mh-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(138,43,226,0.1); color: #8a2be2; display: flex; justify-content: center; align-items: center; font-size: 20px; } .mh-info h5 { color: #fff; font-size: 14px; font-weight: bold; margin-bottom: 4px; } .mh-info p { color: #7a7a9d; font-size: 11px; }
         .mh-right { text-align: right; } .mh-amount { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 6px; } .mh-status { font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; display: inline-block;}
         .mh-status.pending { background: rgba(255,152,0,0.1); color: #ff9800; border: 1px solid rgba(255,152,0,0.3); } .mh-status.approved { background: rgba(0,255,204,0.1); color: #00ffcc; border: 1px solid rgba(0,255,204,0.3); } .mh-status.rejected { background: rgba(255,94,98,0.1); color: #ff5e62; border: 1px solid rgba(255,94,98,0.3); }
-
         /* PRO INVITE */
         .invite-hero { text-align: center; padding: 25px 15px; background: radial-gradient(circle at top, rgba(255,0,127,0.15), transparent 70%); border-radius: 20px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
         .invite-hero-img { width: 110px; height: 110px; margin-bottom: 10px; filter: drop-shadow(0 10px 15px rgba(255,0,127,0.4)); animation: floatLogo 4s infinite ease-in-out; }
@@ -173,7 +163,6 @@
         .share-btn:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
         .share-btn img { width: 32px; height: 32px; } .share-btn span { font-size: 11px; font-weight: 700; color: #d0d0e0; }
         .link-icon, .more-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 50%; color: #fff; } .link-icon { background: #007bff; } .more-icon { background: #4a4a6a; }
-
         /* Others & Inputs */
         .login-box { background-color: #171721; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 4px 25px rgba(0,0,0,0.8); border: 1px solid #2a2a35; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #7a7a9d; margin-top: 15px; text-align: left;} .input-group select, .input-group input { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #33334d; background-color: #0b0b13; color: white; font-size: 15px; transition: 0.3s;} .input-group input:focus { border-color: #ff007f; outline: none; box-shadow: 0 0 10px rgba(255,0,127,0.2); }
@@ -193,7 +182,6 @@
         <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', this)"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
         <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', this);"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
     </div>
-
     <!-- Sidebar Overlay & Container -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div class="sidebar" id="main-sidebar">
@@ -277,7 +265,6 @@
             </div>
             <div class="banner-dots"><div class="b-dot active" id="dot-0"></div><div class="b-dot" id="dot-1"></div><div class="b-dot" id="dot-2"></div></div>
         </div>
-
         <!-- 7-COLOR ANIMATED WALLET -->
         <div class="wallet-wrapper">
             <div class="wallet-inner">
@@ -297,7 +284,7 @@
             <div class="adv-card t-ranks" onclick="switchTab('leaderboard-screen', null); loadAdvancedLeaderboard();">
                 <div class="adv-icon-box">🏆</div><div class="adv-info"><h4>Ranks</h4><p>Leaderboard</p></div>
             </div>
-            <div class="adv-card t-micro" onclick="alert('Micro tasks loading...')">
+            <div class="adv-card t-micro" onclick="alert('Micro jobs loading...')">
                 <div class="adv-icon-box">🗂</div><div class="adv-info"><h4>Micro Jobs</h4><p>Quick Cash</p></div>
             </div>
             <div class="adv-card t-games" onclick="alert('Games loading...')">
@@ -388,7 +375,6 @@
             <div class="share-btn more" id="share-more"><div class="more-icon">•••</div><span>More</span></div>
         </div>
     </div>
-
     <!-- ================== PROFILE SUB-SCREENS ================== -->
     <!-- Analytics -->
     <div id="analytics-screen" class="main-container hidden app-screen">
@@ -407,7 +393,6 @@
             <div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(255,215,0,0.1);color:#ffd700;">🎁</div><div class="mh-info"><h5>Welcome Bonus</h5><p>Account Created</p></div></div><div class="mh-right"><div class="mh-amount" style="color:#ffd700;">+ 50 💎</div></div></div>
         </div>
     </div>
-
     <!-- My Network (Referral Tree) -->
     <div id="network-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Network</h2></div>
@@ -417,13 +402,11 @@
         </div>
         <div id="referral-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading network...</p></div>
     </div>
-
     <!-- Redeem History -->
     <div id="redeem-history-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Redeem History</h2></div>
         <div id="history-list"><p style="text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
     </div>
-
     <!-- Checkout Sub-Screen (From withdraw) -->
     <div id="brand-redeem-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">← Back</button><h2>Checkout</h2></div>
@@ -463,13 +446,11 @@
                 navEl.classList.add('active');
             }
         };
-
         window.openSubScreen = function(screenId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
             document.getElementById('global-bottom-nav').style.display = 'none'; // Hide nav in sub-screens
         };
-
         window.closeSubScreen = function() {
             switchTab('profile-screen', document.getElementById('nav-profile'));
             document.getElementById('global-bottom-nav').style.display = 'flex'; // Show nav again
@@ -482,21 +463,20 @@
                 timeSpan.innerText = new Intl.DateTimeFormat('en-IN', options).format(new Date()) + " IST";
             }
         }, 1000);
-
         let bannerIdx = 0; const bannerTrack = document.getElementById('auto-banner-track');
         setInterval(() => {
             bannerIdx = (bannerIdx + 1) % 3; bannerTrack.style.transform = `translateX(-${bannerIdx * 33.33}%)`;
             document.querySelectorAll('.b-dot').forEach((d, i) => { if(i === bannerIdx) d.classList.add('active'); else d.classList.remove('active'); });
         }, 3500);
-
         const sidebar = document.getElementById('main-sidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay');
         const openSidebarBtn = document.getElementById('open-sidebar-btn'); const closeSidebarBtn = document.getElementById('close-sidebar');
         function openSidebar() { sidebar.classList.add('active'); sidebarOverlay.classList.add('show'); }
         function closeSidebar() { sidebar.classList.remove('active'); sidebarOverlay.classList.remove('show'); }
         openSidebarBtn.addEventListener('click', openSidebar); closeSidebarBtn.addEventListener('click', closeSidebar); sidebarOverlay.addEventListener('click', closeSidebar);
         document.getElementById('side-profile').addEventListener('click', () => { closeSidebar(); switchTab('profile-screen', document.getElementById('nav-profile')); });
-        document.getElementById('side-share').addEventListener('click', () => { closeSidebar(); switchTab('invite-screen', document.getElementById('nav-invite')); });
-
+        
+        // FIX: The line causing the crash was here. The element 'side-share' did not exist in the HTML.
+        
         document.getElementById('login-btn').addEventListener('click', () => {
             const termsBox = document.getElementById('terms-checkbox'); const termsContainer = document.getElementById('terms-container');
             if (!termsBox.checked) { termsContainer.classList.add('shake'); setTimeout(() => termsContainer.classList.remove('shake'), 500); alert("⚠️ Please agree to the Terms of Service and Privacy Policy before continuing."); return; }
@@ -532,14 +512,12 @@
                 document.getElementById('login-screen').classList.remove('hidden'); 
             }
         });
-
         // FIXED REFERRAL REWARD LOGIC + TRANSACTIONS
         document.getElementById('submit-onboarding').addEventListener('click', async () => {
             const usernameInput = document.getElementById('setup-username').value.trim(); const referralInput = document.getElementById('setup-referral').value.trim(); const btn = document.getElementById('submit-onboarding');
             if(!usernameInput) return alert("Please choose a valid username!"); btn.innerText = "Creating..."; btn.disabled = true;
             
             const todayStr = new Date().toISOString().split('T')[0];
-
             try {
                 // Set initial fields including tracking dates
                 await setDoc(doc(db, 'users', currentUser.uid), { 
@@ -547,7 +525,6 @@
                     referralCount: 0, refCode: currentUser.uid.substring(0, 8).toUpperCase(),
                     dailyEarn: 0, weeklyEarn: 0, monthlyEarn: 0, lastEarnDate: todayStr
                 }, { merge: true });
-
                 if(referralInput) {
                     try {
                         let referrerRef = null;
@@ -581,7 +558,6 @@
             } catch (error) { alert("Registration failed! Please try again."); }
             btn.innerText = "Complete Registration"; btn.disabled = false;
         });
-
         // FIXED "0 FRIENDS" BUG 
         window.loadMyReferrals = async function() {
             if(!currentUser) return; 
@@ -599,13 +575,11 @@
                 const profileBadge = document.getElementById('profile-ref-count');
                 if(networkBadge) networkBadge.innerText = `${realCount} Friends`;
                 if(profileBadge) profileBadge.innerText = realCount;
-
                 snap.forEach(doc => { const data = doc.data(); html += `<div style="background: rgba(23, 23, 33, 0.6); padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #2a2a3d; display: flex; justify-content: space-between; align-items: center;"><span style="color:#fff; font-size:14px; font-weight: 500;">${data.name || 'User'}</span><span style="color:#00ffcc; font-size:12px; font-weight:bold; background: rgba(0, 255, 204, 0.1); padding: 4px 8px; border-radius: 6px;">+💎 50</span></div>`; });
                 if(html === "") html = "<p style='text-align: center; color: #7a7a9d; font-size: 13px; margin-top: 20px;'>You haven't referred anyone yet. Start sharing!</p>"; 
                 refList.innerHTML = html;
             } catch(e) { refList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>Error loading referrals.</p>"; }
         }
-
         function startLiveSnapshot(user) {
             onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
                 if (docSnap.exists()) {
@@ -616,7 +590,6 @@
                     if(document.getElementById('profile-ref-count').innerText === "0") {
                         document.getElementById('profile-ref-count').innerText = data.referralCount || 0;
                     }
-
                     const safeName = data.name || "User"; document.getElementById('profile-name').innerText = safeName; document.getElementById('profile-email').innerText = user.email || "No Email"; document.getElementById('profile-avatar').src = data.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${safeName.replace(/ /g, '')}&backgroundColor=ff007f`;
                 }
             });
@@ -659,7 +632,6 @@
         lbDropToggle.addEventListener('click', (e) => { e.stopPropagation(); lbDropMenu.classList.toggle('show'); }); document.addEventListener('click', () => { lbDropMenu.classList.remove('show'); });
         document.querySelectorAll('.lb-drop-item').forEach(item => { item.addEventListener('click', (e) => { document.querySelectorAll('.lb-drop-item').forEach(i => i.classList.remove('active')); e.target.classList.add('active'); currentLbCat = e.target.getAttribute('data-cat'); lbActiveCat.innerText = currentLbCat === 'earnings' ? "Earnings" : "Referrals"; lbScoreTitle.innerText = currentLbCat === 'earnings' ? "COINS" : "INVITES"; window.loadAdvancedLeaderboard(); }); });
         document.querySelectorAll('.lb-b-tab').forEach(tab => { tab.addEventListener('click', (e) => { document.querySelectorAll('.lb-b-tab').forEach(t => t.classList.remove('active')); e.target.classList.add('active'); currentLbTime = e.target.getAttribute('data-time'); window.loadAdvancedLeaderboard(); }); });
-
         setInterval(() => {
             if (currentLbTime === 'all') { lbTimer.style.display = 'none'; return; } else { lbTimer.style.display = 'block'; }
             const now = new Date(); let target = new Date();
@@ -667,7 +639,6 @@
             const diff = target - now; const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'); const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0'); const s = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
             if (currentLbTime === 'today') { lbTimer.innerText = `⏳ Resets in: ${h}h ${m}m ${s}s`; } else { lbTimer.innerText = `⏳ Resets in: ${d}d ${h}h ${m}m ${s}s`; }
         }, 1000);
-
         window.loadAdvancedLeaderboard = async function() {
             const podiumContainer = document.getElementById('podium-pro-box'); const listContainer = document.getElementById('leaderboard-list'); podiumContainer.innerHTML = "<p style='width:100%; text-align:center;'>Loading Data...</p>";
             try {
@@ -687,7 +658,6 @@
                     }
                     users.push(data);
                 });
-
                 // Client Side Sort based on selected time
                 users.sort((a, b) => {
                     if(currentLbCat === 'referrals') return (b.referralCount || 0) - (a.referralCount || 0);
@@ -696,7 +666,6 @@
                     if(currentLbTime === 'monthly') return (b.monthlyEarn || 0) - (a.monthlyEarn || 0);
                     return (b.balance || 0) - (a.balance || 0);
                 });
-
                 // Keep top 50 valid earners
                 if(currentLbTime !== 'all') {
                     users = users.filter(u => {
@@ -705,7 +674,6 @@
                         return true;
                     });
                 }
-
                 if(users.length === 0) { podiumContainer.innerHTML = "<p style='width:100%; text-align:center; margin-top:30px; font-weight:bold; color:#7a7a9d;'>No data for selected period.</p>"; listContainer.innerHTML = ""; return; }
                 
                 const getFirstName = (u) => (u && u.name) ? u.name.split(' ')[0] : "User"; const getAvatar = (u) => (u && u.photoURL) ? u.photoURL : `https://api.dicebear.com/7.x/bottts/svg?seed=${(u&&u.name)?u.name.replace(/ /g, ''):'user'}&backgroundColor=1f1b36`;
@@ -718,7 +686,6 @@
                     if(currentLbTime === 'monthly') return `${u.monthlyEarn || 0} 💎`;
                     return `${u.balance || 0} 💎`;
                 }
-
                 const top1 = users[0] || null; const top2 = users[1] || null; const top3 = users[2] || null;
                 
                 let podiumHtml = "";
@@ -735,7 +702,6 @@
                 listContainer.innerHTML = listHtml;
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
-
         const getShareMessage = () => { return `Join EarnNova Pro! Use my code: ${document.getElementById('my-referral-code').innerText} to get 50 Gems instantly + Lifetime 10% Commission!\nStart earning today! 🚀`; };
         const getShareUrl = () => { return window.location.href.split('?')[0] + "?ref=" + currentUser.uid; };        
         document.getElementById('copy-ref-btn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('my-referral-code').innerText); const btn = document.getElementById('copy-ref-btn'); btn.innerText = "COPIED!"; btn.style.background = "#00ffcc"; btn.style.color = "#000"; setTimeout(() => { btn.innerText = "COPY"; btn.style.background = "linear-gradient(135deg, #ff007f, #8a2be2)"; btn.style.color = "#fff"; }, 2000); });

@@ -74,8 +74,8 @@
         .notif-badge { position: absolute; top: -5px; right: -5px; background: #ff007f; color: #fff; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
         #live-ist-time { font-size: 10px; color: #108975; margin-left: 8px; font-weight: bold; padding: 4px 8px; background: rgba(16, 137, 117, 0.1); border: 1px solid rgba(16, 137, 117, 0.2); border-radius: 8px; }
         
-        /* --- NEW: LIVE EARNING TICKER --- */
-        .ticker-wrapper { width: 100%; overflow: hidden; background: transparent; padding: 5px 0 15px 0; position: relative; display: none; } /* Hidden until data loads */
+        /* --- LIVE EARNING TICKER --- */
+        .ticker-wrapper { width: 100%; overflow: hidden; background: transparent; padding: 5px 0 15px 0; position: relative; display: none; }
         .ticker-track { display: flex; gap: 12px; width: max-content; animation: tickerScroll 25s linear infinite; }
         .ticker-track:hover { animation-play-state: paused; }
         .ticker-item { display: flex; align-items: center; background: #111; padding: 8px 12px; border-radius: 12px; min-width: 180px; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid #333;}
@@ -249,7 +249,7 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .ad-close-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; transition: 0.3s; }
 
-        /* --- NEW: CUSTOM HURRAY CONFETTI POPUP --- */
+        /* CUSTOM HURRAY CONFETTI POPUP */
         #confetti-popup { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.65); backdrop-filter: blur(5px); z-index: 10000; display: flex; justify-content: center; align-items: center; flex-direction: column; }
         .cp-box { background: #ffffff; padding: 30px; border-radius: 24px; text-align: center; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2; width: 85%; max-width: 320px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 2px solid #fff; }
         .cp-icon { font-size: 50px; margin-bottom: 10px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); animation: floatLogo 3s infinite ease-in-out;}
@@ -262,6 +262,20 @@
         .confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 1; }
         .confetti { position: absolute; width: 10px; height: 20px; background: red; animation: fall linear forwards; opacity: 0.9;}
         @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+
+        /* --- NEW: ANNOUNCEMENT NOTIFICATION POPUP --- */
+        #notification-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
+        .notif-box { background: #fff; width: 90%; max-width: 350px; border-radius: 20px; overflow: hidden; animation: popIn 0.4s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .notif-header { background: linear-gradient(135deg, #ff9800, #f57c00); padding: 20px; text-align: center; color: #fff; }
+        .notif-header h3 { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: 1px; }
+        .notif-body { padding: 20px; }
+        .notif-body p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 12px; }
+        .notif-body ul { list-style: none; padding: 0; margin-bottom: 20px; }
+        .notif-body li { font-size: 13px; color: #333; margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: 500;}
+        .notif-body li::before { content: '👉'; position: absolute; left: 0; top: 0; }
+        .notif-footer { padding: 15px 20px; border-top: 1px solid #eee; text-align: center; background: #f9f9f9;}
+        .close-notif-btn { background: #111; color: #fff; border: none; padding: 12px 25px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; width: 100%; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
+        .close-notif-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -342,7 +356,14 @@
             </div>
             <div class="header-actions">
                 <div class="action-icon-group" onclick="alert('Tutorials coming soon!')"><div class="action-circle ac-red">▶</div><span class="action-label">Tutorials</span></div>
-                <div class="action-icon-group" onclick="alert('No new notifications')"><div class="action-circle ac-orange">🔔</div><span class="action-label">Notification</span></div>
+                
+                <!-- UPDATED: BELL ICON WITH BADGE AND POPUP LINK -->
+                <div class="action-icon-group" onclick="openNotification()">
+                    <div class="action-circle ac-orange">🔔</div>
+                    <span class="action-label">Notification</span>
+                    <div class="notif-badge" id="bell-badge" style="background:#ff007f;">1</div>
+                </div>
+
                 <div class="action-icon-group" onclick="openSubScreen('scratch-list-screen')">
                     <div class="action-circle ac-purple">🎁</div><span class="action-label">Scratch</span>
                     <div class="notif-badge hidden" id="scratch-badge">0</div>
@@ -350,11 +371,9 @@
             </div>
         </div>
 
-        <!-- NEW: LIVE EARNING TICKER -->
+        <!-- LIVE EARNING TICKER -->
         <div class="ticker-wrapper" id="ticker-wrapper">
-            <div class="ticker-track" id="live-ticker-track">
-                <!-- Javascript will inject live items here -->
-            </div>
+            <div class="ticker-track" id="live-ticker-track"></div>
         </div>
        
         <!-- BANNERS WITH IMGBB LINKS -->
@@ -629,7 +648,7 @@
         <p style="font-size: 13px; color: #aaa;">Please do not close the app. You will be rewarded soon.</p>
     </div>
 
-    <!-- NEW: CUSTOM HURRAY CONFETTI POPUP -->
+    <!-- CUSTOM HURRAY CONFETTI POPUP -->
     <div id="confetti-popup" class="hidden">
         <div class="confetti-container" id="confetti-container"></div>
         <div class="cp-box">
@@ -637,6 +656,27 @@
             <h2>Hurray!</h2>
             <p>You earned <span id="cp-amount">0</span> Gems from <span id="cp-source" style="text-transform: capitalize; color:#111;">Tasks</span>!</p>
             <button onclick="closeConfetti()">Awesome</button>
+        </div>
+    </div>
+
+    <!-- NEW: ANNOUNCEMENT NOTIFICATION POPUP -->
+    <div id="notification-modal" class="hidden">
+        <div class="notif-box">
+            <div class="notif-header">
+                <h3>🚨 MEGA UPDATE! 🚨</h3>
+            </div>
+            <div class="notif-body">
+                <p>Humne app ko aur bhi Premium aur Advanced bana diya hai! Aaiye dekhte hain kya naya hai:</p>
+                <ul>
+                    <li><b>Live Earning Ticker:</b> Ab Home Screen par dekhiye kaun kitne Gems kama raha hai!</li>
+                    <li><b>New Celebration Alert:</b> Ab boring alerts khatam! Naya 'Hurray!' 🎉 Confetti animation.</li>
+                    <li><b>Leaderboard Upgraded:</b> Daily Leaderboard ab perfectly Indian Time (IST) par kaam karega.</li>
+                </ul>
+                <p style="text-align:center; color:#108975; font-weight:bold; margin-bottom:0;">Keep earning! 💸💎</p>
+            </div>
+            <div class="notif-footer">
+                <button class="close-notif-btn" onclick="closeNotification()">Got it!</button>
+            </div>
         </div>
     </div>
     
@@ -683,6 +723,15 @@
         };
         window.closeSubScreen = function() {
             switchTab('dashboard-screen', 'nav-home');
+        };
+
+        // NEW: NOTIFICATION MODAL LOGIC
+        window.openNotification = function() {
+            document.getElementById('notification-modal').classList.remove('hidden');
+            document.getElementById('bell-badge').classList.add('hidden'); // hide red dot when viewed
+        };
+        window.closeNotification = function() {
+            document.getElementById('notification-modal').classList.add('hidden');
         };
         
         setInterval(() => {
@@ -731,7 +780,7 @@
                         document.getElementById('onboarding-screen').classList.add('hidden'); 
                         switchTab('dashboard-screen', 'nav-home'); 
                         startLiveSnapshot(user); 
-                        startLiveTicker(); // Start global ticker
+                        startLiveTicker(); 
                     } else { 
                         document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
                         document.getElementById('global-bottom-nav').style.display = 'none';
@@ -781,7 +830,6 @@
             btn.innerText = "Complete Registration"; btn.disabled = false;
         });
 
-        // --- NEW: CONFETTI POPUP LOGIC ---
         window.showConfetti = function(amount, source) {
             document.getElementById('cp-amount').innerText = amount;
             document.getElementById('cp-source').innerText = source;
@@ -806,7 +854,6 @@
             document.getElementById('confetti-container').innerHTML = '';
         }
 
-        // --- NEW: LIVE EARNING TICKER LOGIC ---
         function startLiveTicker() {
             const tickerWrapper = document.getElementById('ticker-wrapper');
             const tickerTrack = document.getElementById('live-ticker-track');
@@ -830,7 +877,6 @@
                         <div class="t-amt">🪙 ${d.amount}</div>
                     </div>`;
                 });
-                // Duplicate HTML for seamless marquee loop
                 tickerTrack.innerHTML = html + html;
             });
         }
@@ -915,7 +961,6 @@
             reader.readAsDataURL(file); 
         });
 
-        // --- UPDATED: AWARD GEMS WITH LEADERBOARD FIX & AVATAR INFO ---
         async function awardGems(amount, sourceText) {
             let oldTotal = userFullData.totalGemsEarned || 0;
             let newTotal = oldTotal + amount;
@@ -930,7 +975,6 @@
                 monthlyEarn: increment(amount)
             };
             
-            // IST Fix for Daily Earn
             if (userFullData.lastEarnDate === todayStr) {
                 updates.dailyEarn = increment(amount);
             } else {
@@ -950,13 +994,11 @@
                 timestamp: serverTimestamp()
             });
 
-            // Replaced Alert with Custom Animation
             showConfetti(amount, sourceText);
             
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
 
-        // --- ADMOB WATCH AD LOGIC ---
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
@@ -978,13 +1020,12 @@
                     timerBtn.style.cursor = "pointer";
                     timerBtn.onclick = async function() {
                         adOverlay.classList.add('hidden');
-                        await awardGems(10, "Watched Ads"); // Triggers animation
+                        await awardGems(10, "Watched Ads");
                     }
                 }
             }, 1000);
         }
 
-        // --- SPIN AND WIN LOGIC ---
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
@@ -1009,12 +1050,11 @@
             
             setTimeout(async () => {
                 await updateDoc(doc(db, 'users', currentUser.uid), { totalSpins: increment(1) });
-                await awardGems(finalReward, "Spin & Win"); // Triggers animation
+                await awardGems(finalReward, "Spin & Win");
                 btn.disabled = false; btn.innerText = "SPIN NOW";
             }, 4200);
         });
 
-        // --- CANVAS SCRATCH CARD LOGIC ---
         let scratchRewardVal = 0;
         let isScratched = false;
         window.openScratchCard = function() {
@@ -1056,12 +1096,11 @@
                 if (scratchedPixels > 40) { 
                     isScratched = true; ctx.clearRect(0, 0, 250, 250);
                     await updateDoc(doc(db, 'users', currentUser.uid), { availableScratches: increment(-1), totalScratches: increment(1) });
-                    await awardGems(scratchRewardVal, "Scratch Card"); // Triggers animation
+                    await awardGems(scratchRewardVal, "Scratch Card");
                 }
             }
         }
         
-        // --- WITHDRAW LOGIC ---
         document.querySelectorAll('.voucher-card').forEach(card => {
             card.addEventListener('click', function() {
                 actMethod = this.getAttribute('data-method'); actReqType = this.getAttribute('data-req'); actMin = parseInt(this.getAttribute('data-min'));
@@ -1090,7 +1129,6 @@
             btn.innerText = "Proceed to Transfer"; btn.disabled = false;
         });
 
-        // --- REFERRAL LOGIC ---
         window.loadMyReferrals = async function() {
             if(!currentUser) return; const refList = document.getElementById('referral-list'); 
             refList.innerHTML = "<p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Fetching your invites...</p>";
@@ -1117,7 +1155,6 @@
         document.getElementById('share-link').addEventListener('click', () => { navigator.clipboard.writeText(getShareUrl()); alert("Referral Link Copied to Clipboard!"); });
         document.getElementById('share-more').addEventListener('click', async () => { if (navigator.share) { try { await navigator.share({ title: 'EarnNova Pro', text: getShareMessage(), url: getShareUrl() }); } catch (err) {} } else { alert("Native sharing is not supported on this browser."); } });
 
-        // --- HISTORY LOGIC ---
         window.loadProfileData = async function() {
             if(!currentUser) return; const historyList = document.getElementById('history-list'); historyList.innerHTML = "<p style='text-align: center; color: #777;'>Loading history...</p>";
             try {
@@ -1153,7 +1190,6 @@
             } catch (error) { txList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading transactions.</p>`; }
         }
 
-        // --- UPDATED: LEADERBOARD WITH STRICT IST TIMING ---
         let currentLbCat = 'earnings'; let currentLbTime = 'all';     
         const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
         const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
@@ -1179,7 +1215,6 @@
                 let users = []; const todayStr = getTodayISTString();
                 querySnapshot.forEach(doc => {
                     let data = doc.data();
-                    // IST FIX: Reset local daily earn variable if date mismatches
                     if (currentLbCat === 'earnings' && currentLbTime === 'today') { if (data.lastEarnDate !== todayStr) data.dailyEarn = 0; }
                     users.push(data);
                 });

@@ -226,6 +226,12 @@
         .submit-btn { background: linear-gradient(135deg, #108975, #2cb4a1); width: 100%; border: none; border-radius: 10px; color: white; padding: 15px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 25px; transition: 0.3s; box-shadow: 0 4px 15px rgba(16,137,117,0.3);} .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16,137,117,0.4);}
         .voucher-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; } .voucher-card { background-color: #ffffff; border-radius: 16px; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; position: relative;} .voucher-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(16,137,117,0.15); border-color: #108975; } .voucher-card img { width: 85%; max-height: 45px; object-fit: contain; } .voucher-title { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; margin-top: 8px; text-align: center;} .voucher-card.dark-bg { background-color: #f9f9f9; border: 1px solid #eee;} .voucher-card.dark-bg .voucher-title { color: #333; } .voucher-card.dark-bg:hover {border-color: #108975;}
         .redeem-banner { background: #ffffff; border-radius: 15px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); } .redeem-banner img { max-height: 60px; max-width: 150px; margin-bottom: 15px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));} .redeem-banner h3 { font-size: 22px; color: #111; margin-bottom: 5px; } .redeem-min-text { background: #f0fafa; border: 1px solid #e0f2f0; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #108975; display: inline-flex; align-items: center; gap: 5px;}
+        
+        /* AD OVERLAY */
+        #ad-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050505; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; }
+        .ad-spinner { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #108975; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 20px;}
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .ad-close-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -352,8 +358,9 @@
             <div class="adv-card t-ranks" onclick="switchTab('leaderboard-screen', null); loadAdvancedLeaderboard();">
                 <div class="adv-icon-box">🏆</div><div class="adv-info"><h4>Ranks</h4><p>Leaderboard</p></div>
             </div>
-            <div class="adv-card t-micro" onclick="alert('Micro jobs loading...')">
-                <div class="adv-icon-box">🗂</div><div class="adv-info"><h4>Micro Jobs</h4><p>Quick Cash</p></div>
+            <!-- CHANGED: Micro Jobs to Watch Ads (AdMob Placeholder) -->
+            <div class="adv-card t-micro" onclick="showRewardedAd()">
+                <div class="adv-icon-box" style="color:#ff007f;">📺</div><div class="adv-info"><h4>Watch Ads</h4><p>Free Gems</p></div>
             </div>
             <div class="adv-card t-games" onclick="alert('Games loading...')">
                 <div class="adv-icon-box">🎮</div><div class="adv-info"><h4>Games</h4><p>Fun Rewards</p></div>
@@ -417,7 +424,7 @@
         <div class="list-container" id="leaderboard-list"></div>
     </div>
     
-    <!-- 4. PROFILE SCREEN (UPDATED LIGHT TEAL THEME & AVATAR FIX) -->
+    <!-- 4. PROFILE SCREEN -->
     <div id="profile-screen" class="main-container hidden app-screen">
         <div class="profile-top-bg">
             <div class="pro-top-header">
@@ -495,7 +502,7 @@
         <span id="profile-ref-count" class="hidden">0</span>
     </div>
     
-    <!-- 5. WITHDRAW SCREEN (VOUCHERS TOP BUTTON ADDED & NEW CARDS) -->
+    <!-- 5. WITHDRAW SCREEN -->
     <div id="withdraw-screen" class="main-container hidden app-screen">
         <div class="sub-header" style="justify-content: space-between; margin-bottom: 25px;">
             <h2 style="text-align: left; padding: 0;">Redeem Rewards</h2>
@@ -504,12 +511,10 @@
         <p style="font-size: 12px; color: #777; margin-bottom: 15px; text-transform: uppercase; font-weight: bold;">Select Withdraw Method</p>
         
         <div class="voucher-grid">
-            <!-- ORIGINAL 4 -->
             <div class="voucher-card" data-method="UPI" data-req="upi" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" style="max-height:35px;"><span class="voucher-title">UPI Transfer</span></div>
             <div class="voucher-card" data-method="Google Play" data-req="email" data-min="450" data-cash="₹30" data-img="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play"><span class="voucher-title">Google Play</span></div>
             <div class="voucher-card" data-method="Amazon Gift Card" data-req="email" data-min="300" data-cash="₹20" data-img="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" style="background-color: #FFF3E0;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon"><span class="voucher-title">Amazon</span></div>
             <div class="voucher-card dark-bg" data-method="Uber Voucher" data-req="email" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg" alt="Uber" style="filter: invert(1);"><span class="voucher-title">Uber</span></div>
-            <!-- NEW 8 FAMOUS CARDS -->
             <div class="voucher-card" data-method="Roblox Gift Card" data-req="email" data-min="500" data-cash="400 Robux" data-img="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" alt="Roblox" style="max-height:35px;"><span class="voucher-title">Roblox</span></div>
             <div class="voucher-card dark-bg" data-method="Steam Wallet" data-req="email" data-min="800" data-cash="$5 Steam" data-img="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam" style="max-height:35px;"><span class="voucher-title">Steam</span></div>
             <div class="voucher-card" data-method="Spotify Premium" data-req="email" data-min="600" data-cash="1 Month" data-img="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" style="max-height:35px;"><span class="voucher-title">Spotify</span></div>
@@ -569,7 +574,7 @@
         <div id="history-list"><p style="text-align: center; color: #777; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
     </div>
     
-    <!-- Checkout Sub-Screen (From withdraw) -->
+    <!-- Checkout Sub-Screen -->
     <div id="brand-redeem-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', 'nav-withdraw')">← Back</button><h2>Checkout</h2></div>
         <div class="redeem-banner"><img id="br-img" src="" alt="Brand Logo"><h3 id="br-name">Brand Name</h3><div class="redeem-min-text">💎 <span id="br-min-gems">0</span> Gems required for <span id="br-cash">0</span></div></div>
@@ -580,6 +585,14 @@
             <div class="input-group"><label>Amount to Withdraw (Gems)</label><input type="number" id="redeem-amount" placeholder="Enter amount of Gems"></div>
             <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
         </div>
+    </div>
+
+    <!-- AD SIMULATION OVERLAY FOR ADMOB -->
+    <div id="ad-overlay" class="hidden">
+        <div class="ad-close-btn" id="ad-timer-btn">Wait 5s...</div>
+        <div class="ad-spinner"></div>
+        <h2 style="font-size: 20px; margin-bottom: 10px;">Advertisement Playing...</h2>
+        <p style="font-size: 13px; color: #aaa;">Please do not close the app. You will be rewarded soon.</p>
     </div>
     
     <!-- FIREBASE SCRIPT -->
@@ -594,7 +607,6 @@
         const uiBalance = document.getElementById('user-balance');
         let currentUser = null; let currentBalance = 0; let userFullData = {}; let actMethod = ""; let actReqType = ""; let actMin = 0;
         
-        // Consistent Local Time (IST/Local) generator
         const getTodayDateString = () => {
             const d = new Date();
             return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -607,18 +619,16 @@
         }
         document.getElementById('roulette-wheel').innerHTML = wheelHtml;
 
-        // --- NAVIGATION & SIDEBAR LOGIC (FIXED BOTTOM NAV BUG) ---
         window.switchTab = function(screenId, navElId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            document.getElementById('global-bottom-nav').style.display = 'flex'; // ALWAYS visible
+            document.getElementById('global-bottom-nav').style.display = 'flex'; 
             if(navElId) { 
                 document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); 
                 const el = typeof navElId === 'string' ? document.getElementById(navElId) : navElId;
                 if(el) el.classList.add('active'); 
             }
         };
-        // Removed the line that hides bottom nav so it stays on checkout/sub-screens
         window.openSubScreen = function(screenId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
@@ -819,6 +829,36 @@
             if (newScratchesEarned > 0) alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`);
         }
 
+        // --- ADMOB WATCH AD LOGIC ---
+        window.showRewardedAd = function() {
+            const adOverlay = document.getElementById('ad-overlay');
+            const timerBtn = document.getElementById('ad-timer-btn');
+            adOverlay.classList.remove('hidden');
+            
+            let timeLeft = 5; 
+            timerBtn.innerText = `Wait ${timeLeft}s...`;
+            timerBtn.style.background = "rgba(255,255,255,0.1)";
+            timerBtn.onclick = null;
+            timerBtn.style.cursor = "not-allowed";
+
+            let adInterval = setInterval(() => {
+                timeLeft--;
+                if(timeLeft > 0) {
+                    timerBtn.innerText = `Wait ${timeLeft}s...`;
+                } else {
+                    clearInterval(adInterval);
+                    timerBtn.innerText = "✖ CLOSE & CLAIM";
+                    timerBtn.style.background = "#108975";
+                    timerBtn.style.cursor = "pointer";
+                    timerBtn.onclick = async function() {
+                        adOverlay.classList.add('hidden');
+                        alert("🎉 Ad watched successfully! You got 10 Gems.");
+                        await awardGems(10, "Watched Video Ad");
+                    }
+                }
+            }, 1000);
+        }
+
         // --- SPIN AND WIN LOGIC ---
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
@@ -996,7 +1036,7 @@
                 records.forEach(data => {
                     const dateObj = data.timestamp ? new Date(data.timestamp.toDate()) : new Date();
                     const dateStr = dateObj.toLocaleDateString('en-GB') + " " + dateObj.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
-                    let icon = data.title === "Spin & Win" ? "🎡" : (data.title === "Scratch Card" ? "🎁" : "💰");
+                    let icon = data.title === "Spin & Win" ? "🎡" : (data.title === "Scratch Card" ? "🎁" : (data.title === "Watched Video Ad" ? "📺" : "💰"));
                     html += `<div class="modern-history-item"><div class="mh-left"><div class="mh-icon" style="background:rgba(16,137,117,0.1);color:#108975;">${icon}</div><div class="mh-info"><h5>${data.title}</h5><p>${dateStr}</p></div></div><div class="mh-right"><div class="mh-amount" style="color: #108975;">+ ${data.amount} 💎</div></div></div>`;
                 });
                 txList.innerHTML = html;
@@ -1033,7 +1073,6 @@
                     users.push(data);
                 });
                 
-                // FILTER: Hide anyone with 0 gems/referrals depending on category
                 users = users.filter(u => {
                     if(currentLbCat === 'referrals') return (u.referralCount || 0) > 0;
                     if(currentLbTime === 'today') return (u.dailyEarn || 0) > 0;

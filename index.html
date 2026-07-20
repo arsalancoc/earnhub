@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EarnNova - Pro Rewards</title>
     <style>
-        /* --- PRO LIGHT TEAL THEME CSS (UPDATED) --- */
+        /* --- PRO LIGHT TEAL THEME CSS (GLOBAL) --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background: linear-gradient(135deg, #f4fbfa 0%, #ccebe6 40%, #53b8ab 100%); 
@@ -105,15 +105,15 @@
         .adv-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 24px; background: #f4fbfa; border: 1px solid #e0f2f0; }
         .adv-info h4 { font-size: 15px; font-weight: 800; color: #111; margin-bottom: 2px;} .adv-info p { font-size: 10px; color: #777; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
         
-        /* --- NEW BOTTOM NAV (EXACT TEAL PILL MATCH) --- */
+        /* --- GLOBAL BOTTOM NAV --- */
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px; background: #108975; border: none; display: flex; justify-content: space-around; padding: 10px; z-index: 100; border-radius: 35px; box-shadow: 0 10px 30px rgba(16,137,117,0.4); }
         .nav-item { display: flex; flex-direction: row; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s ease; font-size: 13px; font-weight: 700; padding: 10px; border-radius: 25px; gap: 6px; }
         .nav-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: 0.3s; }
-        .nav-item span { display: none; } /* Hide text for inactive icons */
+        .nav-item span { display: none; }
         .nav-item:hover { color: rgba(255,255,255,0.9); } 
         .nav-item.active { background: rgba(255, 255, 255, 0.25); color: #ffffff; padding: 10px 18px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-item.active span { display: block; } /* Show text only on active pill */
-        .nav-item::after { display: none !important; } /* Hide old indicator dot */
+        .nav-item.active span { display: block; }
+        .nav-item::after { display: none !important; }
         
         /* --- SCREENS HEADERS --- */
         .main-page-header { text-align: center; margin-bottom: 25px; padding-top: 10px; }
@@ -157,30 +157,43 @@
         .lb-bottom-tabs { display: flex; background: #f9f9f9; border-radius: 12px; padding: 6px; margin-top: 15px; margin-bottom: 15px; border: 1px solid #eee;} .lb-b-tab { flex: 1; padding: 10px 0; text-align: center; background: transparent; border: none; color: #777; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s;} .lb-b-tab.active { background: #ffffff; color: #111; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .list-header { display: grid; grid-template-columns: 50px 1fr 80px; padding: 0 15px 10px 15px; border-bottom: 1px solid #eee; color: #777; font-size: 11px; font-weight: bold; letter-spacing: 1px; } .list-container { padding-top: 10px; padding-bottom: 20px;} .list-row { display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; background: #ffffff; border: 1px solid #f0f0f0; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02); } .list-row:hover { background: #f4fbfa; border-color: #e0f2f0;} .row-rank { font-size: 14px; font-weight: bold; color: #777; } .row-user { display: flex; align-items: center; gap: 12px; } .row-avatar { width: 35px; height: 35px; border-radius: 50%; background: #eee; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } .row-name { font-size: 14px; color: #111; font-weight: 500; } .row-score { font-size: 14px; font-weight: bold; color: #108975; text-align: right; }
         
-        /* --- PRO PROFILE DASHBOARD --- */
-        .pro-profile-header { position: relative; background: #ffffff; border-radius: 24px; padding: 30px 20px 25px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #eee; }
-        .pro-profile-header::before { content: ''; position: absolute; top: -20px; left: -20px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(16,137,117,0.1), transparent); z-index: 0; filter: blur(20px);}
-        .pro-avatar-wrapper { position: relative; width: 90px; height: 90px; margin: 0 auto 15px auto; z-index: 1; }
-        .pro-avatar-wrapper img { width: 100%; height: 100%; border-radius: 25px; border: 3px solid #108975; padding: 3px; background: #fff; object-fit: cover; box-shadow: 0 5px 15px rgba(16,137,117,0.2);}
-        .pro-avatar-edit { position: absolute; bottom: -8px; right: -8px; background: #108975; color: #fff; width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(16,137,117,0.3); }
-        .pro-name-row { display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 1; position: relative; }
-        .pro-name-row h3 { font-size: 22px; font-weight: 900; color: #111; }
-        .pro-edit-btn { background: #f0fafa; padding: 4px 8px; border-radius: 8px; font-size: 11px; cursor: pointer; color: #108975; border: 1px solid #e0f2f0; transition: 0.2s;} .pro-edit-btn:hover { background: #e0f2f0; }
-        .pro-email { color: #666; font-size: 13px; margin-top: 5px; z-index: 1; position: relative; font-weight: 500;}
-        .pro-stats-row { display: flex; gap: 15px; margin-top: 25px; z-index: 1; position: relative; }
-        .pro-stat-box { flex: 1; background: #fcfcfc; border-radius: 16px; padding: 15px; border: 1px solid #eee; text-align: left; }
-        .pro-stat-box span { font-size: 11px; color: #777; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;}
-        .pro-stat-box h4 { font-size: 20px; color: #108975; margin-top: 5px; font-weight: 900;}
+        /* --- PRO CUSTOM THEME FOR PROFILE PAGE (EXACT IMAGE MATCH) --- */
+        .pro-custom-theme { background: #000000 !important; padding: 0 !important; max-width: 100% !important; border: none !important; box-shadow: none !important; }
+        .profile-top-bg { background: #170b2b; padding: 20px 20px 30px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .pro-top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-top:10px;}
+        .pro-top-header h2 { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+        .pro-settings-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; border: none; cursor: pointer; }
         
-        .profile-options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;}
-        .profile-option { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: #ffffff; border: 1px solid #eee; border-radius: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
-        .profile-option:hover { transform: translateX(5px); border-color: #108975; box-shadow: 0 5px 15px rgba(16,137,117,0.1); }
-        .po-left { display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: 700; color: #222;}
-        .po-icon { font-size: 20px; width: 35px; height: 35px; background: #f4f4f4; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-        .po-right { color: #aaa; font-size: 12px; font-weight: bold;}
+        .pro-user-section { display: flex; align-items: center; gap: 20px; }
+        .pro-avatar-ring { width: 85px; height: 85px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, #a88deb, #e0a3f8); display: flex; justify-content: center; align-items: center; }
+        .pro-avatar-ring img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid #170b2b; object-fit: cover; background: #222; }
         
-        .profile-logout-btn { width: 100%; padding: 16px; border-radius: 16px; background: #fff; color: #ff5e62; border: 1px solid rgba(255, 94, 98, 0.3); font-size: 15px; font-weight: 900; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,94,98,0.05);}
-        .profile-logout-btn:hover { background: #ff5e62; color: #fff; box-shadow: 0 8px 25px rgba(255,94,98,0.2); border-color: #ff5e62;}
+        .pro-user-details { display: flex; flex-direction: column; gap: 4px; }
+        .pro-user-details h3 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+        .pro-sub-text { font-size: 10px; color: #888; font-weight: 600; margin-top: 4px; }
+        
+        .pro-balance-pill { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; width: fit-content; }
+        .pro-balance-pill span { color: #fff; font-size: 16px; font-weight: 900; }
+        
+        .pro-login-info { display: flex; gap: 10px; margin-top: 2px; }
+        .pro-info-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; justify-content: center; align-items: center; color: #ccc; font-size: 14px; cursor: pointer; }
+        
+        .pro-bottom-content { padding: 20px; padding-bottom: 110px; background: #050505; min-height: 70vh; }
+        .pro-section-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        
+        .pro-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .pro-stat-card { background: #181818; border-radius: 12px; padding: 15px 5px; text-align: center; border: 1px solid #222; display: flex; flex-direction: column; justify-content: center;}
+        .pro-stat-card h4 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 5px; }
+        .pro-stat-card p { font-size: 10px; color: #888; line-height: 1.3; font-weight: 600; }
+        
+        .pro-performance-btn { width: 100%; background: #6b21ff; color: #fff; border: none; padding: 16px 20px; border-radius: 12px; font-size: 14px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(107, 33, 255, 0.2); text-transform: uppercase; letter-spacing: 0.5px;}
+        
+        .pro-list-container { display: flex; flex-direction: column; gap: 12px; }
+        .pro-list-item { background: #151515; border-radius: 12px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid #222; position: relative; overflow: hidden;}
+        .pro-list-item span { font-size: 13px; font-weight: 700; color: #fff; position: relative; z-index: 2;}
+        .pro-list-item .arrow-box { width: 26px; height: 26px; background: rgba(255,255,255,0.08); border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #888; font-size: 12px; font-weight: bold; position: relative; z-index: 2;}
+        
+        .pro-history-badge { position: absolute; right: -10px; top: 0; height: 100%; width: 65px; background: #ffc107; display: flex; justify-content: center; align-items: center; border-radius: 30px 0 0 30px; font-size: 20px; z-index: 1;}
         
         /* History & Lists styling */
         .modern-history-item { display: flex; justify-content: space-between; align-items: center; background: #ffffff; border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid #eee; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
@@ -219,11 +232,11 @@
     
     <!-- GLOBAL BOTTOM NAV -->
     <div class="bottom-nav" id="global-bottom-nav" style="display: none;">
-        <div class="nav-item active" id="nav-home" onclick="switchTab('dashboard-screen', this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
+        <div class="nav-item active" id="nav-home" onclick="switchTab('dashboard-screen', 'nav-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
         <div class="nav-item" id="nav-task" onclick="alert('Tasks section coming soon!')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Tasks</span></div>
-        <div class="nav-item" id="nav-invite" onclick="switchTab('invite-screen', this); loadMyReferrals();"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="14" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="22"></line><path d="M19 8c0-3.3-2.7-6-6-6-1.5 0-2.8.5-3.8 1.4A5.9 5.9 0 0 0 5 8"></path></svg><span>Invite</span></div>
-        <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', this)"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
-        <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', this);"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
+        <div class="nav-item" id="nav-invite" onclick="switchTab('invite-screen', 'nav-invite'); loadMyReferrals();"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="14" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="22"></line><path d="M19 8c0-3.3-2.7-6-6-6-1.5 0-2.8.5-3.8 1.4A5.9 5.9 0 0 0 5 8"></path></svg><span>Invite</span></div>
+        <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', 'nav-withdraw')"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
+        <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', 'nav-profile');"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
     </div>
     
     <!-- Sidebar Overlay & Container -->
@@ -320,7 +333,7 @@
                     <span style="font-size: 28px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">💎</span>
                     <span class="w-balance" id="user-balance">0.00</span>
                 </div>
-                <button class="w-btn-pro" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">Withdraw Coins</button>
+                <button class="w-btn-pro" onclick="switchTab('withdraw-screen', 'nav-withdraw')">Withdraw Coins</button>
             </div>
         </div>
         
@@ -403,36 +416,83 @@
         <div class="list-container" id="leaderboard-list"></div>
     </div>
     
-    <!-- 4. PROFILE SCREEN -->
-    <div id="profile-screen" class="main-container hidden app-screen">
-        <div class="main-page-header"><h2>My Profile</h2></div>
-        <div class="pro-profile-header">
-            <div class="pro-avatar-wrapper"><img id="profile-avatar" src="" alt="Avatar"><div class="pro-avatar-edit" id="edit-avatar-btn">✏️</div></div>
-            <input type="file" id="avatar-upload" accept="image/*" class="hidden">
-            <div class="pro-name-row"><h3 id="profile-name">User Name</h3><div class="pro-edit-btn" id="edit-name-btn">Edit</div></div>
-            <p style="font-size: 10px; color: #ff5e62; margin-top: 5px;" id="changes-left-txt">Name/Avatar changes left: 2</p>
-            <p class="pro-email" id="profile-email">user@email.com</p>
-            <div class="pro-stats-row">
-                <div class="pro-stat-box"><span>Total Balance</span><h4>💎 <span id="profile-balance">0</span></h4></div>
-                <div class="pro-stat-box"><span>Total Invites</span><h4>👥 <span id="profile-ref-count">0</span></h4></div>
+    <!-- 4. NEW DARK PROFILE SCREEN (IMAGE MATCH) -->
+    <div id="profile-screen" class="main-container hidden app-screen pro-custom-theme">
+        <div class="profile-top-bg">
+            <div class="pro-top-header">
+                <h2>PROFILE</h2>
+                <button class="pro-settings-btn" id="edit-avatar-btn">Settings ⚙️</button>
+                <input type="file" id="avatar-upload" accept="image/*" class="hidden">
+            </div>
+            <div class="pro-user-section">
+                <div class="pro-avatar-ring">
+                    <img id="profile-avatar" src="" alt="Avatar">
+                </div>
+                <div class="pro-user-details">
+                    <h3 id="profile-name">User Name</h3>
+                    <div class="pro-sub-text">Current Balance</div>
+                    <div class="pro-balance-pill">
+                        <span>🪙</span> <span id="profile-balance">0</span>
+                    </div>
+                    <div class="pro-sub-text" style="margin-top:8px;">Login Info <span id="changes-left-txt" style="font-size:9px; color:#ff5e62; margin-left:5px;"></span></div>
+                    <div class="pro-login-info">
+                        <div class="pro-info-icon" id="edit-name-btn" title="Edit Name">📞</div>
+                        <div class="pro-info-icon" title="Email"><span id="profile-email" class="hidden"></span>✉️</div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="profile-options-container">
-            <div class="profile-option" onclick="openSubScreen('analytics-screen')">
-                <div class="po-left"><span class="po-icon">📊</span> <span>Earning Analytics</span></div><div class="po-right">❯</div>
+        <div class="pro-bottom-content">
+            <h4 class="pro-section-title">All time Statistics</h4>
+            <div class="pro-stats-grid">
+                <div class="pro-stat-card">
+                    <h4 id="stat-avail">0</h4>
+                    <p>Available to<br>Withdraw</p>
+                </div>
+                <div class="pro-stat-card">
+                    <h4>0</h4>
+                    <p>Pending<br>Earnings</p>
+                </div>
+                <div class="pro-stat-card">
+                    <h4 id="stat-total">0</h4>
+                    <p>Total<br>Earnings</p>
+                </div>
             </div>
-            <div class="profile-option" onclick="openSubScreen('transactions-screen'); loadTransactionsData();">
-                <div class="po-left"><span class="po-icon">🧾</span> <span>Earn Transactions</span></div><div class="po-right">❯</div>
-            </div>
-            <div class="profile-option" onclick="openSubScreen('network-screen'); loadMyReferrals();">
-                <div class="po-left"><span class="po-icon">🤝</span> <span>My Network</span></div><div class="po-right">❯</div>
-            </div>
-            <div class="profile-option" onclick="openSubScreen('redeem-history-screen'); loadProfileData();">
-                <div class="po-left"><span class="po-icon">🎁</span> <span>Redeem History</span></div><div class="po-right">❯</div>
+            
+            <button class="pro-performance-btn" onclick="openSubScreen('analytics-screen')">
+                SEE PERFORMANCE ANALYSIS <span style="font-size:18px;">➔</span>
+            </button>
+            
+            <div class="pro-list-container">
+                <div class="pro-list-item" onclick="openSubScreen('scratch-list-screen')">
+                    <span>My Giftcards</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" onclick="openSubScreen('redeem-history-screen'); loadProfileData();">
+                    <span>My History</span><div class="pro-history-badge">🪙</div>
+                </div>
+                <div class="pro-list-item" onclick="alert('Stats coming soon!')">
+                    <span>My Stats</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" onclick="openSubScreen('transactions-screen'); loadTransactionsData();">
+                    <span>My Transactions</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" onclick="switchTab('invite-screen', 'nav-invite'); loadMyReferrals();">
+                    <span>Refer & Earn</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" onclick="openSubScreen('network-screen'); loadMyReferrals();">
+                    <span>My Network</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" onclick="window.location.href='mailto:support@earnnova.com'">
+                    <span>Support & Help</span><div class="arrow-box">➔</div>
+                </div>
+                <div class="pro-list-item" id="profile-logout-btn">
+                    <span style="color:#ff5e62;">Logout From Account</span><div class="arrow-box" style="color:#ff5e62; background:rgba(255, 94, 98, 0.1);">➔</div>
+                </div>
             </div>
         </div>
-        <button id="profile-logout-btn" class="profile-logout-btn">🚪 Logout From Account</button>
+        <!-- Hidden elements to prevent JS errors -->
+        <span id="profile-ref-count" class="hidden">0</span>
     </div>
     
     <!-- 5. WITHDRAW SCREEN -->
@@ -500,9 +560,11 @@
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Redeem History</h2></div>
         <div id="history-list"><p style="text-align: center; color: #777; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
     </div>
+    
     <!-- Checkout Sub-Screen (From withdraw) -->
     <div id="brand-redeem-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', document.getElementById('nav-withdraw'))">← Back</button><h2>Checkout</h2></div>
+        <!-- FIXED: Back button now uses switchTab to restore Bottom Nav -->
+        <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', 'nav-withdraw')">← Back</button><h2>Checkout</h2></div>
         <div class="redeem-banner"><img id="br-img" src="" alt="Brand Logo"><h3 id="br-name">Brand Name</h3><div class="redeem-min-text">💎 <span id="br-min-gems">0</span> Gems required for <span id="br-cash">0</span></div></div>
         <div style="background: #ffffff; padding: 25px 20px; border-radius: 15px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <div id="input-group-upi" class="dynamic-input hidden"><div class="input-group"><label>Enter UPI ID</label><input type="text" id="redeem-upi" placeholder="e.g., username@bank" autocomplete="off"></div></div>
@@ -533,20 +595,24 @@
         }
         document.getElementById('roulette-wheel').innerHTML = wheelHtml;
 
-        // --- NAVIGATION & SIDEBAR LOGIC ---
-        window.switchTab = function(screenId, navEl) {
+        // --- NAVIGATION & SIDEBAR LOGIC (FIXED BOTTOM NAV BUG) ---
+        window.switchTab = function(screenId, navElId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            if(navEl) { document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); navEl.classList.add('active'); }
+            document.getElementById('global-bottom-nav').style.display = 'flex'; // Fix: Always show on switch
+            if(navElId) { 
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); 
+                const el = typeof navElId === 'string' ? document.getElementById(navElId) : navElId;
+                if(el) el.classList.add('active'); 
+            }
         };
         window.openSubScreen = function(screenId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            document.getElementById('global-bottom-nav').style.display = 'none';
+            document.getElementById('global-bottom-nav').style.display = 'none'; // Hide when in sub-screen
         };
         window.closeSubScreen = function() {
-            switchTab('dashboard-screen', document.getElementById('nav-home'));
-            document.getElementById('global-bottom-nav').style.display = 'flex';
+            switchTab('dashboard-screen', 'nav-home');
         };
         
         setInterval(() => {
@@ -570,7 +636,7 @@
         if(openSidebarBtn) openSidebarBtn.addEventListener('click', openSidebar); 
         if(closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar); 
         if(sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
-        document.getElementById('side-profile').addEventListener('click', () => { closeSidebar(); switchTab('profile-screen', document.getElementById('nav-profile')); });
+        document.getElementById('side-profile').addEventListener('click', () => { closeSidebar(); switchTab('profile-screen', 'nav-profile'); });
         
         document.getElementById('login-btn').addEventListener('click', () => {
             const termsBox = document.getElementById('terms-checkbox'); const termsContainer = document.getElementById('terms-container');
@@ -591,7 +657,7 @@
                     const docSnap = await getDoc(doc(db, 'users', user.uid));
                     if (docSnap.exists()) { 
                         document.getElementById('onboarding-screen').classList.add('hidden'); 
-                        switchTab('dashboard-screen', document.getElementById('nav-home')); 
+                        switchTab('dashboard-screen', 'nav-home'); 
                         startLiveSnapshot(user); 
                     } else { 
                         document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
@@ -636,7 +702,7 @@
                 alert("Welcome to EarnNova Pro! 🎉"); 
                 document.getElementById('onboarding-screen').classList.add('hidden'); 
                 document.getElementById('global-bottom-nav').style.display = 'flex';
-                switchTab('dashboard-screen', document.getElementById('nav-home')); 
+                switchTab('dashboard-screen', 'nav-home'); 
                 startLiveSnapshot(currentUser);
             } catch (error) { alert("Registration failed! Please try again."); }
             btn.innerText = "Complete Registration"; btn.disabled = false;
@@ -648,7 +714,11 @@
                     userFullData = docSnap.data();
                     currentBalance = userFullData.balance || 0; 
                     uiBalance.innerText = currentBalance;
+                    
+                    // NEW DARK PROFILE DATA SYNC
                     document.getElementById('profile-balance').innerText = currentBalance;
+                    document.getElementById('stat-avail').innerText = currentBalance;
+                    document.getElementById('stat-total').innerText = userFullData.totalGemsEarned || 0;
                     
                     document.getElementById('my-referral-code').innerText = userFullData.refCode || "ERROR";
                     
@@ -656,12 +726,12 @@
                         document.getElementById('profile-ref-count').innerText = userFullData.referralCount || 0;
                     }
                     
-                    document.getElementById('profile-name').innerText = userFullData.name || "User";
+                    document.getElementById('profile-name').innerHTML = `${userFullData.name || "User"} <span style="font-size:12px; cursor:pointer;" id="edit-name-btn-inline">✏️</span>`;
                     document.getElementById('profile-email').innerText = user.email || "No Email";
                     document.getElementById('profile-avatar').src = userFullData.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${userFullData.name}&backgroundColor=108975`;
                     
                     let changesLeft = 2 - (userFullData.nameChanges || 0);
-                    document.getElementById('changes-left-txt').innerText = `Name/Avatar changes left: ${changesLeft < 0 ? 0 : changesLeft}`;
+                    document.getElementById('changes-left-txt').innerText = `(${changesLeft < 0 ? 0 : changesLeft} changes left)`;
                     
                     let totalEarned = userFullData.totalGemsEarned || 0;
                     let currentProgress = totalEarned % 100;
@@ -682,6 +752,17 @@
                         document.getElementById('scratch-badge').classList.add('hidden');
                         document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#777; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
                     }
+
+                    // Attach inline edit name button logic since it's rewritten dynamically
+                    document.getElementById('edit-name-btn-inline').addEventListener('click', async () => { 
+                        let usedChanges = userFullData.nameChanges || 0;
+                        if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
+                        const newName = prompt("Enter your new name:", userFullData.name); 
+                        if (newName && newName.trim() !== "" && newName !== userFullData.name) { 
+                            await updateDoc(doc(db, 'users', currentUser.uid), { name: newName, nameChanges: increment(1) }); 
+                            alert("Name updated successfully!");
+                        } 
+                    });
                 }
             });
         }
@@ -867,7 +948,7 @@
             try {
                 await updateDoc(doc(db, 'users', currentUser.uid), { balance: increment(-gemsInput) });
                 await addDoc(collection(db, 'withdrawals'), { userId: currentUser.uid, name: currentUser.displayName || "User", amount: gemsInput, method: actMethod, details: finalDetails, status: "Pending", timestamp: serverTimestamp() });
-                alert(`✅ Withdrawal requested successfully!`); switchTab('profile-screen', document.getElementById('nav-profile')); document.getElementById('global-bottom-nav').style.display = 'flex';
+                alert(`✅ Withdrawal requested successfully!`); switchTab('profile-screen', 'nav-profile');
             } catch (e) { alert("Error submitting request! Please try again."); }
             btn.innerText = "Proceed to Transfer"; btn.disabled = false;
         });

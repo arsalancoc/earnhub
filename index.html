@@ -157,41 +157,42 @@
         .lb-bottom-tabs { display: flex; background: #f9f9f9; border-radius: 12px; padding: 6px; margin-top: 15px; margin-bottom: 15px; border: 1px solid #eee;} .lb-b-tab { flex: 1; padding: 10px 0; text-align: center; background: transparent; border: none; color: #777; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s;} .lb-b-tab.active { background: #ffffff; color: #111; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .list-header { display: grid; grid-template-columns: 50px 1fr 80px; padding: 0 15px 10px 15px; border-bottom: 1px solid #eee; color: #777; font-size: 11px; font-weight: bold; letter-spacing: 1px; } .list-container { padding-top: 10px; padding-bottom: 20px;} .list-row { display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; background: #ffffff; border: 1px solid #f0f0f0; transition: 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02); } .list-row:hover { background: #f4fbfa; border-color: #e0f2f0;} .row-rank { font-size: 14px; font-weight: bold; color: #777; } .row-user { display: flex; align-items: center; gap: 12px; } .row-avatar { width: 35px; height: 35px; border-radius: 50%; background: #eee; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } .row-name { font-size: 14px; color: #111; font-weight: 500; } .row-score { font-size: 14px; font-weight: bold; color: #108975; text-align: right; }
         
-        /* --- PRO CUSTOM THEME FOR PROFILE PAGE (EXACT IMAGE MATCH) --- */
-        .pro-custom-theme { background: #000000 !important; padding: 0 !important; max-width: 100% !important; border: none !important; box-shadow: none !important; }
-        .profile-top-bg { background: #170b2b; padding: 20px 20px 30px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* --- PRO CUSTOM THEME FOR PROFILE PAGE (FIXED LIGHT THEME) --- */
+        .profile-top-bg { background: transparent; padding: 10px 0 20px 0; border-bottom: 1px solid #eee; }
         .pro-top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-top:10px;}
-        .pro-top-header h2 { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
-        .pro-settings-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; border: none; cursor: pointer; }
+        .pro-top-header h2 { font-size: 16px; font-weight: 800; color: #111; letter-spacing: 1px; text-transform: uppercase; }
+        .pro-settings-btn { background: #f0fafa; color: #108975; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; border: 1px solid #e0f2f0; cursor: pointer; transition: 0.2s;}
+        .pro-settings-btn:hover { background: #e0f2f0; }
         
         .pro-user-section { display: flex; align-items: center; gap: 20px; }
-        .pro-avatar-ring { width: 85px; height: 85px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, #a88deb, #e0a3f8); display: flex; justify-content: center; align-items: center; }
-        .pro-avatar-ring img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid #170b2b; object-fit: cover; background: #222; }
+        /* AVATAR BUG FIX */
+        .pro-avatar-ring { width: 85px; height: 85px; min-width: 85px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, #108975, #4ab4a6); display: flex; justify-content: center; align-items: center; }
+        .pro-avatar-ring img { width: 100%; height: 100%; border-radius: 50%; border: 3px solid #fff; object-fit: cover; background: #fff; }
         
         .pro-user-details { display: flex; flex-direction: column; gap: 4px; }
-        .pro-user-details h3 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
-        .pro-sub-text { font-size: 10px; color: #888; font-weight: 600; margin-top: 4px; }
+        .pro-user-details h3 { font-size: 20px; font-weight: 800; color: #111; letter-spacing: 0.5px; }
+        .pro-sub-text { font-size: 10px; color: #777; font-weight: 600; margin-top: 4px; }
         
-        .pro-balance-pill { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; width: fit-content; }
-        .pro-balance-pill span { color: #fff; font-size: 16px; font-weight: 900; }
+        .pro-balance-pill { background: #f0fafa; padding: 5px 15px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; width: fit-content; border: 1px solid #e0f2f0;}
+        .pro-balance-pill span { color: #108975; font-size: 16px; font-weight: 900; }
         
         .pro-login-info { display: flex; gap: 10px; margin-top: 2px; }
-        .pro-info-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; justify-content: center; align-items: center; color: #ccc; font-size: 14px; cursor: pointer; }
+        .pro-info-icon { width: 32px; height: 32px; border-radius: 8px; background: #fff; border: 1px solid #eee; display: flex; justify-content: center; align-items: center; color: #555; font-size: 14px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
         
-        .pro-bottom-content { padding: 20px; padding-bottom: 110px; background: #050505; min-height: 70vh; }
-        .pro-section-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        .pro-bottom-content { padding: 20px 0 110px 0; background: transparent; }
+        .pro-section-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 15px; }
         
         .pro-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
-        .pro-stat-card { background: #181818; border-radius: 12px; padding: 15px 5px; text-align: center; border: 1px solid #222; display: flex; flex-direction: column; justify-content: center;}
-        .pro-stat-card h4 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 5px; }
-        .pro-stat-card p { font-size: 10px; color: #888; line-height: 1.3; font-weight: 600; }
+        .pro-stat-card { background: #fff; border-radius: 12px; padding: 15px 5px; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+        .pro-stat-card h4 { font-size: 18px; font-weight: 900; color: #111; margin-bottom: 5px; }
+        .pro-stat-card p { font-size: 10px; color: #777; line-height: 1.3; font-weight: 600; }
         
-        .pro-performance-btn { width: 100%; background: #6b21ff; color: #fff; border: none; padding: 16px 20px; border-radius: 12px; font-size: 14px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(107, 33, 255, 0.2); text-transform: uppercase; letter-spacing: 0.5px;}
+        .pro-performance-btn { width: 100%; background: linear-gradient(135deg, #108975, #2cb4a1); color: #fff; border: none; padding: 16px 20px; border-radius: 12px; font-size: 14px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(16, 137, 117, 0.3); text-transform: uppercase; letter-spacing: 0.5px;}
         
         .pro-list-container { display: flex; flex-direction: column; gap: 12px; }
-        .pro-list-item { background: #151515; border-radius: 12px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid #222; position: relative; overflow: hidden;}
-        .pro-list-item span { font-size: 13px; font-weight: 700; color: #fff; position: relative; z-index: 2;}
-        .pro-list-item .arrow-box { width: 26px; height: 26px; background: rgba(255,255,255,0.08); border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #888; font-size: 12px; font-weight: bold; position: relative; z-index: 2;}
+        .pro-list-item { background: #fff; border-radius: 12px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid #eee; position: relative; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        .pro-list-item span { font-size: 13px; font-weight: 700; color: #333; position: relative; z-index: 2;}
+        .pro-list-item .arrow-box { width: 26px; height: 26px; background: #f4fbfa; border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #108975; font-size: 12px; font-weight: bold; position: relative; z-index: 2;}
         
         .pro-history-badge { position: absolute; right: -10px; top: 0; height: 100%; width: 65px; background: #ffc107; display: flex; justify-content: center; align-items: center; border-radius: 30px 0 0 30px; font-size: 20px; z-index: 1;}
         
@@ -223,7 +224,7 @@
         .login-box { background-color: #ffffff; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #555; margin-top: 15px; text-align: left;} .input-group select, .input-group input { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #ddd; background-color: #fff; color: #111; font-size: 15px; transition: 0.3s;} .input-group input:focus { border-color: #108975; outline: none; box-shadow: 0 0 10px rgba(16,137,117,0.1); }
         .submit-btn { background: linear-gradient(135deg, #108975, #2cb4a1); width: 100%; border: none; border-radius: 10px; color: white; padding: 15px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 25px; transition: 0.3s; box-shadow: 0 4px 15px rgba(16,137,117,0.3);} .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16,137,117,0.4);}
-        .voucher-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; } .voucher-card { background-color: #ffffff; border-radius: 16px; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; position: relative;} .voucher-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(16,137,117,0.15); border-color: #108975; } .voucher-card img { width: 85%; max-height: 45px; object-fit: contain; } .voucher-title { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; margin-top: 8px;} .voucher-card.dark-bg { background-color: #f9f9f9; border: 1px solid #eee;} .voucher-card.dark-bg .voucher-title { color: #333; } .voucher-card.dark-bg:hover {border-color: #108975;}
+        .voucher-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; } .voucher-card { background-color: #ffffff; border-radius: 16px; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; position: relative;} .voucher-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(16,137,117,0.15); border-color: #108975; } .voucher-card img { width: 85%; max-height: 45px; object-fit: contain; } .voucher-title { font-size: 11px; font-weight: bold; color: #333; text-transform: uppercase; margin-top: 8px; text-align: center;} .voucher-card.dark-bg { background-color: #f9f9f9; border: 1px solid #eee;} .voucher-card.dark-bg .voucher-title { color: #333; } .voucher-card.dark-bg:hover {border-color: #108975;}
         .redeem-banner { background: #ffffff; border-radius: 15px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid #eee; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); } .redeem-banner img { max-height: 60px; max-width: 150px; margin-bottom: 15px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));} .redeem-banner h3 { font-size: 22px; color: #111; margin-bottom: 5px; } .redeem-min-text { background: #f0fafa; border: 1px solid #e0f2f0; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #108975; display: inline-flex; align-items: center; gap: 5px;}
     </style>
 </head>
@@ -416,8 +417,8 @@
         <div class="list-container" id="leaderboard-list"></div>
     </div>
     
-    <!-- 4. NEW DARK PROFILE SCREEN (IMAGE MATCH) -->
-    <div id="profile-screen" class="main-container hidden app-screen pro-custom-theme">
+    <!-- 4. PROFILE SCREEN (UPDATED LIGHT TEAL THEME & AVATAR FIX) -->
+    <div id="profile-screen" class="main-container hidden app-screen">
         <div class="profile-top-bg">
             <div class="pro-top-header">
                 <h2>PROFILE</h2>
@@ -491,19 +492,32 @@
                 </div>
             </div>
         </div>
-        <!-- Hidden elements to prevent JS errors -->
         <span id="profile-ref-count" class="hidden">0</span>
     </div>
     
-    <!-- 5. WITHDRAW SCREEN -->
+    <!-- 5. WITHDRAW SCREEN (VOUCHERS TOP BUTTON ADDED & NEW CARDS) -->
     <div id="withdraw-screen" class="main-container hidden app-screen">
-        <div class="main-page-header"><h2>Redeem Rewards</h2></div>
+        <div class="sub-header" style="justify-content: space-between; margin-bottom: 25px;">
+            <h2 style="text-align: left; padding: 0;">Redeem Rewards</h2>
+            <button onclick="openSubScreen('redeem-history-screen'); loadProfileData();" style="background:#108975; color:#fff; border:none; padding:8px 15px; border-radius:12px; font-size:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,137,117,0.3);">My Vouchers 🎟️</button>
+        </div>
         <p style="font-size: 12px; color: #777; margin-bottom: 15px; text-transform: uppercase; font-weight: bold;">Select Withdraw Method</p>
+        
         <div class="voucher-grid">
+            <!-- ORIGINAL 4 -->
             <div class="voucher-card" data-method="UPI" data-req="upi" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" style="max-height:35px;"><span class="voucher-title">UPI Transfer</span></div>
             <div class="voucher-card" data-method="Google Play" data-req="email" data-min="450" data-cash="₹30" data-img="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play"><span class="voucher-title">Google Play</span></div>
             <div class="voucher-card" data-method="Amazon Gift Card" data-req="email" data-min="300" data-cash="₹20" data-img="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" style="background-color: #FFF3E0;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon"><span class="voucher-title">Amazon</span></div>
             <div class="voucher-card dark-bg" data-method="Uber Voucher" data-req="email" data-min="750" data-cash="₹50" data-img="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg" alt="Uber" style="filter: invert(1);"><span class="voucher-title">Uber</span></div>
+            <!-- NEW 8 FAMOUS CARDS -->
+            <div class="voucher-card" data-method="Roblox Gift Card" data-req="email" data-min="500" data-cash="400 Robux" data-img="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" alt="Roblox" style="max-height:35px;"><span class="voucher-title">Roblox</span></div>
+            <div class="voucher-card dark-bg" data-method="Steam Wallet" data-req="email" data-min="800" data-cash="$5 Steam" data-img="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam" style="max-height:35px;"><span class="voucher-title">Steam</span></div>
+            <div class="voucher-card" data-method="Spotify Premium" data-req="email" data-min="600" data-cash="1 Month" data-img="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" style="max-height:35px;"><span class="voucher-title">Spotify</span></div>
+            <div class="voucher-card dark-bg" data-method="Netflix" data-req="email" data-min="1000" data-cash="1 Month" data-img="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" style="max-height:35px;"><span class="voucher-title">Netflix</span></div>
+            <div class="voucher-card" data-method="PlayStation" data-req="email" data-min="1500" data-cash="$10 PSN" data-img="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation" style="max-height:35px;"><span class="voucher-title">PlayStation</span></div>
+            <div class="voucher-card dark-bg" data-method="Xbox Live" data-req="email" data-min="1500" data-cash="$10 Xbox" data-img="https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg" alt="Xbox" style="max-height:35px;"><span class="voucher-title">Xbox Live</span></div>
+            <div class="voucher-card" data-method="PayPal" data-req="email" data-min="1000" data-cash="$5 Cash" data-img="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="max-height:35px;"><span class="voucher-title">PayPal</span></div>
+            <div class="voucher-card dark-bg" data-method="Apple Gift Card" data-req="email" data-min="800" data-cash="$5 Apple" data-img="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" style="max-height:35px;"><span class="voucher-title">Apple Store</span></div>
         </div>
     </div>
     
@@ -532,21 +546,16 @@
     </div>
 
     <!-- ================== PROFILE SUB-SCREENS ================== -->
-    <!-- Analytics -->
     <div id="analytics-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Analytics</h2></div>
         <div style="background: #ffffff; padding: 30px; border-radius: 20px; text-align: center; border: 1px dashed #108975; margin-top: 20px;">
             <span style="font-size: 40px;">📊</span><h3 style="margin-top: 10px; color:#111;">Analytics Dashboard</h3><p style="color:#666; font-size:12px; margin-top: 5px;">Charts and detailed statistics coming soon in the next update!</p>
         </div>
     </div>
-    <!-- Earn Transactions -->
     <div id="transactions-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
-        <div id="earn-tx-list">
-            <p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Loading transactions...</p>
-        </div>
+        <div id="earn-tx-list"><p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Loading transactions...</p></div>
     </div>
-    <!-- My Network (Referral Tree) -->
     <div id="network-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Network</h2></div>
         <div class="referral-stats-head" style="margin-top: 20px; border: none;">
@@ -555,7 +564,6 @@
         </div>
         <div id="referral-list"><p style="text-align: center; color: #777; font-size: 13px; margin-top: 20px;">Loading network...</p></div>
     </div>
-    <!-- Redeem History -->
     <div id="redeem-history-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Redeem History</h2></div>
         <div id="history-list"><p style="text-align: center; color: #777; font-size: 13px; margin-top: 20px;">Loading history...</p></div>
@@ -563,7 +571,6 @@
     
     <!-- Checkout Sub-Screen (From withdraw) -->
     <div id="brand-redeem-screen" class="main-container hidden app-screen">
-        <!-- FIXED: Back button now uses switchTab to restore Bottom Nav -->
         <div class="sub-header"><button class="back-btn" onclick="switchTab('withdraw-screen', 'nav-withdraw')">← Back</button><h2>Checkout</h2></div>
         <div class="redeem-banner"><img id="br-img" src="" alt="Brand Logo"><h3 id="br-name">Brand Name</h3><div class="redeem-min-text">💎 <span id="br-min-gems">0</span> Gems required for <span id="br-cash">0</span></div></div>
         <div style="background: #ffffff; padding: 25px 20px; border-radius: 15px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
@@ -587,7 +594,12 @@
         const uiBalance = document.getElementById('user-balance');
         let currentUser = null; let currentBalance = 0; let userFullData = {}; let actMethod = ""; let actReqType = ""; let actMin = 0;
         
-        // Populate Spin Wheel 1 to 10
+        // Consistent Local Time (IST/Local) generator
+        const getTodayDateString = () => {
+            const d = new Date();
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        };
+
         let wheelHtml = '';
         for(let i=1; i<=10; i++) {
             let deg = (i-1) * 36 + 18; 
@@ -599,17 +611,17 @@
         window.switchTab = function(screenId, navElId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            document.getElementById('global-bottom-nav').style.display = 'flex'; // Fix: Always show on switch
+            document.getElementById('global-bottom-nav').style.display = 'flex'; // ALWAYS visible
             if(navElId) { 
                 document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); 
                 const el = typeof navElId === 'string' ? document.getElementById(navElId) : navElId;
                 if(el) el.classList.add('active'); 
             }
         };
+        // Removed the line that hides bottom nav so it stays on checkout/sub-screens
         window.openSubScreen = function(screenId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
-            document.getElementById('global-bottom-nav').style.display = 'none'; // Hide when in sub-screen
         };
         window.closeSubScreen = function() {
             switchTab('dashboard-screen', 'nav-home');
@@ -678,7 +690,7 @@
             const usernameInput = document.getElementById('setup-username').value.trim(); const referralInput = document.getElementById('setup-referral').value.trim(); const btn = document.getElementById('submit-onboarding');
             if(!usernameInput) return alert("Please choose a valid username!"); btn.innerText = "Creating..."; btn.disabled = true;
             
-            const todayStr = new Date().toISOString().split('T')[0];
+            const todayStr = getTodayDateString();
             try {
                 await setDoc(doc(db, 'users', currentUser.uid), { 
                     name: usernameInput, balance: 0, photoURL: '', referredBy: referralInput || null, email: currentUser.email || "", 
@@ -715,16 +727,12 @@
                     currentBalance = userFullData.balance || 0; 
                     uiBalance.innerText = currentBalance;
                     
-                    // NEW DARK PROFILE DATA SYNC
                     document.getElementById('profile-balance').innerText = currentBalance;
                     document.getElementById('stat-avail').innerText = currentBalance;
                     document.getElementById('stat-total').innerText = userFullData.totalGemsEarned || 0;
                     
                     document.getElementById('my-referral-code').innerText = userFullData.refCode || "ERROR";
-                    
-                    if(document.getElementById('profile-ref-count').innerText === "0") {
-                        document.getElementById('profile-ref-count').innerText = userFullData.referralCount || 0;
-                    }
+                    if(document.getElementById('profile-ref-count').innerText === "0") document.getElementById('profile-ref-count').innerText = userFullData.referralCount || 0;
                     
                     document.getElementById('profile-name').innerHTML = `${userFullData.name || "User"} <span style="font-size:12px; cursor:pointer;" id="edit-name-btn-inline">✏️</span>`;
                     document.getElementById('profile-email').innerText = user.email || "No Email";
@@ -753,7 +761,6 @@
                         document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#777; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
                     }
 
-                    // Attach inline edit name button logic since it's rewritten dynamically
                     document.getElementById('edit-name-btn-inline').addEventListener('click', async () => { 
                         let usedChanges = userFullData.nameChanges || 0;
                         if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
@@ -767,7 +774,6 @@
             });
         }
         
-        // --- NAME / AVATAR CHANGE LIMITS ---
         document.getElementById('edit-name-btn').addEventListener('click', async () => { 
             let usedChanges = userFullData.nameChanges || 0;
             if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
@@ -792,7 +798,6 @@
             reader.readAsDataURL(file); 
         });
 
-        // --- FIXED EARN REWARD HELPER ---
         async function awardGems(amount, sourceText) {
             let oldTotal = userFullData.totalGemsEarned || 0;
             let newTotal = oldTotal + amount;
@@ -818,10 +823,7 @@
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
-            if (spins >= 40) {
-                alert("❌ You have reached your maximum limit of 40 spins!");
-                return;
-            }
+            if (spins >= 40) return alert("❌ You have reached your maximum limit of 40 spins!");
 
             const btn = document.getElementById('spin-action-btn');
             btn.disabled = true; btn.innerText = "SPINNING...";
@@ -858,11 +860,9 @@
         // --- CANVAS SCRATCH CARD LOGIC ---
         let scratchRewardVal = 0;
         let isScratched = false;
-        
         window.openScratchCard = function() {
             if(userFullData.availableScratches <= 0) return;
             isScratched = false;
-            
             let scratches = userFullData.totalScratches || 0;
             if (scratches > 0 && (scratches + 1) % 50 === 0) {
                 scratchRewardVal = Math.floor(Math.random() * 4) + 7;
@@ -881,44 +881,31 @@
             const canvas = document.getElementById('scratch-canvas');
             const ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = 'source-over';
-            
             let gradient = ctx.createLinearGradient(0, 0, 250, 250);
             gradient.addColorStop(0, "#108975"); gradient.addColorStop(1, "#2cb4a1");
             ctx.fillStyle = gradient; ctx.fillRect(0, 0, 250, 250);
-            
             ctx.fillStyle = "#ffffff"; ctx.font = "bold 20px Arial"; ctx.textAlign = "center";
             ctx.fillText("SCRATCH HERE", 125, 125);
-
-            let isDrawing = false;
-            let scratchedPixels = 0;
-
+            let isDrawing = false; let scratchedPixels = 0;
             function scratch(x, y) {
                 if(!isDrawing) return;
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI * 2); ctx.fill();
                 checkScratchCompletion();
             }
-
             canvas.onmousedown = (e) => { isDrawing = true; scratch(e.offsetX, e.offsetY); }
             canvas.onmousemove = (e) => scratch(e.offsetX, e.offsetY);
             canvas.onmouseup = () => isDrawing = false;
-            
             canvas.ontouchstart = (e) => { isDrawing = true; let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
             canvas.ontouchmove = (e) => { e.preventDefault(); let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
             canvas.ontouchend = () => isDrawing = false;
-            
             async function checkScratchCompletion() {
                 if (isScratched) return;
                 scratchedPixels++;
                 if (scratchedPixels > 40) { 
-                    isScratched = true;
-                    ctx.clearRect(0, 0, 250, 250);
+                    isScratched = true; ctx.clearRect(0, 0, 250, 250);
                     alert(`🎊 Congratulations! You scratched ${scratchRewardVal} Gems!`);
-                    
-                    await updateDoc(doc(db, 'users', currentUser.uid), { 
-                        availableScratches: increment(-1),
-                        totalScratches: increment(1)
-                    });
+                    await updateDoc(doc(db, 'users', currentUser.uid), { availableScratches: increment(-1), totalScratches: increment(1) });
                     await awardGems(scratchRewardVal, "Scratch Card");
                 }
             }
@@ -953,7 +940,7 @@
             btn.innerText = "Proceed to Transfer"; btn.disabled = false;
         });
 
-        // --- REFERRAL & NETWORK LOGIC ---
+        // --- REFERRAL LOGIC ---
         window.loadMyReferrals = async function() {
             if(!currentUser) return; const refList = document.getElementById('referral-list'); 
             refList.innerHTML = "<p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Fetching your invites...</p>";
@@ -1016,7 +1003,7 @@
             } catch (error) { txList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading transactions.</p>`; }
         }
 
-        // --- LEADERBOARD LOGIC ---
+        // --- LEADERBOARD LOGIC (0 GEMS & TIMEZONE FIX) ---
         let currentLbCat = 'earnings'; let currentLbTime = 'all';     
         const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
         const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
@@ -1024,6 +1011,7 @@
         lbDropToggle.addEventListener('click', (e) => { e.stopPropagation(); lbDropMenu.classList.toggle('show'); }); document.addEventListener('click', () => { lbDropMenu.classList.remove('show'); });
         document.querySelectorAll('.lb-drop-item').forEach(item => { item.addEventListener('click', (e) => { document.querySelectorAll('.lb-drop-item').forEach(i => i.classList.remove('active')); e.target.classList.add('active'); currentLbCat = e.target.getAttribute('data-cat'); lbActiveCat.innerText = currentLbCat === 'earnings' ? "Earnings" : "Referrals"; lbScoreTitle.innerText = currentLbCat === 'earnings' ? "COINS" : "INVITES"; window.loadAdvancedLeaderboard(); }); });
         document.querySelectorAll('.lb-b-tab').forEach(tab => { tab.addEventListener('click', (e) => { document.querySelectorAll('.lb-b-tab').forEach(t => t.classList.remove('active')); e.target.classList.add('active'); currentLbTime = e.target.getAttribute('data-time'); window.loadAdvancedLeaderboard(); }); });
+        
         setInterval(() => {
             if (currentLbTime === 'all') { lbTimer.style.display = 'none'; return; } else { lbTimer.style.display = 'block'; }
             const now = new Date(); let target = new Date();
@@ -1038,12 +1026,22 @@
                 let baseField = currentLbCat === 'referrals' ? "referralCount" : "balance";
                 let q = query(collection(db, "users"), orderBy(baseField, "desc"), limit(100));
                 const querySnapshot = await getDocs(q); 
-                let users = []; const todayStr = new Date().toISOString().split('T')[0];
+                let users = []; const todayStr = getTodayDateString();
                 querySnapshot.forEach(doc => {
                     let data = doc.data();
                     if (currentLbCat === 'earnings' && currentLbTime === 'today') { if (data.lastEarnDate !== todayStr) data.dailyEarn = 0; }
                     users.push(data);
                 });
+                
+                // FILTER: Hide anyone with 0 gems/referrals depending on category
+                users = users.filter(u => {
+                    if(currentLbCat === 'referrals') return (u.referralCount || 0) > 0;
+                    if(currentLbTime === 'today') return (u.dailyEarn || 0) > 0;
+                    if(currentLbTime === 'weekly') return (u.weeklyEarn || 0) > 0;
+                    if(currentLbTime === 'monthly') return (u.monthlyEarn || 0) > 0;
+                    return (u.balance || 0) > 0;
+                });
+
                 users.sort((a, b) => {
                     if(currentLbCat === 'referrals') return (b.referralCount || 0) - (a.referralCount || 0);
                     if(currentLbTime === 'today') return (b.dailyEarn || 0) - (a.dailyEarn || 0);
@@ -1051,7 +1049,7 @@
                     if(currentLbTime === 'monthly') return (b.monthlyEarn || 0) - (a.monthlyEarn || 0);
                     return (b.balance || 0) - (a.balance || 0);
                 });
-                if(currentLbTime !== 'all') { users = users.filter(u => { if(currentLbCat === 'referrals') return (u.referralCount || 0) > 0; if(currentLbTime === 'today') return (u.dailyEarn || 0) > 0; return true; }); }
+                
                 if(users.length === 0) { podiumContainer.innerHTML = "<p style='width:100%; text-align:center; margin-top:30px; font-weight:bold; color:#777;'>No data for selected period.</p>"; listContainer.innerHTML = ""; return; }
                 
                 const getFirstName = (u) => (u && u.name) ? u.name.split(' ')[0] : "User"; const getAvatar = (u) => (u && u.photoURL) ? u.photoURL : `https://api.dicebear.com/7.x/bottts/svg?seed=${(u&&u.name)?u.name.replace(/ /g, ''):'user'}&backgroundColor=108975`;

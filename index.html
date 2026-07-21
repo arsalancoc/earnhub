@@ -96,18 +96,16 @@
         .w-balance { font-size: 24px; font-weight: 900; color: #111; letter-spacing: 0.5px;}
         .w-btn-pro { background: linear-gradient(135deg, #108975, #2cb4a1); color: #fff; border: none; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 137, 117, 0.3); transition: 0.2s; position: relative; z-index: 100; }
         .w-btn-pro:active { transform: scale(0.95); }
-
-        /* --- PREMIUM LIVE EARNING TICKER (DARK SLIDE BAR EXACT MATCH) --- */
+        
+        /* --- PREMIUM LIVE EARNING TICKER (BUG FIXED, NO SCROLL JUMPS) --- */
         .ticker-wrapper { 
-            width: 100%; overflow: hidden; margin-bottom: 25px; position: relative; 
-            /* Notice: NO display: none here. So it will always take space. */
+            width: 100%; margin-bottom: 25px; display: flex; justify-content: center;
         } 
-        .ticker-track { display: flex; gap: 12px; width: max-content; animation: tickerScroll 20s linear infinite; }
-        .ticker-track:hover { animation-play-state: paused; }
         .ticker-item { 
             display: flex; align-items: center; background: #111111; padding: 10px 14px; 
-            border-radius: 16px; min-width: 220px; max-width: 250px; gap: 12px; 
+            border-radius: 16px; width: 100%; max-width: 480px; gap: 12px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.15); border: 1px solid #2a2a2a; 
+            transition: opacity 0.5s ease-in-out; opacity: 1;
         }
         .t-source-logo { 
             width: 34px; height: 34px; border-radius: 50%; object-fit: cover; 
@@ -122,7 +120,6 @@
             font-weight: 900; padding: 6px 12px; border-radius: 12px; display: flex; 
             align-items: center; gap: 4px; flex-shrink: 0; border: 1px solid rgba(255, 193, 7, 0.3); 
         }
-        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
         /* ADVANCED ACTION GRID */
         .adv-action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
@@ -171,7 +168,6 @@
         .lb-pro-container { background: #ffffff; border: 1px solid #eee; border-radius: 20px; padding: 25px 15px 0px 15px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative;}
         .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #108975; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #111; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: none;}
         #lb-timer { text-align: center; color: #108975; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: none; background: rgba(16,137,117, 0.1); padding: 6px; border-radius: 8px; border: 1px dashed rgba(16,137,117,0.3); width: fit-content; margin-left: auto; margin-right: auto;}
-        
         .lb-dropdown { position: absolute; top: 0; right: 0; z-index: 10;} .lb-drop-btn { background: #f0fafa; border: 1px solid #e0f2f0; color: #111; padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);} .lb-drop-btn:hover { background: #e0f2f0; } .lb-drop-menu { position: absolute; top: 100%; right: 0; margin-top: 5px; background: #ffffff; border: 1px solid #eee; border-radius: 12px; width: 120px; overflow: hidden; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); flex-direction: column;} .lb-drop-menu.show { display: flex; } .lb-drop-item { padding: 12px 15px; font-size: 13px; color: #555; font-weight: 600; cursor: pointer; transition: 0.2s;} .lb-drop-item:hover { background: #f4fbfa; color: #111; } .lb-drop-item.active { background: #108975; color: #fff; }
         
         .podium-pro-box { display: flex; justify-content: center; align-items: flex-end; gap: 5px; margin-top: 30px; margin-bottom: 0px; height: 180px; } 
@@ -263,7 +259,6 @@
         .ad-spinner { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #108975; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 20px;}
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .ad-close-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; transition: 0.3s; }
-
         /* CUSTOM HURRAY CONFETTI POPUP */
         #confetti-popup { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.65); backdrop-filter: blur(5px); z-index: 10000; display: flex; justify-content: center; align-items: center; flex-direction: column; }
         .cp-box { background: #ffffff; padding: 30px; border-radius: 24px; text-align: center; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2; width: 85%; max-width: 320px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 2px solid #fff; }
@@ -277,7 +272,6 @@
         .confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 1; }
         .confetti { position: absolute; width: 10px; height: 20px; background: red; animation: fall linear forwards; opacity: 0.9;}
         @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
-
         /* NOTIFICATION MODAL */
         #notification-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
         .notif-box { background: #fff; width: 90%; max-width: 350px; border-radius: 20px; overflow: hidden; animation: popIn 0.4s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
@@ -291,6 +285,19 @@
         .notif-footer { padding: 15px 20px; border-top: 1px solid #eee; text-align: center; background: #f9f9f9;}
         .close-notif-btn { background: #111; color: #fff; border: none; padding: 12px 25px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; width: 100%; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
         .close-notif-btn:active { transform: scale(0.95); }
+
+        /* ADVANCED TASKS UI (DARK THEME) CSS */
+        .partner-card { background: #1e1e2f; border-radius: 16px; padding: 18px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1.5px solid transparent; cursor: pointer; transition: all 0.3s ease; position: relative;}
+        .partner-card:active { transform: scale(0.92); }
+        .p-logo { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+        .p-name { font-size: 12px; font-weight: 600; color: #fff; }
+        .border-teal { border-color: #00d2ff; box-shadow: 0 0 12px rgba(0, 210, 255, 0.15); }
+        .border-purple { border-color: #8a2be2; box-shadow: 0 0 12px rgba(138, 43, 226, 0.15); }
+        .border-orange { border-color: #ffa500; box-shadow: 0 0 12px rgba(255, 165, 0, 0.15); }
+        .border-green { border-color: #00ff00; box-shadow: 0 0 12px rgba(0, 255, 0, 0.15); }
+        .border-red { border-color: #ff3333; box-shadow: 0 0 12px rgba(255, 51, 51, 0.15); }
+        .border-yellow { border-color: #ffcc00; box-shadow: 0 0 12px rgba(255, 204, 0, 0.15); }
+        .ribbon { background: #8a2be2; color: white; font-size: 9px; padding: 3px 8px; border-radius: 10px; margin-bottom: 8px; font-weight: bold; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); white-space: nowrap;}
     </style>
 </head>
 <body>
@@ -299,7 +306,7 @@
     <!-- GLOBAL BOTTOM NAV -->
     <div class="bottom-nav" id="global-bottom-nav" style="display: none;">
         <div class="nav-item active" id="nav-home" onclick="switchTab('dashboard-screen', 'nav-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Home</span></div>
-        <div class="nav-item" id="nav-task" onclick="alert('Tasks section coming soon!')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Tasks</span></div>
+        <div class="nav-item" id="nav-task" onclick="switchTab('tasks-screen', 'nav-task')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Tasks</span></div>
         <div class="nav-item" id="nav-invite" onclick="switchTab('invite-screen', 'nav-invite'); loadMyReferrals();"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="14" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="22"></line><path d="M19 8c0-3.3-2.7-6-6-6-1.5 0-2.8.5-3.8 1.4A5.9 5.9 0 0 0 5 8"></path></svg><span>Invite</span></div>
         <div class="nav-item" id="nav-withdraw" onclick="switchTab('withdraw-screen', 'nav-withdraw')"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg><span>Withdraw</span></div>
         <div class="nav-item" id="nav-profile" onclick="switchTab('profile-screen', 'nav-profile');"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></div>
@@ -382,7 +389,6 @@
                 </div>
             </div>
         </div>
-
         <!-- BANNERS -->
         <div class="banner-container">
             <div class="banner-track" id="auto-banner-track">
@@ -406,12 +412,15 @@
                 <button class="w-btn-pro" onclick="switchTab('withdraw-screen', 'nav-withdraw')">Withdraw Coins</button>
             </div>
         </div>
-
-        <!-- LIVE EARNING TICKER (REAL USERS ONLY, DEFAULT BLOCK SO NO CSS HIDES IT) -->
-        <div class="ticker-wrapper" id="ticker-wrapper" style="display: block;">
-            <div class="ticker-track" id="live-ticker-track">
-                <!-- Temporary loading text before Firebase connects -->
-                <div class="ticker-item"><div class="t-source-logo">🔄</div><div class="t-info"><span class="t-name">System</span><span class="t-source">Loading live earnings...</span></div></div>
+        <!-- FIXED LIVE EARNING TICKER -->
+        <div class="ticker-wrapper" id="ticker-wrapper">
+            <div class="ticker-item" id="live-ticker-item">
+                <div class="t-source-logo" id="t-logo">🚀</div>
+                <div class="t-info">
+                    <span class="t-name" id="t-name">System</span>
+                    <span class="t-source" id="t-msg">Loading live earnings...</span>
+                </div>
+                <div class="t-amt" id="t-amt">🪙 0</div>
             </div>
         </div>
         
@@ -423,7 +432,7 @@
             <div class="adv-card t-scratch" onclick="openSubScreen('scratch-list-screen')">
                 <div class="adv-icon-box">🎁</div><div class="adv-info"><h4>Scratch</h4><p>Lucky Cards</p></div>
             </div>
-            <div class="adv-card t-tasks" onclick="alert('Tasks loading...')">
+            <div class="adv-card t-tasks" onclick="switchTab('tasks-screen', 'nav-task')">
                 <div class="adv-icon-box">📋</div><div class="adv-info"><h4>Tasks</h4><p>Earn Daily</p></div>
             </div>
             <div class="adv-card t-ranks" onclick="switchTab('leaderboard-screen', null); loadAdvancedLeaderboard();">
@@ -438,6 +447,61 @@
         </div>
     </div>
     
+    <!-- TASKS SCREEN (DARK THEME) -->
+    <div id="tasks-screen" class="main-container hidden app-screen" style="background: #121212; min-height: 100vh; padding: 0; padding-bottom: 90px;">
+        <div class="task-header" style="display: flex; align-items: center; padding: 20px; background: #1a1a2e; position: sticky; top: 0; z-index: 10;">
+            <button class="back-btn" onclick="switchTab('dashboard-screen', 'nav-home')" style="background: rgba(255,255,255,0.1); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; margin-right: 15px; display:flex; justify-content:center; align-items:center;">❮</button>
+            <h2 style="color: white; font-size: 20px; margin:0; border: none; text-shadow: none;">Task Center</h2>
+        </div>
+
+        <!-- CATEGORY 1: OFFER WALLS -->
+        <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">⭐ Offer Walls</div>
+        <div class="partner-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 20px;">
+            <div class="partner-card border-teal" onclick="window.open('https://cpalead.com/your-link', '_blank')">
+                <div class="p-logo" style="color: #00d2ff;">CP</div>
+                <div class="p-name">CPALead</div>
+            </div>
+            <div class="partner-card border-purple">
+                <div class="ribbon">20% BONUS</div>
+                <div class="p-logo" style="color: #8a2be2;">TW</div>
+                <div class="p-name">TimeWall</div>
+            </div>
+            <div class="partner-card border-orange">
+                <div class="p-logo" style="color: #ffa500;">GD</div>
+                <div class="p-name">GrowDeck</div>
+            </div>
+        </div>
+
+        <!-- CATEGORY 2: SURVEY PARTNERS -->
+        <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">📝 Survey Partners</div>
+        <div class="partner-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 20px;">
+            <div class="partner-card border-yellow">
+                <div class="p-logo" style="color: #ffcc00;">IS</div>
+                <div class="p-name">Ipsos iSay</div>
+            </div>
+            <div class="partner-card border-green">
+                <div class="p-logo" style="color: #00ff00;">CS</div>
+                <div class="p-name">Cash Survey</div>
+            </div>
+            <div class="partner-card border-red">
+                <div class="p-logo" style="color: #ff3333;">PX</div>
+                <div class="p-name">Pollfish</div>
+            </div>
+        </div>
+
+        <!-- CATEGORY 3: WATCH ADS -->
+        <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">📺 Watch Ads & Earn</div>
+        <div class="partner-grid" style="display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 20px;">
+            <div class="partner-card border-teal" style="padding: 20px; flex-direction: row; gap: 15px; justify-content: flex-start; text-align: left;" onclick="alert('Adsterra Direct Link Opens Here')">
+                <div class="p-logo" style="margin: 0; font-size: 35px;">▶️</div>
+                <div>
+                    <div class="p-name" style="font-size: 16px;">Watch Video Ads</div>
+                    <p style="font-size: 11px; color:#888; margin-top:4px;">Earn up to 50 gems per ad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- SPIN AND WIN SCREEN -->
     <div id="spin-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Spin & Win</h2></div>
@@ -449,7 +513,6 @@
         <button class="spin-btn" id="spin-action-btn">SPIN NOW</button>
         <p id="spin-left-text" style="text-align:center; color:#108975; font-weight:bold; font-size:14px; margin-top: 5px;">Spins left: 40</p>
     </div>
-
     <!-- SCRATCH CARDS LIST SCREEN -->
     <div id="scratch-list-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Scratch Cards</h2></div>
@@ -462,7 +525,6 @@
             <p style="color:#777; font-size:12px; width:200%;">No scratch cards available right now.</p>
         </div>
     </div>
-
     <!-- ACTIVE SCRATCH SCREEN -->
     <div id="active-scratch-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="openSubScreen('scratch-list-screen')">← Back</button><h2>Scratch Card</h2></div>
@@ -617,7 +679,6 @@
             <div class="share-btn more" id="share-more"><div class="more-icon">•••</div><span>More</span></div>
         </div>
     </div>
-
     <!-- ================== PROFILE SUB-SCREENS ================== -->
     <div id="analytics-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Analytics</h2></div>
@@ -654,7 +715,6 @@
             <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
         </div>
     </div>
-
     <!-- AD SIMULATION OVERLAY FOR ADMOB -->
     <div id="ad-overlay" class="hidden">
         <div class="ad-close-btn" id="ad-timer-btn">Wait 5s...</div>
@@ -662,7 +722,6 @@
         <h2 style="font-size: 20px; margin-bottom: 10px;">Advertisement Playing...</h2>
         <p style="font-size: 13px; color: #aaa;">Please do not close the app. You will be rewarded soon.</p>
     </div>
-
     <!-- CUSTOM HURRAY CONFETTI POPUP -->
     <div id="confetti-popup" class="hidden">
         <div class="confetti-container" id="confetti-container"></div>
@@ -673,7 +732,6 @@
             <button onclick="closeConfetti()">Awesome</button>
         </div>
     </div>
-
     <!-- NOTIFICATION MODAL -->
     <div id="notification-modal" class="hidden">
         <div class="notif-box">
@@ -713,14 +771,12 @@
             const istDate = new Date(utc + (330 * 60000));
             return istDate.getFullYear() + '-' + String(istDate.getMonth() + 1).padStart(2, '0') + '-' + String(istDate.getDate()).padStart(2, '0');
         };
-
         let wheelHtml = '';
         for(let i=1; i<=10; i++) {
             let deg = (i-1) * 36 + 18; 
             wheelHtml += `<div class="wheel-segment" style="transform: rotate(${deg}deg)">${i}</div>`;
         }
         document.getElementById('roulette-wheel').innerHTML = wheelHtml;
-
         window.switchTab = function(screenId, navElId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
@@ -738,7 +794,6 @@
         window.closeSubScreen = function() {
             switchTab('dashboard-screen', 'nav-home');
         };
-
         window.openNotification = function() {
             document.getElementById('notification-modal').classList.remove('hidden');
             document.getElementById('bell-badge').classList.add('hidden');
@@ -808,7 +863,6 @@
                 document.getElementById('login-screen').classList.remove('hidden'); 
             }
         });
-
         document.getElementById('submit-onboarding').addEventListener('click', async () => {
             const usernameInput = document.getElementById('setup-username').value.trim(); const referralInput = document.getElementById('setup-referral').value.trim(); const btn = document.getElementById('submit-onboarding');
             if(!usernameInput) return alert("Please choose a valid username!"); btn.innerText = "Creating..."; btn.disabled = true;
@@ -842,7 +896,6 @@
             } catch (error) { alert("Registration failed! Please try again."); }
             btn.innerText = "Complete Registration"; btn.disabled = false;
         });
-
         window.showConfetti = function(amount, source) {
             document.getElementById('cp-amount').innerText = amount;
             document.getElementById('cp-source').innerText = source;
@@ -868,69 +921,73 @@
         }
 
         // ==========================================
-        //  FIXED TICKER LOGIC (Client-side filtering)
+        //  BUG FIXED: LIVE TICKER LOGIC
         // ==========================================
         function startLiveTicker() {
-            const tickerWrapper = document.getElementById('ticker-wrapper');
-            const tickerTrack = document.getElementById('live-ticker-track');
+            const tItem = document.getElementById('live-ticker-item');
+            const tLogo = document.getElementById('t-logo');
+            const tName = document.getElementById('t-name');
+            const tMsg = document.getElementById('t-msg');
+            const tAmt = document.getElementById('t-amt');
             
-            // Note: Removed `where("type", "==", "earn")` to bypass Firebase Composite Index requirement
-            const q = query(collection(db, "transactions"), orderBy("timestamp", "desc"), limit(15));
-            
+            let recentWinners = [];
+            // Dummy Data Fallback agar Firebase me koi data nahi ho
+            let dummyData = [
+                { userName: "Rahul S.", title: "Spin & Win", amount: 50 },
+                { userName: "Aman K.", title: "Scratch Card", amount: 120 },
+                { userName: "Priya V.", title: "Referral Reward", amount: 300 },
+                { userName: "Vikash99", title: "Watched Video Ad", amount: 15 }
+            ];
+            let tickerIndex = 0;
+
+            const q = query(collection(db, "transactions"), orderBy("timestamp", "desc"), limit(10));
             onSnapshot(q, (snapshot) => {
-                let html = "";
-                let count = 0;
-                
+                let temp = [];
                 snapshot.forEach(doc => {
                     let d = doc.data();
-                    
-                    // Client side filter
-                    if(d.type !== 'earn') return;
-                    count++;
-                    
-                    let fullName = d.userName || "User";
-                    let shortName = fullName.length > 9 ? fullName.substring(0, 9) + "..." : fullName;
-                    
-                    let sourceTitle = d.title || "Task";
-                    let displaySource = sourceTitle.length > 12 ? sourceTitle.substring(0, 12) + "..." : sourceTitle;
-                    
-                    let sourceLogo = "✅"; 
-                    if (sourceTitle.includes("Spin")) { sourceLogo = "🎡"; } 
-                    else if (sourceTitle.includes("Scratch")) { sourceLogo = "🎁"; } 
-                    else if (sourceTitle.includes("Referral") || sourceTitle.includes("Invite")) { sourceLogo = "👥"; } 
-                    else if (sourceTitle.includes("Ad") || sourceTitle.includes("Watch")) { sourceLogo = "▶️"; }
-
-                    html += `
-                    <div class="ticker-item">
-                        <div class="t-source-logo">${sourceLogo}</div>
-                        <div class="t-info">
-                            <span class="t-name">${shortName}</span>
-                            <span class="t-source">Earned By ${displaySource}</span>
-                        </div>
-                        <div class="t-amt">🪙 ${d.amount}</div>
-                    </div>`;
+                    if(d.type === 'earn') temp.push(d);
                 });
-                
-                // Agar ek bhi earning nahi hai, tabhi gayab karo
-                if(count === 0) {
-                    tickerWrapper.style.display = 'none';
-                    return;
+                if(temp.length > 0) {
+                    recentWinners = temp;
                 }
-                
-                // Data display karna
-                tickerWrapper.style.display = 'block';
-                // Multiply to create an infinite scroll loop safely
-                let finalHtml = html + html + html + html + html + html; 
-                tickerTrack.innerHTML = finalHtml; 
-
             }, (error) => {
-                console.error("Error loading live ticker: ", error);
-                // Fallback UI in case of database rule error
-                tickerWrapper.style.display = 'block';
-                tickerTrack.innerHTML = `<div class="ticker-item"><div class="t-source-logo">🚀</div><div class="t-info"><span class="t-name">System</span><span class="t-source">Earn More Gems!</span></div></div>`;
+                console.error("Ticker Error:", error);
             });
-        }
 
+            function cycleTicker() {
+                const dataToUse = recentWinners.length > 0 ? recentWinners : dummyData;
+                if (dataToUse.length === 0) return;
+
+                // Fade out
+                tItem.style.opacity = 0; 
+                
+                setTimeout(() => {
+                    const user = dataToUse[tickerIndex];
+                    let fullName = user.userName || "Pro User";
+                    tName.innerText = fullName.length > 12 ? fullName.substring(0, 12) + "..." : fullName;
+                    
+                    let src = user.title || "Task";
+                    tMsg.innerText = `Earned By ${src.length > 15 ? src.substring(0, 15) + "..." : src}`;
+                    
+                    let logo = "✅"; 
+                    if (src.includes("Spin")) logo = "🎡"; 
+                    else if (src.includes("Scratch")) logo = "🎁"; 
+                    else if (src.includes("Referral") || src.includes("Invite")) logo = "👥"; 
+                    else if (src.includes("Ad") || src.includes("Watch")) logo = "▶️";
+                    
+                    tLogo.innerText = logo;
+                    tAmt.innerText = `🪙 ${user.amount || 0}`;
+                    
+                    // Fade in
+                    tItem.style.opacity = 1; 
+                    tickerIndex = (tickerIndex + 1) % dataToUse.length;
+                }, 500); // Adhe second me info change hoke wapas ayegi
+            }
+
+            cycleTicker();
+            setInterval(cycleTicker, 3500); // Har 3.5 sec me data change hoga
+        }
+        
         function startLiveSnapshot(user) {
             onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
                 if (docSnap.exists()) {
@@ -973,7 +1030,6 @@
                         document.getElementById('scratch-badge').classList.add('hidden');
                         document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#777; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
                     }
-
                     document.getElementById('edit-name-btn-inline').addEventListener('click', async () => { 
                         let usedChanges = userFullData.nameChanges || 0;
                         if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
@@ -1010,7 +1066,6 @@
             }; 
             reader.readAsDataURL(file); 
         });
-
         async function awardGems(amount, sourceText) {
             let oldTotal = userFullData.totalGemsEarned || 0;
             let newTotal = oldTotal + amount;
@@ -1031,9 +1086,7 @@
                 updates.dailyEarn = amount;
                 updates.lastEarnDate = todayStr;
             }
-
             await updateDoc(doc(db, 'users', currentUser.uid), updates);
-
             await addDoc(collection(db, 'transactions'), {
                 userId: currentUser.uid, 
                 userName: userFullData.name || "User",
@@ -1043,12 +1096,10 @@
                 type: 'earn', 
                 timestamp: serverTimestamp()
             });
-
             showConfetti(amount, sourceText);
             
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
-
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
@@ -1058,7 +1109,6 @@
             timerBtn.style.background = "rgba(255,255,255,0.1)";
             timerBtn.onclick = null;
             timerBtn.style.cursor = "not-allowed";
-
             let adInterval = setInterval(() => {
                 timeLeft--;
                 if(timeLeft > 0) {
@@ -1075,12 +1125,10 @@
                 }
             }, 1000);
         }
-
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
             if (spins >= 40) return alert("❌ You have reached your maximum limit of 40 spins!");
-
             const btn = document.getElementById('spin-action-btn');
             btn.disabled = true; btn.innerText = "SPINNING...";
             
@@ -1093,7 +1141,6 @@
             let currentMod = currentRotation % 360;
             let diff = landAngle - currentMod;
             if (diff < 0) diff += 360;
-
             currentRotation += (5 * 360) + diff; 
             const wheel = document.getElementById('roulette-wheel');
             wheel.style.transform = `rotate(${currentRotation}deg)`;
@@ -1104,7 +1151,6 @@
                 btn.disabled = false; btn.innerText = "SPIN NOW";
             }, 4200);
         });
-
         let scratchRewardVal = 0;
         let isScratched = false;
         window.openScratchCard = function() {
@@ -1117,7 +1163,6 @@
             openSubScreen('active-scratch-screen');
             initCanvas();
         }
-
         function initCanvas() {
             const canvas = document.getElementById('scratch-canvas');
             const ctx = canvas.getContext('2d');
@@ -1178,7 +1223,6 @@
             } catch (e) { alert("Error submitting request! Please try again."); }
             btn.innerText = "Proceed to Transfer"; btn.disabled = false;
         });
-
         window.loadMyReferrals = async function() {
             if(!currentUser) return; const refList = document.getElementById('referral-list'); 
             refList.innerHTML = "<p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Fetching your invites...</p>";
@@ -1204,7 +1248,6 @@
         document.getElementById('share-tg').addEventListener('click', () => { window.open(`https://t.me/share/url?url=${encodeURIComponent(getShareUrl())}&text=${encodeURIComponent(getShareMessage())}`); });
         document.getElementById('share-link').addEventListener('click', () => { navigator.clipboard.writeText(getShareUrl()); alert("Referral Link Copied to Clipboard!"); });
         document.getElementById('share-more').addEventListener('click', async () => { if (navigator.share) { try { await navigator.share({ title: 'EarnNova Pro', text: getShareMessage(), url: getShareUrl() }); } catch (err) {} } else { alert("Native sharing is not supported on this browser."); } });
-
         window.loadProfileData = async function() {
             if(!currentUser) return; const historyList = document.getElementById('history-list'); historyList.innerHTML = "<p style='text-align: center; color: #777;'>Loading history...</p>";
             try {
@@ -1218,7 +1261,6 @@
                 }); historyList.innerHTML = html;
             } catch (error) { historyList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading history.</p>`; }
         }
-
         window.loadTransactionsData = async function() {
             if(!currentUser) return;
             const txList = document.getElementById('earn-tx-list');
@@ -1239,7 +1281,6 @@
                 txList.innerHTML = html;
             } catch (error) { txList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading transactions.</p>`; }
         }
-
         let currentLbCat = 'earnings'; let currentLbTime = 'all';     
         const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
         const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
@@ -1276,7 +1317,6 @@
                     if(currentLbTime === 'monthly') return (u.monthlyEarn || 0) > 0;
                     return (u.balance || 0) > 0;
                 });
-
                 users.sort((a, b) => {
                     if(currentLbCat === 'referrals') return (b.referralCount || 0) - (a.referralCount || 0);
                     if(currentLbTime === 'today') return (b.dailyEarn || 0) - (a.dailyEarn || 0);
@@ -1303,27 +1343,5 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
-    
-    <!-- ANTI-HACK SECURITY SCRIPT (Disabled for Testing) -->
-    <!--
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.onkeydown = function (e) {
-            if (e.keyCode == 123) return false; 
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; 
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
-        };
-        setInterval(function() {
-            const devtools = function() {};
-            devtools.toString = function() {
-                alert("⚠️ Security Warning: Malicious activity detected.");
-                window.location.href = "about:blank"; 
-            }
-            console.log('%c', devtools);
-        }, 2000);
-    </script>
-    -->
 </body>
 </html>

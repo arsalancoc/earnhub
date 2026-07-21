@@ -286,7 +286,6 @@
         .notif-footer { padding: 15px 20px; border-top: 1px solid #eee; text-align: center; background: #f9f9f9;}
         .close-notif-btn { background: #111; color: #fff; border: none; padding: 12px 25px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; width: 100%; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
         .close-notif-btn:active { transform: scale(0.95); }
-
         /* ADVANCED TASKS UI (DARK THEME) CSS */
         .partner-card { background: #1e1e2f; border-radius: 16px; padding: 18px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1.5px solid transparent; cursor: pointer; transition: all 0.3s ease; position: relative;}
         .partner-card:active { transform: scale(0.92); }
@@ -414,11 +413,6 @@
             </div>
         </div>
         
-        <!-- NATIVE BANNER AD INTEGRATION -->
-        <div style="background: #ffffff; padding: 15px; border-radius: 16px; margin-bottom: 25px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-    
-        </div>
-
         <!-- FIXED LIVE EARNING TICKER -->
         <div class="ticker-wrapper" id="ticker-wrapper">
             <div class="ticker-item" id="live-ticker-item">
@@ -460,7 +454,6 @@
             <button class="back-btn" onclick="switchTab('dashboard-screen', 'nav-home')" style="background: rgba(255,255,255,0.1); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; margin-right: 15px; display:flex; justify-content:center; align-items:center;">❮</button>
             <h2 style="color: white; font-size: 20px; margin:0; border: none; text-shadow: none;">Task Center</h2>
         </div>
-
         <!-- CATEGORY 1: OFFER WALLS -->
         <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">⭐ Offer Walls</div>
         <div class="partner-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 20px;">
@@ -478,7 +471,6 @@
                 <div class="p-name">GrowDeck</div>
             </div>
         </div>
-
         <!-- CATEGORY 2: SURVEY PARTNERS -->
         <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">📝 Survey Partners</div>
         <div class="partner-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 20px;">
@@ -495,7 +487,6 @@
                 <div class="p-name">Pollfish</div>
             </div>
         </div>
-
         <!-- CATEGORY 3: WATCH ADS -->
         <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">📺 Watch Ads & Earn</div>
         <div class="partner-grid" style="display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 20px;">
@@ -508,7 +499,6 @@
             </div>
         </div>
     </div>
-
     <!-- SPIN AND WIN SCREEN -->
     <div id="spin-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Spin & Win</h2></div>
@@ -610,7 +600,7 @@
             </button>
             
             <div class="pro-list-container">
-                <div class="pro-list-item" onclick="openSubScreen('scratch-list-screen')">
+                <div class="pro-list-item" onclick="switchTab('withdraw-screen', 'nav-withdraw')">
                     <span>My Giftcards</span><div class="arrow-box">➔</div>
                 </div>
                 <div class="pro-list-item" onclick="openSubScreen('redeem-history-screen'); loadProfileData();">
@@ -926,7 +916,8 @@
             document.getElementById('confetti-popup').classList.add('hidden');
             document.getElementById('confetti-container').innerHTML = '';
         }
-
+        
+        // --- REAL LIVE TICKER (WITHOUT DUMMY DATA) ---
         function startLiveTicker() {
             const tItem = document.getElementById('live-ticker-item');
             const tLogo = document.getElementById('t-logo');
@@ -934,57 +925,47 @@
             const tMsg = document.getElementById('t-msg');
             const tAmt = document.getElementById('t-amt');
             
-            let recentWinners = [];
-            let dummyData = [
-                { userName: "Rahul S.", title: "Spin & Win", amount: 50 },
-                { userName: "Aman K.", title: "Scratch Card", amount: 120 },
-                { userName: "Priya V.", title: "Referral Reward", amount: 300 },
-                { userName: "Vikash99", title: "Watched Video Ad", amount: 15 }
-            ];
+            let realDataList = [];
             let tickerIndex = 0;
-
-            const q = query(collection(db, "transactions"), orderBy("timestamp", "desc"), limit(10));
+            
+            const q = query(collection(db, "withdrawals"), orderBy("timestamp", "desc"), limit(10));
             onSnapshot(q, (snapshot) => {
                 let temp = [];
                 snapshot.forEach(doc => {
-                    let d = doc.data();
-                    if(d.type === 'earn') temp.push(d);
+                    temp.push(doc.data());
                 });
                 if(temp.length > 0) {
-                    recentWinners = temp;
+                    realDataList = temp;
                 }
             }, (error) => {
                 console.error("Ticker Error:", error);
             });
 
             function cycleTicker() {
-                const dataToUse = recentWinners.length > 0 ? recentWinners : dummyData;
-                if (dataToUse.length === 0) return;
-
+                if (realDataList.length === 0) {
+                    tName.innerText = "System";
+                    tMsg.innerText = "Waiting for first withdrawal...";
+                    tAmt.innerText = "🪙 0";
+                    return;
+                }
+                
                 tItem.style.opacity = 0; 
                 
                 setTimeout(() => {
-                    const user = dataToUse[tickerIndex];
-                    let fullName = user.userName || "Pro User";
+                    const user = realDataList[tickerIndex];
+                    let fullName = user.name || "Pro User";
                     tName.innerText = fullName.length > 12 ? fullName.substring(0, 12) + "..." : fullName;
                     
-                    let src = user.title || "Task";
-                    tMsg.innerText = `Earned By ${src.length > 15 ? src.substring(0, 15) + "..." : src}`;
+                    let src = user.method || "Reward";
+                    tMsg.innerText = `Redeemed ${src}`;
                     
-                    let logo = "✅"; 
-                    if (src.includes("Spin")) logo = "🎡"; 
-                    else if (src.includes("Scratch")) logo = "🎁"; 
-                    else if (src.includes("Referral") || src.includes("Invite")) logo = "👥"; 
-                    else if (src.includes("Ad") || src.includes("Watch")) logo = "▶️";
-                    
-                    tLogo.innerText = logo;
+                    tLogo.innerText = "💸";
                     tAmt.innerText = `🪙 ${user.amount || 0}`;
                     
                     tItem.style.opacity = 1; 
-                    tickerIndex = (tickerIndex + 1) % dataToUse.length;
+                    tickerIndex = (tickerIndex + 1) % realDataList.length;
                 }, 500);
             }
-
             cycleTicker();
             setInterval(cycleTicker, 3500);
         }
@@ -1101,14 +1082,12 @@
             
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
-
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
             
             const adsterraSmartLink = "https://www.effectivecpmnetwork.com/rnd56j9du7?key=b5f3f55ed7c70b960862f0769abcfca3";
             window.open(adsterraSmartLink, '_blank');
-
             adOverlay.classList.remove('hidden');
             let timeLeft = 5; 
             timerBtn.innerText = `Wait ${timeLeft}s...`;
@@ -1351,9 +1330,5 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
-    
-    <!-- ADSTERRA NATIVE BANNER & SMARTLINK SCRIPTS -->
-    <script src="https://pl30459767.effectivecpmnetwork.com/44/4b/70/444b7008a89d975d41554fc86bb81e31.js"></script>
-
 </body>
 </html>

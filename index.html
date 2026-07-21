@@ -716,12 +716,12 @@
             <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
         </div>
     </div>
-    <!-- AD SIMULATION OVERLAY FOR ADMOB -->
+    <!-- AD SIMULATION OVERLAY -->
     <div id="ad-overlay" class="hidden">
         <div class="ad-close-btn" id="ad-timer-btn">Wait 5s...</div>
         <div class="ad-spinner"></div>
-        <h2 style="font-size: 20px; margin-bottom: 10px;">Advertisement Playing...</h2>
-        <p style="font-size: 13px; color: #aaa;">Please do not close the app. You will be rewarded soon.</p>
+        <h2 style="font-size: 20px; margin-bottom: 10px;">Advertisement Loading...</h2>
+        <p style="font-size: 13px; color: #aaa;">Please wait while your offer opens. You will be rewarded soon.</p>
     </div>
     <!-- CUSTOM HURRAY CONFETTI POPUP -->
     <div id="confetti-popup" class="hidden">
@@ -932,7 +932,6 @@
             const tAmt = document.getElementById('t-amt');
             
             let recentWinners = [];
-            // Dummy Data Fallback agar Firebase me koi data nahi ho
             let dummyData = [
                 { userName: "Rahul S.", title: "Spin & Win", amount: 50 },
                 { userName: "Aman K.", title: "Scratch Card", amount: 120 },
@@ -959,7 +958,6 @@
                 const dataToUse = recentWinners.length > 0 ? recentWinners : dummyData;
                 if (dataToUse.length === 0) return;
 
-                // Fade out
                 tItem.style.opacity = 0; 
                 
                 setTimeout(() => {
@@ -979,14 +977,13 @@
                     tLogo.innerText = logo;
                     tAmt.innerText = `🪙 ${user.amount || 0}`;
                     
-                    // Fade in
                     tItem.style.opacity = 1; 
                     tickerIndex = (tickerIndex + 1) % dataToUse.length;
-                }, 500); // Adhe second me info change hoke wapas ayegi
+                }, 500);
             }
 
             cycleTicker();
-            setInterval(cycleTicker, 3500); // Har 3.5 sec me data change hoga
+            setInterval(cycleTicker, 3500);
         }
         
         function startLiveSnapshot(user) {
@@ -1102,16 +1099,24 @@
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
 
-        // PROFIT OPTIMIZED WATCH ADS LOGIC
+        // ==========================================================
+        // SMARTLINK INTEGRATED WATCH ADS LOGIC (DIRECT EARNING LINK)
+        // ==========================================================
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
+            
+            // Open Adsterra Smartlink in a new tab immediately or on claim
+            const adsterraSmartLink = "https://www.effectivecpmnetwork.com/rnd56j9du7?key=b5f3f55ed7c70b960862f0769abcfca3";
+            window.open(adsterraSmartLink, '_blank');
+
             adOverlay.classList.remove('hidden');
             let timeLeft = 5; 
             timerBtn.innerText = `Wait ${timeLeft}s...`;
             timerBtn.style.background = "rgba(255,255,255,0.1)";
             timerBtn.onclick = null;
             timerBtn.style.cursor = "not-allowed";
+            
             let adInterval = setInterval(() => {
                 timeLeft--;
                 if(timeLeft > 0) {
@@ -1123,7 +1128,7 @@
                     timerBtn.style.cursor = "pointer";
                     timerBtn.onclick = async function() {
                         adOverlay.classList.add('hidden');
-                        // REWARD SET TO 1 GEM TO KEEP OWNER PROFITABLE
+                        // Rewarding 1 Gem to keep owner fully profitable
                         await awardGems(1, "Watched Ads");
                     }
                 }
@@ -1348,9 +1353,5 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
-    
-    <!-- ADSTERRA AD SCRIPT -->
-    <script src="https://pl30459299.effectivecpmnetwork.com/78/af/51/78af516e05ccc57504cc183d3e4067b9.js"></script>
-
 </body>
 </html>

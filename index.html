@@ -413,6 +413,12 @@
                 <button class="w-btn-pro" onclick="switchTab('withdraw-screen', 'nav-withdraw')">Withdraw Coins</button>
             </div>
         </div>
+        
+        <!-- NATIVE BANNER AD INTEGRATION -->
+        <div style="background: #ffffff; padding: 15px; border-radius: 16px; margin-bottom: 25px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+            <div id="container-08cab2ef07c1c9441d3ba7e04f86ac24"></div>
+        </div>
+
         <!-- FIXED LIVE EARNING TICKER -->
         <div class="ticker-wrapper" id="ticker-wrapper">
             <div class="ticker-item" id="live-ticker-item">
@@ -716,7 +722,7 @@
             <button id="final-submit-redeem" class="submit-btn">Proceed to Transfer</button>
         </div>
     </div>
-    <!-- AD SIMULATION OVERLAY -->
+    <!-- AD OVERLAY -->
     <div id="ad-overlay" class="hidden">
         <div class="ad-close-btn" id="ad-timer-btn">Wait 5s...</div>
         <div class="ad-spinner"></div>
@@ -921,9 +927,6 @@
             document.getElementById('confetti-container').innerHTML = '';
         }
 
-        // ==========================================
-        //  BUG FIXED: LIVE TICKER LOGIC
-        // ==========================================
         function startLiveTicker() {
             const tItem = document.getElementById('live-ticker-item');
             const tLogo = document.getElementById('t-logo');
@@ -1099,14 +1102,10 @@
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
 
-        // ==========================================================
-        // SMARTLINK INTEGRATED WATCH ADS LOGIC (DIRECT EARNING LINK)
-        // ==========================================================
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
             
-            // Open Adsterra Smartlink in a new tab immediately or on claim
             const adsterraSmartLink = "https://www.effectivecpmnetwork.com/rnd56j9du7?key=b5f3f55ed7c70b960862f0769abcfca3";
             window.open(adsterraSmartLink, '_blank');
 
@@ -1128,7 +1127,6 @@
                     timerBtn.style.cursor = "pointer";
                     timerBtn.onclick = async function() {
                         adOverlay.classList.add('hidden');
-                        // Rewarding 1 Gem to keep owner fully profitable
                         await awardGems(1, "Watched Ads");
                     }
                 }
@@ -1353,5 +1351,10 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
+    
+    <!-- ADSTERRA NATIVE BANNER & SMARTLINK SCRIPTS -->
+    <script src="https://pl30459767.effectivecpmnetwork.com/44/4b/70/444b7008a89d975d41554fc86bb81e31.js"></script>
+    <script async="async" data-cfasync="false" src="https://pl30459768.effectivecpmnetwork.com/08cab2ef07c1c9441d3ba7e04f86ac24/invoke.js"></script>
+
 </body>
 </html>

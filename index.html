@@ -461,7 +461,7 @@
                 <div class="p-logo" style="color: #00d2ff;">CP</div>
                 <div class="p-name">CPALead</div>
             </div>
-            <div class="partner-card border-purple">
+            <div class="partner-card border-purple" onclick="openTimeWall()">
                 <div class="ribbon">20% BONUS</div>
                 <div class="p-logo" style="color: #8a2be2;">TW</div>
                 <div class="p-name">TimeWall</div>
@@ -487,7 +487,6 @@
                 <div class="p-name">Pollfish</div>
             </div>
         </div>
-
         <!-- CATEGORY: NEW PREMIUM APPS -->
         <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">🚀 Premium Offers</div>
         <div class="partner-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 20px;">
@@ -498,13 +497,11 @@
                 <div class="p-logo" style="color: #00d2ff;">AG</div>
                 <div class="p-name">AdGem</div>
             </div>
-
             <!-- App 2: Monlix -->
             <div class="partner-card border-purple" onclick="window.open('YOUR_MONLIX_LINK_HERE', '_blank')">
                 <div class="p-logo" style="color: #8a2be2;">MX</div>
                 <div class="p-name">Monlix</div>
             </div>
-
             <!-- App 3: BitLabs (Surveys/Tasks) -->
             <div class="partner-card border-orange" onclick="window.open('YOUR_BITLABS_LINK_HERE', '_blank')">
                 <div class="ribbon" style="background: #00cc66;">HIGH PAY</div>
@@ -966,7 +963,6 @@
             }, (error) => {
                 console.error("Ticker Error:", error);
             });
-
             function cycleTicker() {
                 if (realDataList.length === 0) {
                     tName.innerText = "System";
@@ -1355,6 +1351,16 @@
                 listContainer.innerHTML = listHtml;
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
+
+        // TIMEWALL INTEGRATION CODE
+        window.openTimeWall = function() {
+            if (!currentUser) {
+                alert("❌ Please login first to access offers!");
+                return;
+            }
+            let twLink = `https://timewall.io/users/login?oid=4f03f15e6a66483b&uid=${currentUser.uid}&tab=surveys`;
+            window.open(twLink, '_blank');
+        };
     </script>
 </body>
 </html>

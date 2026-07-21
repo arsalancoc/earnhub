@@ -17,6 +17,14 @@ const db = getFirestore();
 module.exports = async (req, res) => {
     const uid = req.query.uid;
     const amount = parseInt(req.query.amount);
+    const secret = req.query.secret; // Naya Security Check
+
+    // APNI SECRET KEY YAHAN SET KAREIN (Kisi ko mat batana)
+    const MY_SECRET_KEY = "EarnNovaPro@2026_Secure"; 
+
+    if (secret !== MY_SECRET_KEY) {
+        return res.status(403).send("Error: Unauthorized Access!");
+    }
 
     if (!uid || isNaN(amount)) {
         return res.status(400).send("Error: Invalid Parameters");
@@ -25,8 +33,7 @@ module.exports = async (req, res) => {
     try {
         const userRef = db.collection("users").doc(uid);
         
-        // 'update' ki jagah 'set' aur 'merge: true' lagaya hai
-        // Ab agar document nahi bhi hoga toh naya ban jayega
+        // Update user balance safely
         await userRef.set({
             balance: FieldValue.increment(amount)
         }, { merge: true });
@@ -37,7 +44,6 @@ module.exports = async (req, res) => {
         
     } catch (error) {
         console.error("Firebase Update Error: ", error);
-        // Taki agar agli baar error aaye, toh browser par exact reason dikhe
         return res.status(500).send("DB Error: " + error.message);
     }
 };

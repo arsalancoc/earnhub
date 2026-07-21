@@ -97,7 +97,7 @@
         .w-btn-pro { background: linear-gradient(135deg, #108975, #2cb4a1); color: #fff; border: none; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 137, 117, 0.3); transition: 0.2s; position: relative; z-index: 100; }
         .w-btn-pro:active { transform: scale(0.95); }
         
-        /* --- PREMIUM LIVE EARNING TICKER (BUG FIXED, NO SCROLL JUMPS) --- */
+        /* --- PREMIUM LIVE EARNING TICKER (BUG FIXED) --- */
         .ticker-wrapper { 
             width: 100%; margin-bottom: 25px; display: flex; justify-content: center;
         } 
@@ -168,6 +168,7 @@
         .lb-pro-container { background: #ffffff; border: 1px solid #eee; border-radius: 20px; padding: 25px 15px 0px 15px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative;}
         .lb-pro-title { text-align: center; margin-bottom: 15px; position: relative;} .lb-pro-title span { font-size: 12px; font-weight: 900; color: #108975; text-transform: uppercase; letter-spacing: 1.5px; } .lb-pro-title h2 { font-size: 24px; font-weight: 900; color: #111; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; text-shadow: none;}
         #lb-timer { text-align: center; color: #108975; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: none; background: rgba(16,137,117, 0.1); padding: 6px; border-radius: 8px; border: 1px dashed rgba(16,137,117,0.3); width: fit-content; margin-left: auto; margin-right: auto;}
+        
         .lb-dropdown { position: absolute; top: 0; right: 0; z-index: 10;} .lb-drop-btn { background: #f0fafa; border: 1px solid #e0f2f0; color: #111; padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);} .lb-drop-btn:hover { background: #e0f2f0; } .lb-drop-menu { position: absolute; top: 100%; right: 0; margin-top: 5px; background: #ffffff; border: 1px solid #eee; border-radius: 12px; width: 120px; overflow: hidden; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); flex-direction: column;} .lb-drop-menu.show { display: flex; } .lb-drop-item { padding: 12px 15px; font-size: 13px; color: #555; font-weight: 600; cursor: pointer; transition: 0.2s;} .lb-drop-item:hover { background: #f4fbfa; color: #111; } .lb-drop-item.active { background: #108975; color: #fff; }
         
         .podium-pro-box { display: flex; justify-content: center; align-items: flex-end; gap: 5px; margin-top: 30px; margin-bottom: 0px; height: 180px; } 
@@ -492,11 +493,11 @@
         <!-- CATEGORY 3: WATCH ADS -->
         <div class="category-title" style="font-size: 13px; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 20px 15px 20px;">📺 Watch Ads & Earn</div>
         <div class="partner-grid" style="display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 20px;">
-            <div class="partner-card border-teal" style="padding: 20px; flex-direction: row; gap: 15px; justify-content: flex-start; text-align: left;" onclick="alert('Adsterra Direct Link Opens Here')">
+            <div class="partner-card border-teal" style="padding: 20px; flex-direction: row; gap: 15px; justify-content: flex-start; text-align: left;" onclick="showRewardedAd()">
                 <div class="p-logo" style="margin: 0; font-size: 35px;">▶️</div>
                 <div>
                     <div class="p-name" style="font-size: 16px;">Watch Video Ads</div>
-                    <p style="font-size: 11px; color:#888; margin-top:4px;">Earn up to 50 gems per ad</p>
+                    <p style="font-size: 11px; color:#888; margin-top:4px;">Earn Gems instantly</p>
                 </div>
             </div>
         </div>
@@ -1100,6 +1101,8 @@
             
             if (newScratchesEarned > 0) setTimeout(() => alert(`🎉 You unlocked ${newScratchesEarned} new Scratch Card(s)!`), 1000);
         }
+
+        // PROFIT OPTIMIZED WATCH ADS LOGIC
         window.showRewardedAd = function() {
             const adOverlay = document.getElementById('ad-overlay');
             const timerBtn = document.getElementById('ad-timer-btn');
@@ -1120,11 +1123,13 @@
                     timerBtn.style.cursor = "pointer";
                     timerBtn.onclick = async function() {
                         adOverlay.classList.add('hidden');
-                        await awardGems(10, "Watched Ads");
+                        // REWARD SET TO 1 GEM TO KEEP OWNER PROFITABLE
+                        await awardGems(1, "Watched Ads");
                     }
                 }
             }, 1000);
         }
+        
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
@@ -1343,5 +1348,9 @@
             } catch (error) { podiumContainer.innerHTML = `<p style="width:100%; text-align:center; color:#ff5e62;">Database Error</p>`; }
         }
     </script>
+    
+    <!-- ADSTERRA AD SCRIPT -->
+    <script src="https://pl30459299.effectivecpmnetwork.com/78/af/51/78af516e05ccc57504cc183d3e4067b9.js"></script>
+
 </body>
 </html>

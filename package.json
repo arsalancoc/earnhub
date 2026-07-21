@@ -1,5 +1,8 @@
 {
+  "name": "earnnova-backend",
+  "version": "1.0.0",
+  "description": "Backend API for EarnNova",
   "dependencies": {
-    "firebase-admin": "^14.2.0"
+    "firebase-admin": "^12.0.0"
   }
 }

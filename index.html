@@ -98,8 +98,7 @@
         .w-btn-pro:active { transform: scale(0.95); }
 
         /* --- PREMIUM LIVE EARNING TICKER (DARK SLIDE BAR EXACT MATCH) --- */
-        .ticker-wrapper { width: 100%; overflow: hidden; margin-bottom: 25px; position: relative; } 
-        /* Notice display: none is removed so it ALWAYS shows */
+        .ticker-wrapper { width: 100%; overflow: hidden; margin-bottom: 25px; position: relative; display: none; /* Initially hidden until real data loads */ } 
         .ticker-track { display: flex; gap: 12px; width: max-content; animation: tickerScroll 20s linear infinite; }
         .ticker-track:hover { animation-play-state: paused; }
         .ticker-item { 
@@ -405,17 +404,10 @@
             </div>
         </div>
 
-        <!-- LIVE EARNING TICKER (NOW ALWAYS VISIBLE WITH DEFAULT DATA) -->
-        <div class="ticker-wrapper" id="ticker-wrapper">
+        <!-- LIVE EARNING TICKER (REAL USERS ONLY, DARK PREMIUM THEME) -->
+        <div class="ticker-wrapper" id="ticker-wrapper" style="display: none;">
             <div class="ticker-track" id="live-ticker-track">
-                <!-- Dummy data pre-filled so it never disappears -->
-                <div class="ticker-item"><div class="t-source-logo">▶️</div><div class="t-info"><span class="t-name">Rahul Sh...</span><span class="t-source">Earned By Watch Ads</span></div><div class="t-amt">🪙 10</div></div>
-                <div class="ticker-item"><div class="t-source-logo">🎁</div><div class="t-info"><span class="t-name">Amit Ku...</span><span class="t-source">Earned By Scratch</span></div><div class="t-amt">🪙 15</div></div>
-                <div class="ticker-item"><div class="t-source-logo">🎡</div><div class="t-info"><span class="t-name">Priya Si...</span><span class="t-source">Earned By Spin & Win</span></div><div class="t-amt">🪙 5</div></div>
-                <!-- Clones for smooth scroll -->
-                <div class="ticker-item"><div class="t-source-logo">▶️</div><div class="t-info"><span class="t-name">Rahul Sh...</span><span class="t-source">Earned By Watch Ads</span></div><div class="t-amt">🪙 10</div></div>
-                <div class="ticker-item"><div class="t-source-logo">🎁</div><div class="t-info"><span class="t-name">Amit Ku...</span><span class="t-source">Earned By Scratch</span></div><div class="t-amt">🪙 15</div></div>
-                <div class="ticker-item"><div class="t-source-logo">🎡</div><div class="t-info"><span class="t-name">Priya Si...</span><span class="t-source">Earned By Spin & Win</span></div><div class="t-amt">🪙 5</div></div>
+                <!-- Asli data JS ke through yahan aayega -->
             </div>
         </div>
         
@@ -687,7 +679,7 @@
             <div class="notif-body">
                 <p>Humne app ko aur bhi Premium aur Advanced bana diya hai! Aaiye dekhte hain kya naya hai:</p>
                 <ul>
-                    <li><b>Live Ticker:</b> Dark premium theme ke sath live earning dekhiye!</li>
+                    <li><b>Live Ticker:</b> Dark premium theme ke sath real-time live earning dekhiye!</li>
                     <li><b>New Celebration:</b> Naya 'Hurray!' 🎉 Confetti animation on win.</li>
                     <li><b>Leaderboard Upgraded:</b> Daily Leaderboard ab perfectly Indian Time (IST) par.</li>
                 </ul>
@@ -871,19 +863,27 @@
             document.getElementById('confetti-container').innerHTML = '';
         }
 
-        // --- NEW TICKER LOGIC (NO MORE DISAPPEARING + CORRECT IMAGE STYLE) ---
+        // --- STRICTLY REAL USER TICKER LOGIC ---
         function startLiveTicker() {
+            const tickerWrapper = document.getElementById('ticker-wrapper');
             const tickerTrack = document.getElementById('live-ticker-track');
+            
             const q = query(collection(db, "transactions"), where("type", "==", "earn"), orderBy("timestamp", "desc"), limit(10));
             
             onSnapshot(q, (snapshot) => {
-                // If there's no data in DB yet, we just return. 
-                // The HTML already has dummy data loaded so the slide bar WON'T disappear!
-                if(snapshot.empty) return; 
+                // Agar DB khali hai toh slide bar completely hide rahega
+                if(snapshot.empty) {
+                    tickerWrapper.style.display = 'none';
+                    return;
+                }
                 
+                // DB mein 1 bhi real entry aa gayi toh slide bar dikhayega
+                tickerWrapper.style.display = 'block';
                 let html = "";
+                
                 snapshot.forEach(doc => {
                     let d = doc.data();
+                    
                     let fullName = d.userName || "User";
                     let shortName = fullName.length > 9 ? fullName.substring(0, 9) + "..." : fullName;
                     
@@ -907,8 +907,10 @@
                     </div>`;
                 });
                 
-                // Set the track with real data (doubled for smooth looping)
-                tickerTrack.innerHTML = html + html; 
+                // Continuous loop banaye rakhne ke liye isi real data ko 6-7 baar multiply kar diya gaya hai.
+                // Isse agar 1 hi entry hui toh bhi wo tootegi nahi aur gol ghoomti rahegi!
+                let finalHtml = html + html + html + html + html + html; 
+                tickerTrack.innerHTML = finalHtml; 
             });
         }
 
@@ -1286,6 +1288,7 @@
     </script>
     
     <!-- ANTI-HACK SECURITY SCRIPT (Disabled for Testing) -->
+    <!-- Jab app final release karni ho tab in < ! - - aur - - > ko hata dena -->
     <!--
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());

@@ -98,7 +98,10 @@
         .w-btn-pro:active { transform: scale(0.95); }
 
         /* --- PREMIUM LIVE EARNING TICKER (DARK SLIDE BAR EXACT MATCH) --- */
-        .ticker-wrapper { width: 100%; overflow: hidden; margin-bottom: 25px; position: relative; display: none; /* Initially hidden until real data loads */ } 
+        .ticker-wrapper { 
+            width: 100%; overflow: hidden; margin-bottom: 25px; position: relative; 
+            /* Notice: NO display: none here. So it will always take space. */
+        } 
         .ticker-track { display: flex; gap: 12px; width: max-content; animation: tickerScroll 20s linear infinite; }
         .ticker-track:hover { animation-play-state: paused; }
         .ticker-item { 
@@ -404,10 +407,11 @@
             </div>
         </div>
 
-        <!-- LIVE EARNING TICKER (REAL USERS ONLY, DARK PREMIUM THEME) -->
-        <div class="ticker-wrapper" id="ticker-wrapper" style="display: none;">
+        <!-- LIVE EARNING TICKER (REAL USERS ONLY, DEFAULT BLOCK SO NO CSS HIDES IT) -->
+        <div class="ticker-wrapper" id="ticker-wrapper" style="display: block;">
             <div class="ticker-track" id="live-ticker-track">
-                <!-- Asli data JS ke through yahan aayega -->
+                <!-- Temporary loading text before Firebase connects -->
+                <div class="ticker-item"><div class="t-source-logo">🔄</div><div class="t-info"><span class="t-name">System</span><span class="t-source">Loading live earnings...</span></div></div>
             </div>
         </div>
         
@@ -863,26 +867,26 @@
             document.getElementById('confetti-container').innerHTML = '';
         }
 
-        // --- STRICTLY REAL USER TICKER LOGIC ---
+        // ==========================================
+        //  FIXED TICKER LOGIC (Client-side filtering)
+        // ==========================================
         function startLiveTicker() {
             const tickerWrapper = document.getElementById('ticker-wrapper');
             const tickerTrack = document.getElementById('live-ticker-track');
             
-            const q = query(collection(db, "transactions"), where("type", "==", "earn"), orderBy("timestamp", "desc"), limit(10));
+            // Note: Removed `where("type", "==", "earn")` to bypass Firebase Composite Index requirement
+            const q = query(collection(db, "transactions"), orderBy("timestamp", "desc"), limit(15));
             
             onSnapshot(q, (snapshot) => {
-                // Agar DB khali hai toh slide bar completely hide rahega
-                if(snapshot.empty) {
-                    tickerWrapper.style.display = 'none';
-                    return;
-                }
-                
-                // DB mein 1 bhi real entry aa gayi toh slide bar dikhayega
-                tickerWrapper.style.display = 'block';
                 let html = "";
+                let count = 0;
                 
                 snapshot.forEach(doc => {
                     let d = doc.data();
+                    
+                    // Client side filter
+                    if(d.type !== 'earn') return;
+                    count++;
                     
                     let fullName = d.userName || "User";
                     let shortName = fullName.length > 9 ? fullName.substring(0, 9) + "..." : fullName;
@@ -907,10 +911,23 @@
                     </div>`;
                 });
                 
-                // Continuous loop banaye rakhne ke liye isi real data ko 6-7 baar multiply kar diya gaya hai.
-                // Isse agar 1 hi entry hui toh bhi wo tootegi nahi aur gol ghoomti rahegi!
+                // Agar ek bhi earning nahi hai, tabhi gayab karo
+                if(count === 0) {
+                    tickerWrapper.style.display = 'none';
+                    return;
+                }
+                
+                // Data display karna
+                tickerWrapper.style.display = 'block';
+                // Multiply to create an infinite scroll loop safely
                 let finalHtml = html + html + html + html + html + html; 
                 tickerTrack.innerHTML = finalHtml; 
+
+            }, (error) => {
+                console.error("Error loading live ticker: ", error);
+                // Fallback UI in case of database rule error
+                tickerWrapper.style.display = 'block';
+                tickerTrack.innerHTML = `<div class="ticker-item"><div class="t-source-logo">🚀</div><div class="t-info"><span class="t-name">System</span><span class="t-source">Earn More Gems!</span></div></div>`;
             });
         }
 
@@ -1288,7 +1305,6 @@
     </script>
     
     <!-- ANTI-HACK SECURITY SCRIPT (Disabled for Testing) -->
-    <!-- Jab app final release karni ho tab in < ! - - aur - - > ko hata dena -->
     <!--
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());

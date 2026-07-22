@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-key.json'); // ✅ Direct File Import (No Vercel Variables needed!)
+const serviceAccount = require('./firebase-key.json'); // ✅ Authentication Successful!
 
 // 1. Firebase Admin Setup
 if (!admin.apps.length) {
@@ -15,19 +15,29 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 module.exports = async (req, res) => {
-    const { uid, reward, secret } = req.query;
+    // 🔥 Code ko thoda smart banaya: 'reward' aur 'currencyAmount' dono check karega
+    const { uid, reward, currencyAmount, secret } = req.query;
     const MY_SECRET_CODE = "EarnNovaPro2026"; 
 
     if (secret !== MY_SECRET_CODE) {
         return res.status(401).send("Unauthorized!");
     }
 
-    if (!uid || !reward) {
-        return res.status(400).send("UID ya Reward missing hai.");
+    // TimeWall jo bhi naam se bheje, usko final amount maan lo
+    const incomingAmount = reward || currencyAmount;
+
+    if (!uid || !incomingAmount) {
+        return res.status(400).send("UID ya Amount missing hai link mein.");
     }
 
     try {
-        const amountToAdd = parseFloat(reward);
+        const amountToAdd = parseFloat(incomingAmount);
+        
+        // 🔥 Ek aur safety check: Agar TimeWall blank bheje, toh crash na ho
+        if (isNaN(amountToAdd)) {
+            return res.status(400).send(`Invalid Number Error: TimeWall ne "${incomingAmount}" bheja hai.`);
+        }
+
         const userRef = db.collection('users').doc(uid);
         
         await userRef.set({

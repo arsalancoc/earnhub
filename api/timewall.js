@@ -1,14 +1,14 @@
 const admin = require('firebase-admin');
+const serviceAccount = require('./firebase-key.json'); // ✅ Direct File Import (No Vercel Variables needed!)
 
-// 1. Firebase Admin Setup (Bulletproof JSON method)
+// 1. Firebase Admin Setup
 if (!admin.apps.length) {
     try {
-        const serviceAccount = JSON.parse(process.env.FIREBASE_JSON);
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount)
         });
     } catch (error) {
-        console.error("🔥 Firebase Init Error (JSON galat hai):", error);
+        console.error("🔥 Firebase Init Error:", error);
     }
 }
 
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
 
         await db.collection('transactions').add({
             userId: uid,
-            title: "TimeWall Task",
+            title: "TimeWall Task Completed",
             amount: amountToAdd,
             type: 'earn',
             timestamp: admin.firestore.FieldValue.serverTimestamp()

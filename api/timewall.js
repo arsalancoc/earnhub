@@ -13,15 +13,16 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-export default async function handler(req, res) {
+// FIXED: export default ki jagah module.exports use kiya gaya hai
+module.exports = async (req, res) => {
     // TimeWall jo data bhejega wo yahan aayega
     const { uid, reward, secret } = req.query;
 
-    // 2. Security Check: Ek secret code jo sirf aapko aur TimeWall ko pata hoga
+    // 2. Security Check: Ek secret code
     const MY_SECRET_CODE = "EarnNovaPro2026"; 
 
     if (secret !== MY_SECRET_CODE) {
-        return res.status(401).send("Bhai, tu kaun hai? Unauthorized!");
+        return res.status(401).send("Unauthorized!");
     }
 
     if (!uid || !reward) {
@@ -41,7 +42,7 @@ export default async function handler(req, res) {
         // 4. History (Transactions) mein record add karna
         await db.collection('transactions').add({
             userId: uid,
-            title: "TimeWall Task Completed",
+            title: "TimeWall Task",
             amount: amountToAdd,
             type: 'earn',
             timestamp: admin.firestore.FieldValue.serverTimestamp()
@@ -53,4 +54,4 @@ export default async function handler(req, res) {
         console.error("Database Error:", error);
         res.status(500).send("Server Error");
     }
-}
+};

@@ -498,10 +498,13 @@
                 <div class="p-logo" style="color: #ffcc00;">IS</div>
                 <div class="p-name">Ipsos iSay</div>
             </div>
-            <div class="partner-card border-green">
-                <div class="p-logo" style="color: #00ff00;">CS</div>
-                <div class="p-name">Cash Survey</div>
+            <div class="partner-card border-green" id="cpx-btn" style="cursor: pointer;">
+           <div class="p-logo" style="color: #00ff00;">CPX</div>
+           <div class="p-name">CPX Research</div>
             </div>
+                
+                
+            
             <div class="partner-card border-red">
                 <div class="p-logo" style="color: #ff3333;">PX</div>
                 <div class="p-name">Pollfish</div>
@@ -1386,6 +1389,19 @@
             let twLink = `https://timewall.io/users/login?oid=4f03f15e6a66483b&uid=${currentUser.uid}&tab=surveys`;
             window.open(twLink, '_blank');
         };
+        // CPX Research Survey Button Logic
+    if (document.getElementById('cpx-btn')) {
+        document.getElementById('cpx-btn').addEventListener('click', () => {
+            const user = auth.currentUser;
+            if (user) {
+                // User ki exact ID dynamically CPX ko jayegi
+                const cpxLink = `https://offers.cpx-research.com/index.php?app_id=34690&ext_user_id=${user.uid}`;
+                window.open(cpxLink, '_blank');
+            } else {
+                alert("Please login first to earn Gems!");
+            }
+        });
+    }
     </script>
 </body>
 </html>

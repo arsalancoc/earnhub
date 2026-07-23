@@ -431,9 +431,10 @@
         
         <!-- ADVANCED ACTION GRID -->
         <div class="adv-action-grid">
-            <div class="adv-card t-spin" onclick="openSubScreen('spin-screen')">
+            <!-- Spin and win removed from UI based on request -->
+            <!-- <div class="adv-card t-spin" onclick="openSubScreen('spin-screen')">
                 <div class="adv-icon-box">🎡</div><div class="adv-info"><h4>Spin & Win</h4><p>Try Luck</p></div>
-            </div>
+            </div> -->
             <div class="adv-card t-scratch" onclick="openSubScreen('scratch-list-screen')">
                 <div class="adv-icon-box">🎁</div><div class="adv-info"><h4>Scratch</h4><p>Lucky Cards</p></div>
             </div>
@@ -540,17 +541,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- SPIN AND WIN SCREEN -->
-    <div id="spin-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Spin & Win</h2></div>
-        <p style="text-align: center; color: #666; font-size: 13px;">Spin the wheel to win 1 to 10 Gems! (Max 40 spins)</p>
-        <div class="spin-wheel-container">
-            <div class="spin-pointer"></div>
-            <div class="wheel" id="roulette-wheel"></div>
-        </div>
-        <button class="spin-btn" id="spin-action-btn">SPIN NOW</button>
-        <p id="spin-left-text" style="text-align:center; color:#108975; font-weight:bold; font-size:14px; margin-top: 5px;">Spins left: 40</p>
     </div>
     <!-- SCRATCH CARDS LIST SCREEN -->
     <div id="scratch-list-screen" class="main-container hidden app-screen">
@@ -701,7 +691,7 @@
         <div class="invite-hero">
             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=gift" class="invite-hero-img">
             <h2 class="invite-title">Invite Friends & Earn</h2>
-            <p class="invite-sub">Get <span class="highlight">💎50</span> instantly + <span class="highlight">10%</span> lifetime commission for every friend who joins!</p>
+            <p class="invite-sub">Get <span class="highlight">💎10</span> instantly + <span class="highlight">6%</span> lifetime commission for every friend who joins!</p>
         </div>
         <div class="invite-code-box">
             <span>Your Referral Code</span>
@@ -921,8 +911,8 @@
                         if(referrerRef) { 
                             const referrerSnap = await getDoc(referrerRef); 
                             if(referrerSnap.exists()) { 
-                                await updateDoc(referrerRef, { balance: increment(50), referralCount: increment(1), dailyEarn: increment(50), weeklyEarn: increment(50), monthlyEarn: increment(50), lastEarnDate: todayStr }); 
-                                await addDoc(collection(db, 'transactions'), { userId: referrerRef.id, userName: referrerSnap.data().name || "User", title: 'Referral Reward', amount: 50, type: 'earn', timestamp: serverTimestamp() });
+                                await updateDoc(referrerRef, { balance: increment(10), referralCount: increment(1), dailyEarn: increment(10), weeklyEarn: increment(10), monthlyEarn: increment(10), lastEarnDate: todayStr }); 
+                                await addDoc(collection(db, 'transactions'), { userId: referrerRef.id, userName: referrerSnap.data().name || "User", title: 'Referral Reward', amount: 10, type: 'earn', timestamp: serverTimestamp() });
                             } 
                         }
                     } catch(e) {}
@@ -1038,7 +1028,11 @@
                     let currentProgress = totalEarned % 100;
                     document.getElementById('scratch-progress-text').innerText = `Progress: ${currentProgress} / 100 Gems`;
                     
-                    let avScratches = userFullData.availableScratches || 0;
+                    // Sync backend scratch cards with frontend scratch cards
+                    let frontendScratches = userFullData.availableScratches || 0;
+                    let backendScratches = userFullData.scratchCards || 0;
+                    let avScratches = frontendScratches + backendScratches;
+                    
                     document.getElementById('sc-count').innerText = avScratches;
                     
                     let spinsUsed = userFullData.totalSpins || 0;
@@ -1153,6 +1147,7 @@
             }, 1000);
         }
         
+        // Spin & Win button event remains, but the UI card is hidden so it won't be accessed.
         let currentRotation = 0;
         document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
@@ -1179,10 +1174,14 @@
                 btn.disabled = false; btn.innerText = "SPIN NOW";
             }, 4200);
         });
+        
         let scratchRewardVal = 0;
         let isScratched = false;
         window.openScratchCard = function() {
-            if(userFullData.availableScratches <= 0) return;
+            let frontendScratches = userFullData.availableScratches || 0;
+            let backendScratches = userFullData.scratchCards || 0;
+            
+            if((frontendScratches + backendScratches) <= 0) return;
             isScratched = false;
             let scratches = userFullData.totalScratches || 0;
             if (scratches > 0 && (scratches + 1) % 50 === 0) { scratchRewardVal = Math.floor(Math.random() * 4) + 7;
@@ -1213,12 +1212,20 @@
             canvas.ontouchstart = (e) => { isDrawing = true; let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
             canvas.ontouchmove = (e) => { e.preventDefault(); let rect = canvas.getBoundingClientRect(); scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }
             canvas.ontouchend = () => isDrawing = false;
+            
             async function checkScratchCompletion() {
                 if (isScratched) return;
                 scratchedPixels++;
                 if (scratchedPixels > 40) { 
                     isScratched = true; ctx.clearRect(0, 0, 250, 250);
-                    await updateDoc(doc(db, 'users', currentUser.uid), { availableScratches: increment(-1), totalScratches: increment(1) });
+                    
+                    // Prioritize deducting backend scratches first, then frontend
+                    if (userFullData.scratchCards && userFullData.scratchCards > 0) {
+                        await updateDoc(doc(db, 'users', currentUser.uid), { scratchCards: increment(-1), totalScratches: increment(1) });
+                    } else {
+                        await updateDoc(doc(db, 'users', currentUser.uid), { availableScratches: increment(-1), totalScratches: increment(1) });
+                    }
+                    
                     await awardGems(scratchRewardVal, "Scratch Card");
                 }
             }
@@ -1263,13 +1270,13 @@
                 const profileBadge = document.getElementById('profile-ref-count');
                 if(networkBadge) networkBadge.innerText = `${realCount} Friends`;
                 if(profileBadge) profileBadge.innerText = realCount;
-                snap.forEach(doc => { const data = doc.data(); html += `<div style="background: #fff; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);"><span style="color:#111; font-size:14px; font-weight: 500;">${data.name || 'User'}</span><span style="color:#108975; font-size:12px; font-weight:bold; background: rgba(16,137,117,0.1); padding: 4px 8px; border-radius: 6px;">+💎 50</span></div>`; });
+                snap.forEach(doc => { const data = doc.data(); html += `<div style="background: #fff; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);"><span style="color:#111; font-size:14px; font-weight: 500;">${data.name || 'User'}</span><span style="color:#108975; font-size:12px; font-weight:bold; background: rgba(16,137,117,0.1); padding: 4px 8px; border-radius: 6px;">+💎 10</span></div>`; });
                 if(html === "") html = "<p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>You haven't referred anyone yet. Start sharing!</p>"; 
                 refList.innerHTML = html;
             } catch(e) { refList.innerHTML = "<p style='text-align: center; color: #ff5e62;'>Error loading referrals.</p>"; }
         }
         
-        const getShareMessage = () => { return `Join EarnNova Pro! Use my code: ${document.getElementById('my-referral-code').innerText} to get 50 Gems instantly + Lifetime 10% Commission!\nStart earning today! 🚀`; };
+        const getShareMessage = () => { return `Join EarnNova Pro! Use my code: ${document.getElementById('my-referral-code').innerText} to get 10 Gems instantly + Lifetime 6% Commission!\nStart earning today! 🚀`; };
         const getShareUrl = () => { return window.location.href.split('?')[0] + "?ref=" + currentUser.uid; };        
         document.getElementById('copy-ref-btn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('my-referral-code').innerText); const btn = document.getElementById('copy-ref-btn'); btn.innerText = "COPIED!"; btn.style.background = "#fff"; btn.style.color = "#108975"; setTimeout(() => { btn.innerText = "COPY"; btn.style.background = "linear-gradient(135deg, #108975, #2cb4a1)"; btn.style.color = "#fff"; }, 2000); });
         document.getElementById('share-wa').addEventListener('click', () => { window.open(`https://wa.me/?text=${encodeURIComponent(getShareMessage() + "\n" + getShareUrl())}`); });

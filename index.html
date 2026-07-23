@@ -805,7 +805,7 @@
             let deg = (i-1) * 36 + 18; 
             wheelHtml += `<div class="wheel-segment" style="transform: rotate(${deg}deg)">${i}</div>`;
         }
-        document.getElementById('roulette-wheel').innerHTML = wheelHtml;
+        if (document.getElementById('roulette-wheel')) document.getElementById('roulette-wheel').innerHTML = wheelHtml;
         window.switchTab = function(screenId, navElId) {
             document.querySelectorAll('.app-screen').forEach(s => s.classList.add('hidden'));
             document.getElementById(screenId).classList.remove('hidden');
@@ -1149,7 +1149,7 @@
         
         // Spin & Win button event remains, but the UI card is hidden so it won't be accessed.
         let currentRotation = 0;
-        document.getElementById('spin-action-btn').addEventListener('click', async () => {
+        if (document.getElementById('spin-action-btn')) document.getElementById('spin-action-btn').addEventListener('click', async () => {
             let spins = userFullData.totalSpins || 0;
             if (spins >= 40) return alert("❌ You have reached your maximum limit of 40 spins!");
             const btn = document.getElementById('spin-action-btn');

@@ -1,11 +1,15 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-key.json'); // ✅ Authentication Successful!
 
-// 1. Firebase Admin Setup
+// 1. Firebase Admin Setup (Vercel Environment Variables ke through)
 if (!admin.apps.length) {
     try {
         admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
+            credential: admin.credential.cert({
+                projectId: process.env.FIREBASE_PROJECT_ID,
+                clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+                // 🔥 Yeh line \n error ko fix karti hai aur bina json file ke login karti hai
+                privateKey: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined,
+            })
         });
     } catch (error) {
         console.error("🔥 Firebase Init Error:", error);

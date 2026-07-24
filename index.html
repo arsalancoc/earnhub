@@ -417,17 +417,6 @@
             </div>
         </div>
         
-        <!-- FIXED LIVE EARNING TICKER -->
-        <div class="ticker-wrapper" id="ticker-wrapper">
-            <div class="ticker-item" id="live-ticker-item">
-                <div class="t-source-logo" id="t-logo">🚀</div>
-                <div class="t-info">
-                    <span class="t-name" id="t-name">System</span>
-                    <span class="t-source" id="t-msg">Loading live earnings...</span>
-                </div>
-                <div class="t-amt" id="t-amt">🪙 0</div>
-            </div>
-        </div>
         
         <!-- ADVANCED ACTION GRID -->
         <div class="adv-action-grid">
@@ -630,7 +619,8 @@
                 </div>
             </div>
             
-            <button class="pro-performance-btn" onclick="openSubScreen('analytics-screen')">
+            loadAnalyticsData();
+            <button class="pro-performance-btn" onclick="openSubScreen('analytics-screen'); loadAnalyticsData();"></button>
                 SEE PERFORMANCE ANALYSIS <span style="font-size:18px;">➔</span>
             </button>
             
@@ -713,11 +703,33 @@
     </div>
     <!-- ================== PROFILE SUB-SCREENS ================== -->
     <div id="analytics-screen" class="main-container hidden app-screen">
-        <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Analytics</h2></div>
-        <div style="background: #ffffff; padding: 30px; border-radius: 20px; text-align: center; border: 1px dashed #108975; margin-top: 20px;">
-            <span style="font-size: 40px;">📊</span><h3 style="margin-top: 10px; color:#111;">Analytics Dashboard</h3><p style="color:#666; font-size:12px; margin-top: 5px;">Charts and detailed statistics coming soon in the next update!</p>
+    <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Performance Analysis</h2></div>
+    
+    <div style="background: #ffffff; padding: 25px 20px; border-radius: 20px; border: 1px solid #eee; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+        <h3 style="color:#111; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; font-weight: 900;">Earnings Overview</h3>
+        
+        <div style="display:flex; justify-content:space-between; margin-bottom: 12px; padding: 15px; background:#f4fbfa; border-radius:12px; border: 1px solid #e0f2f0;">
+            <span style="color:#555; font-weight:bold; font-size:14px;">Total Lifetime Earned</span>
+            <span id="ana-total" style="color:#108975; font-weight:900; font-size:16px;">0 💎</span>
+        </div>
+        
+        <div style="display:flex; justify-content:space-between; margin-bottom: 12px; padding: 15px; background:#fffbf0; border-radius:12px; border: 1px solid #ffeba1;">
+            <span style="color:#555; font-weight:bold; font-size:14px;">Today's Earning</span>
+            <span id="ana-today" style="color:#ff9800; font-weight:900; font-size:16px;">0 💎</span>
+        </div>
+        
+        <div style="display:flex; justify-content:space-between; margin-bottom: 12px; padding: 15px; background:#f0f5ff; border-radius:12px; border: 1px solid #cce0ff;">
+            <span style="color:#555; font-weight:bold; font-size:14px;">Total Network / Referrals</span>
+            <span id="ana-refs" style="color:#007bff; font-weight:900; font-size:16px;">0 👥</span>
         </div>
     </div>
+
+    <h3 style="color:#111; font-size: 15px; margin-top: 30px; margin-bottom:15px; font-weight:800; padding-left: 5px;">Earnings By Source</h3>
+    <div id="ana-sources-list">
+        <p style="text-align:center; color:#777; font-size:12px;">Analyzing your data...</p>
+    </div>
+</div>
+
     <div id="transactions-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
         <div id="earn-tx-list"><p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Loading transactions...</p></div>
@@ -1043,13 +1055,20 @@
                     document.getElementById('spin-left-text').innerText = `Spins left: ${spinsLeft < 0 ? 0 : spinsLeft}`;
                     
                     if(avScratches > 0) {
-                        document.getElementById('scratch-badge').innerText = avScratches;
-                        document.getElementById('scratch-badge').classList.remove('hidden');
-                        document.getElementById('scratch-cards-grid').innerHTML = `<div onclick="openScratchCard()" style="background: linear-gradient(135deg, #108975, #4ab4a6); padding: 20px; border-radius:15px; text-align:center; cursor:pointer; box-shadow: 0 5px 15px rgba(16,137,117,0.2);"><span style="font-size:30px;">🎁</span><p style="color:#fff; font-weight:bold; font-size:12px; margin-top:5px;">Tap to Scratch</p></div>`;
-                    } else {
-                        document.getElementById('scratch-badge').classList.add('hidden');
-                        document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#777; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
-                    }
+    document.getElementById('scratch-badge').innerText = avScratches;
+    document.getElementById('scratch-badge').classList.remove('hidden');
+    
+    // Naya Loop Code: Jitne cards honge, utne banenge
+    let cardsHtml = '';
+    for(let i = 0; i < avScratches; i++) {
+        cardsHtml += `<div onclick="openScratchCard()" style="background: linear-gradient(135deg, #108975, #4ab4a6); padding: 20px; border-radius:15px; text-align:center; cursor:pointer; box-shadow: 0 5px 15px rgba(16,137,117,0.2);"><span style="font-size:30px;">🎁</span><p style="color:#fff; font-weight:bold; font-size:12px; margin-top:5px;">Card ${i + 1}</p></div>`;
+    }
+    document.getElementById('scratch-cards-grid').innerHTML = cardsHtml;
+} else {
+    document.getElementById('scratch-badge').classList.add('hidden');
+    document.getElementById('scratch-cards-grid').innerHTML = `<p style="color:#777; font-size:12px; width:200%;">No scratch cards available. Earn more gems!</p>`;
+}
+                       
                     document.getElementById('edit-name-btn-inline').addEventListener('click', async () => { 
                         let usedChanges = userFullData.nameChanges || 0;
                         if (usedChanges >= 2) return alert("❌ You have reached your 2-time name change limit!");
@@ -1319,6 +1338,58 @@
                 txList.innerHTML = html;
             } catch (error) { txList.innerHTML = `<p style='text-align: center; color: #ff5e62;'>Error loading transactions.</p>`; }
         }
+        window.loadAnalyticsData = async function() {
+            if(!currentUser || !userFullData) return;
+            
+            // Set basic stats from userFullData
+            document.getElementById('ana-total').innerText = (userFullData.totalGemsEarned || 0) + " 💎";
+            
+            const todayStr = getTodayISTString();
+            let todayEarn = 0;
+            if(userFullData.lastEarnDate === todayStr) {
+                todayEarn = userFullData.dailyEarn || 0;
+            }
+            document.getElementById('ana-today').innerText = todayEarn + " 💎";
+            document.getElementById('ana-refs').innerText = (userFullData.referralCount || 0) + " 👥";
+
+            const listDiv = document.getElementById('ana-sources-list');
+            listDiv.innerHTML = "<p style='text-align:center; color:#777; font-size:13px;'>Fetching detailed analytics...</p>";
+
+            try {
+                const q = query(collection(db, "transactions"), where("userId", "==", currentUser.uid));
+                const querySnapshot = await getDocs(q);
+                
+                let sourcesMap = {};
+                
+                querySnapshot.forEach(doc => {
+                    let data = doc.data();
+                    let amount = data.amount || 0;
+                    let title = data.title || "Other";
+                    
+                    if(data.type === 'earn') {
+                        if(!sourcesMap[title]) sourcesMap[title] = 0;
+                        sourcesMap[title] += amount;
+                    }
+                });
+                
+                let html = "";
+                for (let [source, amount] of Object.entries(sourcesMap)) {
+                    html += `<div style="display:flex; justify-content:space-between; align-items:center; background:#fff; padding:15px; margin-bottom:10px; border-radius:12px; border:1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                        <span style="color:#111; font-weight:bold; font-size:14px;">${source}</span>
+                        <span style="color:#108975; font-weight:900; font-size:14px;">+ ${amount} 💎</span>
+                    </div>`;
+                }
+                
+                if(html === "") {
+                    listDiv.innerHTML = "<p style='text-align:center; color:#ff5e62;'>No earning data available yet.</p>";
+                } else {
+                    listDiv.innerHTML = html;
+                }
+                
+            } catch (error) {
+                listDiv.innerHTML = "<p style='text-align:center; color:#ff5e62;'>Error loading analytics data.</p>";
+            }
+        }
         let currentLbCat = 'earnings'; let currentLbTime = 'all';     
         const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
         const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');
@@ -1370,9 +1441,10 @@
                 
                 const top1 = users[0] || null; const top2 = users[1] || null; const top3 = users[2] || null;
                 let podiumHtml = "";
-                if(top2) podiumHtml += `<div class="podium-pillar rank-2-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top2)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">2. ${getFirstName(top2)}</div><div class="p-score">${getScore(top2)}</div></div></div></div>`;
-                if(top1) podiumHtml += `<div class="podium-pillar rank-1-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top1)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">1. ${getFirstName(top1)}</div><div class="p-score">${getScore(top1)}</div></div></div></div>`;
-                if(top3) podiumHtml += `<div class="podium-pillar rank-3-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top3)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name">3. ${getFirstName(top3)}</div><div class="p-score">${getScore(top3)}</div></div></div></div>`;
+                // Is line ko dhoondhein aur replace karein:
+                if(top2) podiumHtml += `<div class="podium-pillar rank-2-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top2)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name" style="color: #111;">2. ${getFirstName(top2)}</div><div class="p-score">${getScore(top2)}</div></div></div></div>`;
+                if(top1) podiumHtml += `<div class="podium-pillar rank-1-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top1)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name" style="color: #111;">1. ${getFirstName(top1)}</div><div class="p-score">${getScore(top1)}</div></div></div></div>`;
+                if(top3) podiumHtml += `<div class="podium-pillar rank-3-pro"><div class="crown">👑</div><div class="hex-outer"><div class="hex-inner"><img src="${getAvatar(top3)}"></div></div><div class="pillar-base"><div class="pillar-text"><div class="p-name" style="color: #111;">3. ${getFirstName(top3)}</div><div class="p-score">${getScore(top3)}</div></div></div></div>`;
                 podiumContainer.innerHTML = podiumHtml;
                 
                 let listHtml = '';

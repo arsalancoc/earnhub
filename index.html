@@ -20,8 +20,22 @@
         .hidden { display: none !important; }
        
         /* --- GLOBAL BACKGROUND WATERMARK --- */
-        body::after { content: ''; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vw; height: 90vw; max-width: 500px; max-height: 500px; background-image: url('https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=108975'); background-size: contain; background-repeat: no-repeat; opacity: 0.03; z-index: -1; pointer-events: none; border-radius: 50%; filter: grayscale(100%); }
-        
+        body::after { 
+    content: ''; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 90vw; 
+    height: 90vw; 
+    max-width: 400px; 
+    max-height: 400px; 
+    background: url('earnnova-logo.png') no-repeat center; 
+    background-size: contain; 
+    opacity: 0.1; 
+    z-index: -1; 
+    pointer-events: none; 
+}
         /* --- LOGIN SCREEN --- */
         #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background: linear-gradient(135deg, #f4fbfa 0%, #53b8ab 100%); overflow: hidden; position: relative; z-index: 10; }
         .floating-element { position: absolute; pointer-events: none; animation: floatAnim 6s ease-in-out infinite; z-index: 0; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)); font-size: 3rem; }
@@ -371,7 +385,7 @@
             <div style="display: flex; align-items: center;">
                 <div class="menu-btn" id="open-sidebar-btn"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
                 <div class="brand-logo">
-                    <img src="https://api.dicebear.com/7.x/initials/svg?seed=EN&backgroundColor=108975" alt="EarnNova Logo">
+                    <img src="earnnova-icon.png" alt="EarnNova Logo" style="height: 38px; width: auto; object-fit: contain;">
                     <div class="brand-text"><span>EARN</span><span>NOVA</span></div>
                     <span id="live-ist-time">--:-- IST</span>
                 </div>

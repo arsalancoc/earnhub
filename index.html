@@ -21,21 +21,22 @@
        
         /* --- GLOBAL BACKGROUND WATERMARK --- */
         body::after { 
-    content: ''; 
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 90vw; 
-    height: 90vw; 
-    max-width: 400px; 
-    max-height: 400px; 
-    background: url('assets/earnnova-logo.jpg') no-repeat center; 
-    background-size: contain; 
-    opacity: 0.1; 
-    z-index: -1; 
-    pointer-events: none; 
-}
+            content: ''; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 90vw; 
+            height: 90vw; 
+            max-width: 400px; 
+            max-height: 400px; 
+            background: url('assets/earnnova-logo.jpg') no-repeat center; 
+            background-size: contain; 
+            opacity: 0.1; 
+            z-index: -1; 
+            pointer-events: none; 
+        }
+        
         /* --- LOGIN SCREEN --- */
         #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background: linear-gradient(135deg, #f4fbfa 0%, #53b8ab 100%); overflow: hidden; position: relative; z-index: 10; }
         .floating-element { position: absolute; pointer-events: none; animation: floatAnim 6s ease-in-out infinite; z-index: 0; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)); font-size: 3rem; }
@@ -92,7 +93,6 @@
         /* BANNER CONTAINER */
         .banner-container { width: 100%; overflow: hidden; border-radius: 15px; margin-bottom: 20px; position: relative; background: #111; border: 1px solid #eee; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
         .banner-track { display: flex; width: 300%; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
-
         .banner-slide.slide-1 { width: 33.333%; background-image: url('assets/banner-1.png'); background-size: contain; background-repeat: no-repeat; background-position: center; min-height: 150px; }
         .banner-slide.slide-2 { width: 33.333%; background-image: url('assets/banner-2.png'); background-size: contain; background-repeat: no-repeat; background-position: center; min-height: 150px; }
         .banner-slide.slide-3 { width: 33.333%; background-image: url('assets/banner-3.png'); background-size: contain; background-repeat: no-repeat; background-position: center; min-height: 150px; }
@@ -361,7 +361,6 @@
                 <input type="checkbox" id="terms-checkbox">
                 <label for="terms-checkbox">I agree to the <a href="https://earnnovaprivacy.blogspot.com/2026/07/earnnova-privacy-policy.html" target="_blank">Terms of Service</a> & <a href="https://earnnovaprivacy.blogspot.com/2026/07/earnnova-privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
             </div>
-
             <button id="login-btn" class="google-btn-new">
                 <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" class="google-icon">
                 Continue with Google
@@ -517,7 +516,6 @@
             </div>
         </div>
     </div>
-
     <!-- SCRATCH CARDS LIST SCREEN -->
     <div id="scratch-list-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>My Scratch Cards</h2></div>
@@ -703,7 +701,6 @@
             <div class="share-btn more" id="share-more"><div class="more-icon">•••</div><span>More</span></div>
         </div>
     </div>
-
     <!-- ================== PROFILE SUB-SCREENS ================== -->
     <div id="analytics-screen" class="main-container hidden app-screen" style="background-color: #f4f7f6;">
         <div class="sub-header" style="background:#fff; border-bottom: 1px solid #eaeaea; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
@@ -734,7 +731,6 @@
                     <h3 id="ana-withdrawn" style="font-size: 16px; color: #111; margin: 0; font-weight:900;">0</h3>
                 </div>
             </div>
-
             <!-- Performance Chart Mockup -->
             <div style="background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); margin-bottom: 20px;">
                 <h3 style="font-size: 13px; color: #333; margin-bottom: 15px; font-weight: 800;">Daily Performance Chart</h3>
@@ -751,14 +747,12 @@
                 </div>
                 <p style="text-align: center; font-size: 10px; color: #999;">Last 7 Days Activity Trend</p>
             </div>
-
             <h3 style="font-size: 13px; color: #333; margin-bottom: 10px; padding-left: 5px; font-weight: 800;">Earnings Breakdown</h3>
             <div id="ana-sources-list">
                 <p style="text-align:center; color:#777; font-size:12px;">Loading data...</p>
             </div>
         </div>
     </div>
-
     <div id="transactions-screen" class="main-container hidden app-screen">
         <div class="sub-header"><button class="back-btn" onclick="closeSubScreen()">← Back</button><h2>Earn Transactions</h2></div>
         <div id="earn-tx-list"><p style='text-align: center; color: #777; font-size: 13px; margin-top: 20px;'>Loading transactions...</p></div>
@@ -1274,10 +1268,8 @@
             }
             document.getElementById('ana-today').innerText = todayEarn + " 💎";
             document.getElementById('ana-refs').innerText = (userFullData.referralCount || 0) + " 👥";
-
             const listDiv = document.getElementById('ana-sources-list');
             listDiv.innerHTML = "<p style='text-align:center; color:#777; font-size:13px;'>Fetching detailed analytics...</p>";
-
             try {
                 const q = query(collection(db, "transactions"), where("userId", "==", currentUser.uid));
                 const querySnapshot = await getDocs(q);
@@ -1299,7 +1291,6 @@
                 });
                 
                 document.getElementById('ana-withdrawn').innerText = totalWithdrawn + " ₹";
-
                 let html = "";
                 for (let [source, amount] of Object.entries(sourcesMap)) {
                     html += `<div style="display:flex; justify-content:space-between; align-items:center; background:#fff; padding:15px; margin-bottom:10px; border-radius:8px; border:1px solid #eaeaea; border-left: 4px solid #108975; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
@@ -1318,7 +1309,6 @@
                 listDiv.innerHTML = "<p style='text-align:center; color:#ff5e62; font-size:12px;'>Error loading analytics data.</p>";
             }
         }
-
         let currentLbCat = 'earnings'; let currentLbTime = 'all';     
         const lbDropToggle = document.getElementById('lb-drop-toggle'); const lbDropMenu = document.getElementById('lb-drop-menu');
         const lbActiveCat = document.getElementById('lb-active-cat'); const lbScoreTitle = document.getElementById('lb-score-title');

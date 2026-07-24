@@ -456,20 +456,6 @@
             </div>
         </div>
         
-        <!-- NEW ADSTERRA BANNER -->
-        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 25px; overflow: hidden; border-radius: 15px;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '010b58f6a0a3179fca81cedb74b12523',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="https://www.highperformanceformat.com/010b58f6a0a3179fca81cedb74b12523/invoke.js"></script>
-        </div>
-        
     </div>
     
     <!-- TASKS SCREEN (DARK THEME) -->
@@ -981,57 +967,7 @@
             document.getElementById('confetti-container').innerHTML = '';
         }
         
-        // --- REAL LIVE TICKER (WITHOUT DUMMY DATA) ---
-        function startLiveTicker() {
-            const tItem = document.getElementById('live-ticker-item');
-            const tLogo = document.getElementById('t-logo');
-            const tName = document.getElementById('t-name');
-            const tMsg = document.getElementById('t-msg');
-            const tAmt = document.getElementById('t-amt');
-            
-            let realDataList = [];
-            let tickerIndex = 0;
-            
-            const q = query(collection(db, "withdrawals"), orderBy("timestamp", "desc"), limit(10));
-            onSnapshot(q, (snapshot) => {
-                let temp = [];
-                snapshot.forEach(doc => {
-                    temp.push(doc.data());
-                });
-                if(temp.length > 0) {
-                    realDataList = temp;
-                }
-            }, (error) => {
-                console.error("Ticker Error:", error);
-            });
-            function cycleTicker() {
-                if (realDataList.length === 0) {
-                    tName.innerText = "System";
-                    tMsg.innerText = "Waiting for first withdrawal...";
-                    tAmt.innerText = "🪙 0";
-                    return;
-                }
-                
-                tItem.style.opacity = 0; 
-                
-                setTimeout(() => {
-                    const user = realDataList[tickerIndex];
-                    let fullName = user.name || "Pro User";
-                    tName.innerText = fullName.length > 12 ? fullName.substring(0, 12) + "..." : fullName;
-                    
-                    let src = user.method || "Reward";
-                    tMsg.innerText = `Redeemed ${src}`;
-                    
-                    tLogo.innerText = "💸";
-                    tAmt.innerText = `🪙 ${user.amount || 0}`;
-                    
-                    tItem.style.opacity = 1; 
-                    tickerIndex = (tickerIndex + 1) % realDataList.length;
-                }, 500);
-            }
-            cycleTicker();
-            setInterval(cycleTicker, 3500);
-        }
+        
         
         function startLiveSnapshot(user) {
             onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
